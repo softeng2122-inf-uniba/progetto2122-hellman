@@ -22,4 +22,4 @@
 - Mi esprimerò mediante il codice.
 - Aggiungerò commenti al codice solo se non sono riuscito ad esprimermi attraverso il codice.
 - Scriverò codice che aderisce alle convenzioni di formattazione e stile del mio team. 
-- Non presenterò codice che causa warning in alcun tool.
+- Cercherò di non presentare codice che causa warning in alcun tool.

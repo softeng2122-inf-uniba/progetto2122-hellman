@@ -53,7 +53,7 @@ Si suppone che lo studente abbia già installato sulla sua macchina l’ultima v
   - il nome del gruppo deve essere un cognome di un vincitore di [**ACM Turing Award**](https://amturing.acm.org/byyear.cfm), scritto tutto in minuscolo senza spazi e caratteri speciali. </br>
 Il nome del gruppo sarà usato per la creazione del team e la configurazione del repository su GitHub.
 - Una volta completata la formazione del gruppo o raggiunto il numero minimo di componenti, mettersi d'accordo su chi sarà il primo componente del gruppo che accetterà l'*assignment* su GitHub Classroom.
-* Il componente designato dal gruppo dovrà scrivere sul canale `Formazione gruppi` di Teams un messaggio rivolto al docente (usare il *mention* con *@*) dichiarando che "il gruppo *x* è pronto" dove *x* è il nome del gruppo.  
+* Il componente designato dal gruppo dovrà scrivere sul canale `Formazione gruppi` di Teams un messaggio rivolto al docente (usare il *mention* con *@*) dichiarando che "il gruppo *hellman* è pronto".  
 * Il docente risponderà inviando allo studente in chat il link di assegnazione del progetto.
 
 ### Accettazione assignment del primo componente e creazione repository su GitHub
@@ -167,7 +167,7 @@ Per aggiungere il badge che riporta l'ultimo esito dell'esecuzione del workflow 
   ![Update_GitHub_badge_2](./img/Update_GitHub_badge_2.png)
 - fare click sul pulsante `Create status badge` in alto a destra nella pagina e, lasciando invariate le impostazioni di default (`branch` e `event`), fare click su `Copy status badge Markdown`;
   ![Update_GitHub_badge_3](./img/Update_GitHub_badge_3.png)
-- La modifica del file Markdown `README.md`sarà fatta come parte dei task dello *Sprint 0* incollando il codice markdown per la costruzione del badge in cima al `README.md`, accanto al titolo del repository.
+- La modifica del file Markdown `README.md` sarà fatta come parte dei task dello *Sprint 0* incollando il codice markdown per la costruzione del badge in cima al `README.md`, accanto al titolo del repository.
 
 Il titolo del README.md dovrà apparire come nella seguente figura, con *Wordle* al posto di *scacchi*:
 
@@ -181,7 +181,7 @@ Il colore e lo stato del badge potranno cambiare dopo ogni build, riflettendo lo
 Coveralls è un servizio web che aiuta a monitorare nel tempo la copertura del codice di un progetto (*code coverage*) e a verificare che, di volta in volta, tutto il codice che si aggiunge sia adeguatamente coperto da casi di test.
 
 Per configurare Coveralls, collegarsi al [sito web del servizio](https://coveralls.io) ed effettuare il login tramite il proprio account GitHub. Nel menu a comparsa sulla sinistra, selezionare la voce **+ ADD REPOS**. 
-Il repository `SOFTENG2122-INF-UNIBA/<nome repository>` dovrebbe essere immediatamente visibile nella pagina. Qualora non lo fosse, digitare le prime lettere del nome nel campo di testo. Se così facendo ancora non fosse visibile, andare in fondo alla pagina e cliccare sul pulsante **REFRESH PRIVATE REPOS**. 
+Il repository `SOFTENG2122-INF-UNIBA/progetto2122-hellman` dovrebbe essere immediatamente visibile nella pagina. Qualora non lo fosse, digitare le prime lettere del nome nel campo di testo. Se così facendo ancora non fosse visibile, andare in fondo alla pagina e cliccare sul pulsante **REFRESH PRIVATE REPOS**. 
 Quando la riga relativa al progetto compare, fare click sul tasto OFF per trasformarlo in ON, come mostrato in figura.
 
 ![](./img/add_repo_coveralls.png)
@@ -209,7 +209,7 @@ I passi per ottenere il badge di Coveralls sono i seguenti:
   ![CoverallsBadge_1](./img/CoverallsBadge_1.png)
 - copiare il codice markdown per la richiesta del badge;
   ![CoverallsBadge_2](./img/CoverallsBadge_2.png)
-- La modifica del file Markdown `README.md`sarà fatta come parte dei task dello *Sprint 0* incollando il codice markdown per la costruzione del badge in cima al `README.md`, accanto al titolo del repository.
+- La modifica del file Markdown `README.md` sarà fatta come parte dei task dello *Sprint 0* incollando il codice markdown per la costruzione del badge in cima al `README.md`, accanto al titolo del repository.
 - Alla fine, il file `README.md` dovrà mostrare due badge, simili a quelli riportati nella figura sottostante, con *Wordle* al posto di *scacchi*:
 ![actions+coveralls-badges](./img/actions+coveralls-badges.png)
 
@@ -218,7 +218,7 @@ I passi per ottenere il badge di Coveralls sono i seguenti:
 Qualora doveste accorgervi che il badge con il coverage non si aggiorna - nonstante le modifiche ai casi di test - potete forzare il refresh aggiungendo `&service=github` al link, come mostrato di seguito:
 
 ```
-[![Coverage Status](https://coveralls.io/repos/github/softeng2122-inf-uniba/base2122/badge.svg?branch=master&t=0yipNR&service=github)](https://coveralls.io/github/softeng2122-inf-uniba/base2122?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/softeng2122-inf-uniba/progetto2122-hellman/badge.svg?branch=master&t=0yipNR&service=github)](https://coveralls.io/github/softeng2122-inf-uniba/progetto2122-hellman?branch=master)
 ```
 
 
@@ -230,9 +230,9 @@ Come prima attività, è necessario clonare il repository remoto sulla propria m
 <!--*Per evitare successivi problemi con l'importazione di Eclipse, evitare di salvare la cartella di progetto nella root del workspace di Eclipse*;
 -->
 - Da terminale con shell bash spostarsi attraverso il comando *cd* nella cartella scelta al passo precedente;
-- Scrivere il comando `git clone <url>` , dove l’url è quello visibile da GitHub premendo il bottone *Clone or Download*, in alto a destra nell’interfaccia. Ad esempio:
+- Scrivere il comando `git clone https://github.com/softeng2122-inf-uniba/progetto2122-hellman.git`, dove l’url è quello visibile da GitHub premendo il bottone *Clone or Download*, in alto a destra nell’interfaccia. Ad esempio:
 
-![](img/guida-studente/cloneusingurl.PNG)
+![cloneusingurl](./img/cloneusingurl.png)
 
 Se l’operazione è andata a buon fine, sarà possibile importare il progetto nell'IDE con cui intendete lavorare.
 
@@ -319,9 +319,8 @@ Svolgere le seguenti operazioni:
   - salvate il vostro token in un file di testo (ad esempio, potete salvarlo in un file chiamato `TOKEN.txt`);
   - portatevi nella cartella in cui avete salvato il token ed eseguite il comando:
     ```bash
-    cat ./TOKEN.txt | docker login https://docker.pkg.github.com -u <USERNAME> --password-stdin
+    cat ./TOKEN.txt | docker login https://docker.pkg.github.com -u D0men1c0 --password-stdin
     ```
-    sostituendo il vostro username di GitHub alla voce `<USERNAME>`.
 
     **N.B.**: è necessario effettuare questo passaggio soltanto al primo utilizzo di Docker con GitHub Packages;
 
@@ -347,13 +346,13 @@ Svolgere le seguenti operazioni:
 
 Ad esempio, se il comando precedente (copiato da GitHub dal riquadro mostrato in figura), è:
 ```
-docker pull docker.pkg.github.com/softeng2122-inf-uniba/provaprogetto2122-prova/prova:latest
+docker pull docker.pkg.github.com/softeng2122-inf-uniba/progetto2122-hellman/prova:latest
 ```
 
 il comando per eseguire il container sarà:
 
 ```
-docker run --rm -it docker.pkg.github.com/softeng2122-inf-uniba/provaprogetto2122-prova/prova:latest
+docker run --rm -it docker.pkg.github.com/softeng2122-inf-uniba/progetto2122-hellman/prova:latest
 ```
 
 (in altre parole, il secondo comando si ottiene dal primo sostituendo a `docker pull` le parole `docker run --rm -it`).

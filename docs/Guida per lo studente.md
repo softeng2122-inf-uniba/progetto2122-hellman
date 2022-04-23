@@ -319,7 +319,7 @@ Svolgere le seguenti operazioni:
   - salvate il vostro token in un file di testo (ad esempio, potete salvarlo in un file chiamato `TOKEN.txt`);
   - portatevi nella cartella in cui avete salvato il token ed eseguite il comando:
     ```bash
-    cat ./TOKEN.txt | docker login https://docker.pkg.github.com -u D0men1c0 --password-stdin
+    cat ./TOKEN.txt | docker login https://docker.pkg.github.com -u <USERNAME> --password-stdin
     ```
 
     **N.B.**: è necessario effettuare questo passaggio soltanto al primo utilizzo di Docker con GitHub Packages;

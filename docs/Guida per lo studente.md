@@ -241,7 +241,7 @@ Come prima attività, è necessario clonare il repository remoto sulla propria m
 - Da terminale con shell bash spostarsi attraverso il comando *cd* nella cartella scelta al passo precedente;
 - Scrivere il comando `git clone https://github.com/softeng2122-inf-uniba/progetto2122-hellman.git`, dove l’url è quello visibile da GitHub premendo il bottone *Clone or Download*, in alto a destra nell’interfaccia. Ad esempio:
 
-![cloneusingurl](./img/cloneusingurl.png)
+![cloneusingurl](./img/cloneusingurl.PNG)
 
 Se l’operazione è andata a buon fine, sarà possibile importare il progetto nell'IDE con cui intendete lavorare.
 

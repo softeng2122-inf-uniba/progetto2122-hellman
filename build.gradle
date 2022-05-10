@@ -41,6 +41,9 @@ dependencies {
     compileOnly("com.github.spotbugs:spotbugs-annotations:${spotbugs.toolVersion.get()}")
 }
 
+run {
+    standardInput = System.in
+}
 
 
 /**************

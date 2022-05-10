@@ -110,9 +110,9 @@ public class Parser {
         ParserOutput p = null;
 
         System.out.println("Inserisci un comando:");
-        String command = scanner.nextLine();
+        
         while (scanner.hasNextLine()) {
-            command = scanner.nextLine();
+            String command = scanner.nextLine();
             p = this.parse(command, getCommands());
             return p;
         }

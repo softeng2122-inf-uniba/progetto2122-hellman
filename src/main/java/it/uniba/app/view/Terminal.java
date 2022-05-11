@@ -2,7 +2,6 @@ package it.uniba.app.view;
 
 import java.util.*;
 import it.uniba.app.utils.*;
-import it.uniba.app.utils.CommandType;
 import java.io.PrintStream;
 
 /**
@@ -21,6 +20,7 @@ public class Terminal extends Viewer{
         super();
 
         // Aggiungere i comandi accettati dal parser
+        commands.add(new Pair<String, CommandType>("/help", CommandType.HELP));
 
         parser = new Parser(commands);
         readInput();
@@ -46,7 +46,43 @@ public class Terminal extends Viewer{
 
         if (p == null) {
             out.println("Non ho capito! Prova con un altro comando.");
+        }else{
+            CommandType type = p.getCommand().getType();
+            
+            switch(type)
+            {
+                case HELP:
+                    out.println(help());
+                    break;
+
+                default:
+                    break;
+            }
         }
 
+    }
+
+    /**
+     * Restituisce la stringa del comando di help
+     * 
+     * @return comando di help
+     */
+    private String help()
+    {
+        String str = "";
+
+        str += "==============================================================================================\n";
+        str += "Wordle è un videogioco in cui il giocatore deve indovinare una parola di cinque lettere in meno di sei tentativi. \n";
+        str += "I comandi del paroliere per interagire con il gioco sono: \n";
+        str += "   - imposta parola segreta (comando /nuova)\n";
+        str += "   - mostra parola segreta (comando /mostra) \n \n";
+        str += "I comandi del giocatore per interagire con il gioco sono:\n";
+        str += "   - inizia una nuova partita (comando /gioca)\n";
+        str += "   - abbandona la partita corrente (comando /abbandona)\n";
+        str += "   - chiudere il gioco (comando /esci)\n";
+        str += "   - effettua un tentativo per indovinare la parola segreta (inserendo qualsiasi input dopo /gioca)\n";
+        str += "==============================================================================================\n";
+
+        return str;
     }
 }

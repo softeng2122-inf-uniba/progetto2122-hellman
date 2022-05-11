@@ -15,7 +15,11 @@ public class Terminal extends Viewer{
     // Lista di comandi accettati dal gioco
     List<Pair<String, CommandType>> commands = new ArrayList<>();
 
-    public Terminal()
+    /**
+     * Costruttore di terminal
+     * @param flags passato all'apertura del terminale
+     */
+    public Terminal(String[] flags)
     {
         super();
 
@@ -23,6 +27,15 @@ public class Terminal extends Viewer{
         commands.add(new Pair<String, CommandType>("/help", CommandType.HELP));
 
         parser = new Parser(commands);
+
+        if(flags.length > 0)
+        {
+            if(flags[0].equals("-h") || flags[0].equals("--help"))
+            {
+                System.out.println(help());
+            }
+        }
+
         readInput();
     }
 

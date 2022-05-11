@@ -12,6 +12,6 @@ public final class App {
      * @param args command line arguments
      */
     public static void main(final String[] args) {
-        new Terminal();
+        new Terminal(args);
     }
 }

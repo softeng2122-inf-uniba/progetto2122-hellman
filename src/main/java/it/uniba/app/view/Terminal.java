@@ -80,7 +80,7 @@ public class Terminal extends Viewer{
      * 
      * @return comando di help
      */
-    private String help()
+    public static String help()
     {
         String str = "";
 

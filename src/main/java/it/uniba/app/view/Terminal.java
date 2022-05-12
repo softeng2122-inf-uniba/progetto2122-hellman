@@ -28,6 +28,7 @@ public class Terminal extends Viewer{
         // Aggiungere i comandi accettati dal parser
         commands.add(new Pair<String, CommandType>("/help", CommandType.HELP));
         commands.add(new Pair<String, CommandType>("/esci", CommandType.EXIT_APP));
+        commands.add(new Pair<String, CommandType>("/gioca", CommandType.START_GAME));
         commands.add(new Pair<String, CommandType>("si", CommandType.EXIT_APP_YES));
         commands.add(new Pair<String, CommandType>("no", CommandType.EXIT_APP_NO));
         commands.add(new Pair<String, CommandType>("/nuova", CommandType.NUOVA));
@@ -58,7 +59,7 @@ public class Terminal extends Viewer{
 
     /**
      * Metodo che gestisce il comando inserito dall'utente
-     * 
+     *
      * @param p risultato del parser
      * @param out canale di output
      */
@@ -68,7 +69,7 @@ public class Terminal extends Viewer{
             out.println("Non ho capito! Prova con un altro comando.");
         }else{
             CommandType type = p.getCommand().getType();
-            
+
             switch(type)
             {
                 case HELP:
@@ -78,7 +79,7 @@ public class Terminal extends Viewer{
                 case EXIT_APP:
                     closeApp(out);
                     break;
-                
+
                 case NUOVA:
                     out.println(setSecretWord(p.getCommand().getName()));
                     break;
@@ -86,6 +87,10 @@ public class Terminal extends Viewer{
                 case SHOW:
                     printSecretWord();
                     break;   
+
+                case START_GAME:
+                    startGame(out);
+                    break;
 
                 default:
                     out.println("Non ho capito! Prova con un altro comando.");
@@ -95,9 +100,29 @@ public class Terminal extends Viewer{
 
     }
 
+    public void startGame(PrintStream out){
+        out.println("Avvio partita...");
+
+        try {
+            usrManager.startGame();
+        } catch (WrongWordException e) {
+            out.println(e.getMessage());
+            out.println("");
+            return;
+        }
+
+        out.println("");
+        for(int i = 0; i < Helper.MAX_TRYS; i++){
+            for(int j = 0; j < Helper.MAX_LETTERS; j++){
+                out.print("_ ");
+            }
+            out.println("");
+        }
+    }
+
     /**
      * Restituisce la stringa del comando di help
-     * 
+     *
      * @return comando di help
      */
     public static String help()
@@ -121,7 +146,7 @@ public class Terminal extends Viewer{
 
     /**
      * Gestisce la chiusura dell'app
-     * 
+     *
      * @param out canale di output
      */
     public void closeApp(PrintStream out){
@@ -167,7 +192,7 @@ public class Terminal extends Viewer{
         }catch(WrongWordException w){
             System.out.println(w.getMessage());
         }
-       
+
         return str;
 	}
 

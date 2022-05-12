@@ -25,7 +25,10 @@ public class Terminal extends Viewer{
 
         // Aggiungere i comandi accettati dal parser
         commands.add(new Pair<String, CommandType>("/help", CommandType.HELP));
-
+        commands.add(new Pair<String, CommandType>("/esci", CommandType.EXIT_APP));
+        commands.add(new Pair<String, CommandType>("si", CommandType.EXIT_APP_YES));
+        commands.add(new Pair<String, CommandType>("no", CommandType.EXIT_APP_NO));
+    
         parser = new Parser(commands);
 
         if(flags.length > 0)
@@ -45,7 +48,7 @@ public class Terminal extends Viewer{
     protected void readInput()
     {
         while (true){
-            nextCommand(parser.readCommand(), System.out);
+            nextCommand(parser.readCommand(true), System.out);
         }
     }
 
@@ -68,7 +71,12 @@ public class Terminal extends Viewer{
                     out.println(help());
                     break;
 
+                case EXIT_APP:
+                    closeApp(out);
+                    break;
+
                 default:
+                    out.println("Non ho capito! Prova con un altro comando.");
                     break;
             }
         }
@@ -97,5 +105,38 @@ public class Terminal extends Viewer{
         str += "==============================================================================================\n";
 
         return str;
+    }
+
+    /**
+     * Gestisce la chiusura dell'app
+     * 
+     * @param out canale di output
+     */
+    public void closeApp(PrintStream out){
+        out.println("Sei sicuro di uscire dall'app? (si/no)");
+
+        ParserOutput po = parser.readCommand(false);
+        if(po != null)
+        {
+            CommandType type = po.getCommand().getType();
+            switch(type)
+            {
+                case EXIT_APP_YES:
+                    out.println("Ciao!");
+                    System.exit(0);
+                    return;
+
+                case EXIT_APP_NO:
+                    out.println("Chiusura dell'app annullata.");
+                    return;
+
+                default:
+                    out.println("Input non valido. Reinserisci l'input.");
+                    return;
+            }
+        }
+
+        out.println("Input non valido. Reinserisci l'input.");
+        return;
     }
 }

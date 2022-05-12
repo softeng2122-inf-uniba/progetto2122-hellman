@@ -135,6 +135,13 @@ public class Parser {
         if (!tokens.isEmpty()) {
             int ic = checkForCommand(tokens.get(0), commands);
             if (ic == -1) {
+                if(tokens.size() == 1)
+                {
+                    Commands inputWord = new Commands(CommandType.INPUT_WORD, tokens.get(0));
+                    inputWord.setAlias(new String[] { tokens.get(0).toLowerCase(), tokens.get(0).toUpperCase() });
+                    return new ParserOutput(inputWord);
+                }
+
                 return null;
             }
             return new ParserOutput(commands.get(ic));

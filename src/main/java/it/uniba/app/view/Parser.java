@@ -104,6 +104,8 @@ public class Parser {
      * parse con uno qualsiasi dei comandi supportati, se essa corrisponde ad uno
      * dei comandi, lo restituisce, altrimenti restituisce null
      * 
+     * @param print_command se true stampa "Inserisci un comando", altrimenti non stampa nulla
+     * 
      * @return risultato di parse.
      */
     public ParserOutput readCommand(boolean print_command) {

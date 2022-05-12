@@ -20,7 +20,7 @@ public class GameManager {
 
     /**
      * Metodo per l'impostazione della parola segreta di un Game.
-     * 
+     *
      * @param game Game di cui modificare la parola segreta.
      * @param secretWord Parola segreta da impostare.
      * @throws WrongWordException Eccezione sollevata nel caso in cui la parola inserita non sia adeguata
@@ -45,11 +45,30 @@ public class GameManager {
 
     /**
      * Serve ad accedere alla parola segreta di un Game.
-     * 
+     *
      * @param game Game di cui accedere alla parola segreta.
      * @return Parola segreta di game.
      */
     public static String getSecretWord(Game game) {
         return game.getSecretWord();
     }
+
+    public static void startGame(Game currentGame, Game configuratedGame) throws WrongWordException{
+        if (currentGame.getSecretWord().equals("")){
+            if(configuratedGame != null && !configuratedGame.getSecretWord().equals("")){
+                currentGame.setSecretWord(configuratedGame.getSecretWord());
+
+                currentGame.disableConfigurable();
+
+                configuratedGame.setSecretWord("");
+            } else {
+                throw new WrongWordException("Non è ancora stato configurato un game!");
+            }
+
+        } else {
+            throw new WrongWordException("C'è già un game in corso.");
+        }
+    }
+
+
 }

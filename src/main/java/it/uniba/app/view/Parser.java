@@ -106,10 +106,11 @@ public class Parser {
      * 
      * @return risultato di parse.
      */
-    public ParserOutput readCommand() {
+    public ParserOutput readCommand(boolean print_command) {
         ParserOutput p = null;
 
-        System.out.println("Inserisci un comando:");
+        if(print_command)
+            System.out.println("Inserisci un comando:");
         
         while (scanner.hasNextLine()) {
             String command = scanner.nextLine();

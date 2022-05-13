@@ -44,21 +44,8 @@ public class GameManager {
     }
 
     /**
-     * Metodo per verificare che una stringa sia presente in una lista di Word.
      * 
-     * @param word Parola di cui verificare la presenza nella lista.
-     * @param words Lista di cui verificare la presenza dalla parola.
-     * @return Esito della ricerca.
      */
-    private static boolean isContained(String word, List<Word> words) {
-
-        for (Word w: words) {
-            if (w.getWord().equalsIgnoreCase(word)) {
-                return true;
-            }
-        }
-
-        return false;
     }
 
     

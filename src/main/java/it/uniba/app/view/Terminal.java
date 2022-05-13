@@ -31,6 +31,7 @@ public class Terminal extends Viewer{
         commands.add(new Pair<String, CommandType>("si", CommandType.EXIT_APP_YES));
         commands.add(new Pair<String, CommandType>("no", CommandType.EXIT_APP_NO));
         commands.add(new Pair<String, CommandType>("/nuova", CommandType.NUOVA));
+        commands.add(new Pair<String, CommandType>("/mostra", CommandType.SHOW));
 
         parser = new Parser(commands);
 
@@ -81,6 +82,10 @@ public class Terminal extends Viewer{
                 case NUOVA:
                     out.println(setSecretWord(p.getCommand().getName()));
                     break;
+                 
+                case SHOW:
+                    printSecretWord();
+                    break;   
 
                 default:
                     out.println("Non ho capito! Prova con un altro comando.");
@@ -146,7 +151,13 @@ public class Terminal extends Viewer{
         out.println("Input non valido. Reinserisci l'input.");
         return;
     }
-
+    
+    /**
+     * Metodo che serve a impostare la parola segreta.
+     * 
+     * @param word
+     * @return
+     */
     public String setSecretWord(String word){
         String str= "";
 
@@ -160,4 +171,14 @@ public class Terminal extends Viewer{
         return str;
 	}
 
+    /**
+     * Metodo che permette di stampare la parola segreta.
+     */
+    public void printSecretWord(){ 
+        if(usrManager.getSecretWord().compareTo("") != 0){
+        System.out.println("La parola segreta è " + usrManager.getSecretWord());     
+        } else {
+            System.out.println("Errore, non e' stata inserita alcuna parola segreta.");
+        }
+    }
 }

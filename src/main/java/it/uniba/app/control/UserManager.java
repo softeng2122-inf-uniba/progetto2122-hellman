@@ -22,4 +22,12 @@ public class UserManager implements IPlayer, IWordSmith{
         
 		wordSmith.setSecretWord(word);
 	}
+
+  /**
+   * Metodo che restituisce la parola segreta.
+   * @return parola segreta
+   */
+  public String getSecretWord(){
+		return wordSmith.getSecretWord();
+	}
 }

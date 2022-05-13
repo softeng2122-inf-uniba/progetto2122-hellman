@@ -1,6 +1,8 @@
 package it.uniba.app.view;
 
 import java.util.*;
+
+import it.uniba.app.control.UserManager;
 import it.uniba.app.utils.*;
 import java.io.PrintStream;
 
@@ -28,7 +30,8 @@ public class Terminal extends Viewer{
         commands.add(new Pair<String, CommandType>("/esci", CommandType.EXIT_APP));
         commands.add(new Pair<String, CommandType>("si", CommandType.EXIT_APP_YES));
         commands.add(new Pair<String, CommandType>("no", CommandType.EXIT_APP_NO));
-    
+        commands.add(new Pair<String, CommandType>("/nuova", CommandType.NUOVA));
+
         parser = new Parser(commands);
 
         if(flags.length > 0)
@@ -73,6 +76,10 @@ public class Terminal extends Viewer{
 
                 case EXIT_APP:
                     closeApp(out);
+                    break;
+                
+                case NUOVA:
+                    out.println(setSecretWord(p.getCommand().getName()));
                     break;
 
                 default:
@@ -139,4 +146,18 @@ public class Terminal extends Viewer{
         out.println("Input non valido. Reinserisci l'input.");
         return;
     }
+
+    public String setSecretWord(String word){
+        String str= "";
+
+        try{
+		    usrManager.setSecretWord(word);
+            str += "La parola è stata inserita correttamente.";
+        }catch(WrongWordException w){
+            System.out.println(w.getMessage());
+        }
+       
+        return str;
+	}
+
 }

@@ -137,6 +137,14 @@ public class Parser {
             if (ic == -1) {
                 return null;
             }
+            if(commands.get(ic).getType() == CommandType.NUOVA)
+            {
+                if (tokens.size() == 2){
+                    Commands inputWord = new Commands(CommandType.NUOVA, tokens.get(1).toLowerCase());
+                    return new ParserOutput(inputWord);
+                } else
+                    return null;
+            }
             return new ParserOutput(commands.get(ic));
 
         } else {

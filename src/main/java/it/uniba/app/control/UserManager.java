@@ -13,21 +13,30 @@ public class UserManager implements IPlayer, IWordSmith{
     private WordSmith wordSmith = new WordSmith();
     private Game currentGame = new Game();
 
-    /** 
+    /**
      * Metodo che demanda al paroliere l'impostazione della parola segreta.
-     * 
+     *
      * @param word parola da impostare.
-    */
+     */
     public void setSecretWord(String word) throws WrongWordException{
-        
-		wordSmith.setSecretWord(word);
-	}
+        wordSmith.setSecretWord(word);
+    }
 
-  /**
-   * Metodo che restituisce la parola segreta.
-   * @return parola segreta
-   */
-  public String getSecretWord(){
-		return wordSmith.getSecretWord();
-	}
+    /**
+     * Metodo che restituisce la parola segreta.
+     * 
+     * @return parola segreta
+     */
+    public String getSecretWord(){
+        return wordSmith.getSecretWord();
+    }
+
+    /**
+     * Metodo per avviare la partita attraverso il metodo statico di GameManager.
+     * 
+     * @throws WrongWordException Eccezione che controlla che la parola sia settata correttamente.
+     */
+    public void startGame() throws WrongWordException{
+        GameManager.startGame(currentGame, wordSmith.getConfiguratedGame());
+    }
 }

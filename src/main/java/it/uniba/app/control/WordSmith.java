@@ -11,16 +11,16 @@ public class WordSmith implements IWordSmith{
 
     private Game configuratedGame = new Game();
 
-    /** 
+    /**
      * Metodo che demanda al gameManager di impostare la parola.
-     * 
+     *
      * @param word parola da impostare
-     * 
+     *
     */
     public void setSecretWord(String word) throws WrongWordException{
-		
+
 		  GameManager.setSecretWord(configuratedGame,word);
-		
+
 	  }
 
     /**
@@ -30,4 +30,8 @@ public class WordSmith implements IWordSmith{
     public String getSecretWord(){
 		  return GameManager.getSecretWord(configuratedGame);
 	  }
+
+    public Game getConfiguratedGame() {
+        return configuratedGame;
+    }
 }

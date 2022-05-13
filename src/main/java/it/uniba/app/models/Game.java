@@ -16,9 +16,9 @@ public class Game{
 
     /**
      * Costruttore di classe.
-     * Inizializza maxTry a 6 e numberLetter a 5. 
+     * Inizializza maxTry a 6 e numberLetter a 5.
      * secretWord viene inizializzata attraverso il parametro e trys viene instanziata come LinkedList.
-     * 
+     *
      * @param secretWord Parola segreta inizializzata alla creazione dell'oggetto.
      */
     public Game(String secretWord){
@@ -35,7 +35,7 @@ public class Game{
 
     /**
      * Serve per accedere al valore della parola segreta.
-     * 
+     *
      * @return Valore della parola segreta.
      */
     public String getSecretWord(){
@@ -44,7 +44,7 @@ public class Game{
 
     /**
      * Serve per modificare il valore della parola segreta.
-     * 
+     *
      * @param secretWord Parola segreta con cui sostituire l'attuale.
      */
     public void setSecretWord(String secretWord){
@@ -53,7 +53,7 @@ public class Game{
 
     /**
      * Serve per accedere al valore dei tentativi massimi effettuabili.
-     * 
+     *
      * @return Valore dei tentativi massimi effettuabili.
      */
     public int getMaxTry(){
@@ -62,7 +62,7 @@ public class Game{
 
     /**
      * Serve per accedere al valore del numero di lettere che formano le parole.
-     * 
+     *
      * @return Valore del numero di lettere che formano le parole.
      */
     public int getNumberLetter(){
@@ -71,7 +71,7 @@ public class Game{
 
     /**
      * Serve per controllare che il gioco sia configurabile.
-     * 
+     *
      * @return Valore della variabile booleana che stabilisce se il gioco è configurabile.
      */
     public boolean isConfigurable(){
@@ -94,7 +94,7 @@ public class Game{
 
     /**
      * Serve per aggiungere un tentativo alla lista dei tentativi effettuati.
-     * 
+     *
      * @param word Parola inserita nell'ultimo tentativo effettuato.
      */
     public void addTry(Word word){
@@ -112,7 +112,7 @@ public class Game{
 
     /**
      * Serve per accedere alla numero dei tentativi effettuati.
-     * 
+     *
      * @return Valore che stabilisce il numero dei tentativi effettuati.
      */
     public int getNumberTrys(){

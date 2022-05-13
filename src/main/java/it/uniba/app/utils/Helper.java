@@ -10,9 +10,17 @@ public class Helper {
     final public static int FORMAT_LETTER_FOUND_WRONG_POSITION = 2;
     final public static int FORMAT_LETTER_FOUND_RIGHT_POSITION = 3;
 
+    final public static int MAX_LETTERS = 5;
+    final public static int MAX_TRYS = 6;
+
     final public static int GAME_WIN = 5;
     final public static int GAME_LOSE = 6;
     final public static int GAME_WAITING = 7;
+
+    final public static String ANSI_RESET = "\u001B[0m";
+    final public static String ANSI_GREEN = "\u001B[32m";
+    final public static String ANSI_YELLOW = "\u001B[33m";
+    final public static String ANSI_GREY = "\u001b[0m";
 
     private Helper(){}
 }

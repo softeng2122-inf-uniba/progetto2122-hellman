@@ -22,8 +22,7 @@ public class Terminal extends Viewer{
      * Costruttore di terminal
      * @param flags passato all'apertura del terminale
      */
-    public Terminal(String[] flags)
-    {
+    public Terminal(String[] flags){
         super();
 
         // Aggiungere i comandi accettati dal parser
@@ -37,10 +36,8 @@ public class Terminal extends Viewer{
 
         parser = new Parser(commands);
 
-        if(flags.length > 0)
-        {
-            if(flags[0].equals("-h") || flags[0].equals("--help"))
-            {
+        if(flags.length > 0){
+            if(flags[0].equals("-h") || flags[0].equals("--help")){
                 System.out.println(help());
             }
         }
@@ -51,8 +48,7 @@ public class Terminal extends Viewer{
     /**
      * Metodo che invoca l'inserimento di nuovi comandi da tastiera
      */
-    protected void readInput()
-    {
+    protected void readInput(){
         while (true){
             nextCommand(parser.readCommand(true), System.out);
         }
@@ -71,8 +67,7 @@ public class Terminal extends Viewer{
         }else{
             CommandType type = p.getCommand().getType();
 
-            switch(type)
-            {
+            switch(type){
                 case HELP:
                     out.println(help());
                     break;
@@ -101,6 +96,12 @@ public class Terminal extends Viewer{
 
     }
 
+    /**
+     * Metodo per l'avvio della partita nel caso in cui la parola segreta sia stata
+     * impostata.
+     * 
+     * @param out Canale di output.
+     */
     public void startGame(PrintStream out){
         out.println("Avvio partita...");
 
@@ -147,11 +148,9 @@ public class Terminal extends Viewer{
         out.println("Sei sicuro di uscire dall'app? (si/no)");
 
         ParserOutput po = parser.readCommand(false);
-        if(po != null)
-        {
+        if(po != null){
             CommandType type = po.getCommand().getType();
-            switch(type)
-            {
+            switch(type){
                 case EXIT_APP_YES:
                     out.println("Ciao!");
                     System.exit(0);

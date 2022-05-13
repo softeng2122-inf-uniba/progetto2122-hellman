@@ -62,7 +62,7 @@ public class GameManager {
 
                 configuratedGame.setSecretWord("");
             } else {
-                throw new WrongWordException("Non è ancora stato configurato un game!");
+                throw new WrongWordException("Non è ancora stata inserita la parola segreta!");
             }
 
         } else {

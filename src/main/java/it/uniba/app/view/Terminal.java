@@ -2,7 +2,6 @@ package it.uniba.app.view;
 
 import java.util.*;
 
-import it.uniba.app.control.UserManager;
 import it.uniba.app.models.Word;
 import it.uniba.app.utils.*;
 import java.io.PrintStream;

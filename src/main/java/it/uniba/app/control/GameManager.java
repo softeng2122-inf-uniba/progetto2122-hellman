@@ -1,13 +1,8 @@
 package it.uniba.app.control;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.regex.Pattern;
 
 import it.uniba.app.models.Game;
-import it.uniba.app.models.Word;
-import it.uniba.app.utils.Helper;
-import it.uniba.app.utils.Pair;
 import it.uniba.app.utils.WrongWordException;
 
 /**

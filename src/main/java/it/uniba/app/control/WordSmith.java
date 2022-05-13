@@ -23,4 +23,11 @@ public class WordSmith implements IWordSmith{
 		
 	  }
 
+    /**
+     * Metodo che restituisce la parola segreta.
+     * @return parola segreta
+     */
+    public String getSecretWord(){
+		  return GameManager.getSecretWord(configuratedGame);
+	  }
 }

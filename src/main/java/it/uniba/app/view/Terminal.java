@@ -194,49 +194,52 @@ public class Terminal extends Viewer{
     {
         String str = "\n";
 
-        if(words.size() > 0)
-        {
-            str += " ";
-            for(int i = 0; i < words.get(0).getWord().length(); i++)
-            {
-                str += "-";
+        for(int i = 0; i < Helper.MAX_TRYS; i++){
+            boolean emptyWord = false; 
+            Word word = null;
+            try{
+                word = words.get(i);
+            }catch(IndexOutOfBoundsException e){
+                emptyWord = true;
+            }
+
+            for(int j = 0; j < Helper.MAX_LETTERS; j++){
+                str += (emptyWord == true) ? "_" : getCharColored(word.getWord().charAt(j), word.getFormat().get(j));
+                str += " ";
             }
             str += "\n";
         }
 
-        for(Word el: words)
+        return str;
+    }
+
+    /**
+     * Restituisce il carattere colorato del formato passato in input
+     * 
+     * @param c carattere da colorare
+     * @param format formato del colore
+     * @return carattere colorato
+     */
+    private String getCharColored(char c, int format)
+    {
+        String str = "";
+
+        switch(format)
         {
-            str += "|";
-            int idx = 0;
-            for(char c: el.getWord().toCharArray())
-            {
-                switch(el.getFormat().get(idx))
-                {
-                    case Helper.FORMAT_LETTER_NOT_FOUND:
-                        str += Helper.ANSI_GREY + c + Helper.ANSI_RESET;
-                        break;
-                        
-                    case Helper.FORMAT_LETTER_FOUND_RIGHT_POSITION:
-                        str += Helper.ANSI_GREEN + c + Helper.ANSI_RESET;
-                        break;
-                    
-                    case Helper.FORMAT_LETTER_FOUND_WRONG_POSITION:
-                        str += Helper.ANSI_YELLOW + c + Helper.ANSI_RESET;
-                        break;
-
-                    default:
-                    break;
-                }
-
-                idx++;
-            }
+            case Helper.FORMAT_LETTER_NOT_FOUND:
+                str += Helper.ANSI_GREY + c + Helper.ANSI_RESET;
+                break;
+                
+            case Helper.FORMAT_LETTER_FOUND_RIGHT_POSITION:
+                str += Helper.ANSI_GREEN + c + Helper.ANSI_RESET;
+                break;
             
-            str += "|\n ";
-            for(int i = 0; i < words.get(0).getWord().length(); i++)
-            {
-                str += "-";
-            }
-            str += "\n";
+            case Helper.FORMAT_LETTER_FOUND_WRONG_POSITION:
+                str += Helper.ANSI_YELLOW + c + Helper.ANSI_RESET;
+                break;
+
+            default:
+                break;
         }
 
         return str;

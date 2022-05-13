@@ -11,6 +11,9 @@ public class Helper {
   public static final String ANSI_YELLOW = "\u001B[33m";
   public static final String ANSI_GREY = "\u001b[0m";
 
+  public static final int MAX_LETTERS = 5;
+  public static final int MAX_TRYS = 6;
+
   final public static int GAME_WIN = 5;
   final public static int GAME_LOSE = 6;
   final public static int GAME_WAITING = 7;

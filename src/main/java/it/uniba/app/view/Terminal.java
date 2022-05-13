@@ -1,6 +1,8 @@
 package it.uniba.app.view;
 
 import java.util.*;
+
+import it.uniba.app.models.Word;
 import it.uniba.app.utils.*;
 import java.io.PrintStream;
 
@@ -75,6 +77,10 @@ public class Terminal extends Viewer{
                     closeApp(out);
                     break;
 
+                case INPUT_WORD:
+                    out.println(makeTry(p.getCommand().getName()));
+                    break;
+
                 default:
                     out.println("Non ho capito! Prova con un altro comando.");
                     break;
@@ -138,5 +144,101 @@ public class Terminal extends Viewer{
 
         out.println("Input non valido. Reinserisci l'input.");
         return;
+    }
+
+    /**
+     * Gestisce il tentativo della parola
+     *  
+     * @param word per effettuare il tentativo
+     * @return stringa della risposta del tentativo
+     */
+    public String makeTry(String word){
+        String str = "";
+
+        try{
+            Pair<Integer, List<Word>> res = usrManager.makeTry(word);
+
+            switch(res.getFirst())
+            {
+                case Helper.GAME_WIN:
+                    str += "Parola segreta indovinata\nNumero tentativi: ";
+                    str += printMatrix(res.getSecond());
+                    break;
+
+                case Helper.GAME_LOSE:
+                    str += "Hai raggiunto il numero massimo di tentativi.\nLa parola segreta è: " + res.getSecond().get(0).getWord();
+                    break;
+
+                case Helper.GAME_WAITING:
+                    str += "Tentativo errato! ";
+                    str += printMatrix(res.getSecond());
+                    break;
+
+                default:
+                    break;
+            }
+        }catch(WrongWordException e){
+            return e.getMessage();
+        }
+
+        return str;
+    }
+
+    /**
+     * Restituisce la matrice delle parole inserite con i rispettivi colori nelle lettere
+     * @param words tentativi effettuati
+     * 
+     * @return matrice dei tentativi colorata
+     */
+    private String printMatrix(List<Word> words)
+    {
+        String str = "\n";
+
+        if(words.size() > 0)
+        {
+            str += " ";
+            for(int i = 0; i < words.get(0).getWord().length(); i++)
+            {
+                str += "-";
+            }
+            str += "\n";
+        }
+
+        for(Word el: words)
+        {
+            str += "|";
+            int idx = 0;
+            for(char c: el.getWord().toCharArray())
+            {
+                switch(el.getFormat().get(idx))
+                {
+                    case Helper.FORMAT_LETTER_NOT_FOUND:
+                        str += Helper.ANSI_GREY + c + Helper.ANSI_RESET;
+                        break;
+                        
+                    case Helper.FORMAT_LETTER_FOUND_RIGHT_POSITION:
+                        str += Helper.ANSI_GREEN + c + Helper.ANSI_RESET;
+                        break;
+                    
+                    case Helper.FORMAT_LETTER_FOUND_WRONG_POSITION:
+                        str += Helper.ANSI_YELLOW + c + Helper.ANSI_RESET;
+                        break;
+
+                    default:
+                    break;
+                }
+
+                idx++;
+            }
+            
+            str += "|\n ";
+            for(int i = 0; i < words.get(0).getWord().length(); i++)
+            {
+                str += "-";
+            }
+            str += "\n";
+        }
+
+        return str;
     }
 }

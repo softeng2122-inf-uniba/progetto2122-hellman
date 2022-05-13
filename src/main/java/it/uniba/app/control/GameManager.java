@@ -44,9 +44,12 @@ public class GameManager {
     }
 
     /**
+     * Serve ad accedere alla parola segreta di un Game.
      * 
+     * @param game Game di cui accedere alla parola segreta.
+     * @return Parola segreta di game.
      */
+    public static String getSecretWord(Game game) {
+        return game.getSecretWord();
     }
-
-    
 }

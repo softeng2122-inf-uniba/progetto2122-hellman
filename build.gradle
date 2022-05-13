@@ -129,6 +129,12 @@ spotbugsTest {
     }
 }
 
+run {
+    standardInput = System.in
+}
+// To run the program via Gradle, invoke the `run` task as follows.
+// ./gradlew run -q --console=plain
+
 test {
     // Use JUnit 5
     useJUnitPlatform()
@@ -140,7 +146,7 @@ test {
     testLogging {
         events "passed", "skipped", "failed"
     }
-    
+
     finalizedBy jacocoTestReport
 }
 
@@ -152,7 +158,7 @@ task spotbugsMainReport {
                 println( it )
             }
         }
-        
+
     }
 }
 tasks.getByName('spotbugsMain').finalizedBy('spotbugsMainReport')

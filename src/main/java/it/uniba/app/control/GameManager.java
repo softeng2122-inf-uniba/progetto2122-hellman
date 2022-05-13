@@ -53,6 +53,18 @@ public class GameManager {
         return game.getSecretWord();
     }
 
+    /**
+     * Metodo per l'avvio del gioco instanziando il game attuale con i valori del
+     * game precedentemente configurato.
+     * Successivamente viene disabilitata la possibilità di configurare il game
+     * attuale e viene resettato il game precedente.
+     * 
+     * @param currentGame      Game attuale da configurare.
+     * @param configuratedGame Game configurato i cui valori verranno usati per
+     *                         instanziare il game attuale
+     * @throws WrongWordException Eccezione che controlla che la parola sia settata
+     *                            correttamente.
+     */
     public static void startGame(Game currentGame, Game configuratedGame) throws WrongWordException{
         if (currentGame.getSecretWord().equals("")){
             if(configuratedGame != null && !configuratedGame.getSecretWord().equals("")){

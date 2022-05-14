@@ -32,6 +32,15 @@ public class UserManager implements IPlayer, IWordSmith{
     }
 
     /**
+     *  Metodo che serve per uscire da una partita in corso.
+     * 
+     * @throws WrongWordException Eccezione che controlla il corretto funzionamento del metodo
+     */
+    public void backGame() throws WrongWordException{
+        GameManager.backGame(currentGame);
+    }
+
+    /**
      * Metodo per avviare la partita attraverso il metodo statico di GameManager.
      * 
      * @throws WrongWordException Eccezione che controlla che la parola sia settata correttamente.

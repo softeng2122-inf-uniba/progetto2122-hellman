@@ -28,10 +28,11 @@ public class Terminal extends Viewer{
         commands.add(new Pair<String, CommandType>("/help", CommandType.HELP));
         commands.add(new Pair<String, CommandType>("/esci", CommandType.EXIT_APP));
         commands.add(new Pair<String, CommandType>("/gioca", CommandType.START_GAME));
-        commands.add(new Pair<String, CommandType>("si", CommandType.EXIT_APP_YES));
-        commands.add(new Pair<String, CommandType>("no", CommandType.EXIT_APP_NO));
+        commands.add(new Pair<String, CommandType>("si", CommandType.EXIT_YES));
+        commands.add(new Pair<String, CommandType>("no", CommandType.EXIT_NO));
         commands.add(new Pair<String, CommandType>("/nuova", CommandType.NUOVA));
         commands.add(new Pair<String, CommandType>("/mostra", CommandType.SHOW));
+        commands.add(new Pair<String, CommandType>("/abbandona", CommandType.EXIT_GAME));
 
         parser = new Parser(commands);
 
@@ -87,6 +88,10 @@ public class Terminal extends Viewer{
                     startGame(out);
                     break;
 
+                case EXIT_GAME:
+                    backGame(out);
+                    break;
+
                 default:
                     out.println("Non ho capito! Prova con un altro comando.");
                     break;
@@ -113,6 +118,42 @@ public class Terminal extends Viewer{
         }
 
         out.println(printMatrix(new ArrayList<Word>()));
+    }
+
+    /**
+     * Metodo per l'abbandono della partita nel caso in cui si decide di non voler più giocare.
+     * 
+     * @param out Canale di output.
+     */
+    public void backGame(PrintStream out){
+        out.println("Sei sicuro di abbandonare il gioco ancora in corso? (si/no)");
+
+        ParserOutput po = parser.readCommand(false);
+        if(po != null){
+            CommandType type = po.getCommand().getType();
+            switch(type){
+                case EXIT_YES:
+                    try {
+                        usrManager.backGame();
+                        out.println("Abbandono partita...");
+                    } catch (WrongWordException e) {
+                        out.println(e.getMessage());
+                        out.println("");
+                    }
+                    return;
+
+                case EXIT_NO:
+                    out.println("Abbandono del gioco annullato.");
+                    return;
+
+                default:
+                    out.println("Input non valido. Reinserisci l'input.");
+                    return;
+            }
+        }
+
+        out.println("Input non valido. Reinserisci l'input.");
+        return;
     }
 
     /**
@@ -150,12 +191,12 @@ public class Terminal extends Viewer{
         if(po != null){
             CommandType type = po.getCommand().getType();
             switch(type){
-                case EXIT_APP_YES:
+                case EXIT_YES:
                     out.println("Ciao!");
                     System.exit(0);
                     return;
 
-                case EXIT_APP_NO:
+                case EXIT_NO:
                     out.println("Chiusura dell'app annullata.");
                     return;
 

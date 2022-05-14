@@ -8,8 +8,7 @@ public abstract class Viewer {
     
     UserManager usrManager;
 
-    public Viewer()
-    {
+    public Viewer(){
         usrManager = new UserManager();
     }
     

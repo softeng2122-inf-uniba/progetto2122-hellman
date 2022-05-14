@@ -1,8 +1,13 @@
 package it.uniba.app.control;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Pattern;
 
 import it.uniba.app.models.Game;
+import it.uniba.app.models.Word;
+import it.uniba.app.utils.Helper;
+import it.uniba.app.utils.Pair;
 import it.uniba.app.utils.WrongWordException;
 
 /**
@@ -63,11 +68,10 @@ public class GameManager {
     public static void startGame(Game currentGame, Game configuratedGame) throws WrongWordException{
         if (currentGame.getSecretWord().equals("")){
             if(configuratedGame != null && !configuratedGame.getSecretWord().equals("")){
+                currentGame.resetGame();
                 currentGame.setSecretWord(configuratedGame.getSecretWord());
-
                 currentGame.disableConfigurable();
 
-                configuratedGame.setSecretWord("");
             } else {
                 throw new WrongWordException("Non è ancora stata inserita la parola segreta!");
             }
@@ -85,11 +89,93 @@ public class GameManager {
      */
     public static void backGame(Game currentGame) throws WrongWordException{
         if (currentGame.getSecretWord().equals("") || currentGame.isConfigurable()){
-            throw new WrongWordException("Non c'è già un game in corso.");
+            throw new WrongWordException("Non c'è un game in corso.");
         }else {
-            currentGame.setSecretWord("");
+            currentGame.resetGame();
         }
     }
 
+    /**
+     * Metodo per verificare la presenza o meno di un carattere nella parola
+     * così da controllare eventualmente anche se questo è nella posizione corretta o errata.
+     * 
+     * @param secretword Parola segreta di cui verificare la presenza del carattere.
+     * @param character Carattere della parola del tentativo di cui verificare la presenza in word.
+     * @param wordCharPosition Posizione della carattere nella parola inserita nel tentativo.
+     * @return Costante che stabilisce la presenza o meno del carattere ed eventualmente se la sua posizione è corretta.
+     */
+    private static int matchCharacters(String secretword, char character, int wordCharPosition) {
+        int secretwordCharFirstOccurrence = secretword.indexOf(character);
+        
+        if (secretwordCharFirstOccurrence < 0)
+            return Helper.FORMAT_LETTER_NOT_FOUND;
+        if (secretword.charAt(wordCharPosition) == character)
+            return Helper.FORMAT_LETTER_FOUND_RIGHT_POSITION;
+        if (secretword.charAt(wordCharPosition) != character)
+            return Helper.FORMAT_LETTER_FOUND_WRONG_POSITION;
 
+        return -1;
+    }
+
+    /**
+     * Metodo per effettuare un tentativo di inserimento di una parola per
+     * indovinare la parola segreta.
+     * 
+     * @param currentGame Game attuale in cui effettuare il tentativo.
+     * @param word Parola da inserire durante il tentativo.
+     * @return Costante che stabilisce lo stato del game e la lista aggiornata dei tentativi effettuati.
+     * @throws WrongWordException Eccezione sollevata nel caso in cui la parola inserita non sia adeguata
+     * o nel caso in cui il gioco sia configurabile.
+     */
+    public static Pair<Integer, List<Word>> makeTry(Game currentGame, String word) throws WrongWordException {
+        List<Word> trys;
+        if (!currentGame.isConfigurable()) {
+
+            if (currentGame.getNumberLetter() > word.length()) {
+                throw new WrongWordException("La parola inserita contiene un numero insufficiente di caratteri.");
+            } else if (currentGame.getNumberLetter() < word.length()) {
+                throw new WrongWordException("La parola inserita contiene un numero troppo elevato di caratteri.");
+            } else if (!Pattern.matches("[a-zA-Z]+", word)) {
+                throw new WrongWordException("La parola contiene caratteri non ammessi.");
+            } else {
+                
+                ArrayList<Integer> formats = new ArrayList<Integer>();
+                int result = Helper.GAME_WIN;
+
+                for(int i = 0; i < word.length(); i++) {
+                    int format = matchCharacters(currentGame.getSecretWord(), word.charAt(i), i);
+
+                    if(format != Helper.FORMAT_LETTER_FOUND_RIGHT_POSITION)
+                        result = Helper.GAME_LOSE;
+
+                    formats.add(format);
+                }
+
+                currentGame.addTry(new Word(word, formats));
+
+                if(result == Helper.GAME_LOSE && currentGame.getNumberTrys() != currentGame.getMaxTry())
+                    result = Helper.GAME_WAITING;
+
+                trys = currentGame.getTrys();
+
+                if(result == Helper.GAME_LOSE || result == Helper.GAME_WIN){
+                    currentGame.resetGame();
+                }
+                
+                return new Pair<Integer, List<Word>>(result, trys);
+            }
+        } else {
+            throw new WrongWordException("Il game non è iniziato.");
+        }
+    }
+
+    /**
+     * Metodo usato per capire se è o meno iniziata una partita.
+     * 
+     * @param game game su cui effettuare il controllo.
+     * @return true se il game è iniziato, false altrimenti.
+     */
+    public static boolean isGameStarted(Game game){
+        return !game.getSecretWord().equals("");
+    }
 }

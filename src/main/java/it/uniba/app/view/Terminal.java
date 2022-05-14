@@ -50,7 +50,7 @@ public class Terminal extends Viewer{
      */
     protected void readInput(){
         while (true){
-            nextCommand(parser.readCommand(true), System.out);
+            nextCommand(parser.readCommand(true,usrManager.isGameStarted()), System.out);
         }
     }
 
@@ -78,6 +78,8 @@ public class Terminal extends Viewer{
 
                 case INPUT_WORD:
                     out.println(makeTry(p.getCommand().getName()));
+                    break;
+                    
                 case NUOVA:
                     out.println(setSecretWord(p.getCommand().getName()));
                     break;
@@ -130,7 +132,7 @@ public class Terminal extends Viewer{
     public void backGame(PrintStream out){
         out.println("Sei sicuro di abbandonare il gioco ancora in corso? (si/no)");
 
-        ParserOutput po = parser.readCommand(false);
+        ParserOutput po = parser.readCommand(false,usrManager.isGameStarted());
         if(po != null){
             CommandType type = po.getCommand().getType();
             switch(type){
@@ -189,7 +191,7 @@ public class Terminal extends Viewer{
     public void closeApp(PrintStream out){
         out.println("Sei sicuro di uscire dall'app? (si/no)");
 
-        ParserOutput po = parser.readCommand(false);
+        ParserOutput po = parser.readCommand(false,usrManager.isGameStarted());
         if(po != null){
             CommandType type = po.getCommand().getType();
             switch(type){
@@ -220,31 +222,32 @@ public class Terminal extends Viewer{
      */
     public String makeTry(String word){
         String str = "";
-
+        Pair<Integer, List<Word>> res;
         try{
-            Pair<Integer, List<Word>> res = usrManager.makeTry(word);
-
-            switch(res.getFirst())
-            {
-                case Helper.GAME_WIN:
-                    str += "Parola segreta indovinata\nNumero tentativi: ";
-                    str += printMatrix(res.getSecond());
-                    break;
-
-                case Helper.GAME_LOSE:
-                    str += "Hai raggiunto il numero massimo di tentativi.\nLa parola segreta è: " + res.getSecond().get(0).getWord();
-                    break;
-
-                case Helper.GAME_WAITING:
-                    str += "Tentativo errato! ";
-                    str += printMatrix(res.getSecond());
-                    break;
-
-                default:
-                    break;
-            }
+            res = usrManager.makeTry(word);
         }catch(WrongWordException e){
             return e.getMessage();
+        }
+
+        switch(res.getFirst())
+        {
+            case Helper.GAME_WIN:
+                str += printMatrix(res.getSecond());
+                str += "Parola segreta indovinata\nNumero tentativi: ";
+                str += res.getSecond().size();
+                break;
+
+            case Helper.GAME_LOSE:
+                str += "Hai raggiunto il numero massimo di tentativi.\nLa parola segreta è: " + res.getSecond().get(0).getWord();
+                break;
+
+            case Helper.GAME_WAITING:
+                str += "Tentativo errato! ";
+                str += printMatrix(res.getSecond());
+                break;
+
+            default:
+                break;
         }
 
         return str;

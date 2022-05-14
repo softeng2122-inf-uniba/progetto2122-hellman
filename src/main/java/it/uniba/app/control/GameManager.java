@@ -77,5 +77,19 @@ public class GameManager {
         }
     }
 
+    /**
+     * Metodo per l'abbandono del gioco con reset dei dati in esso configurati.
+     *  
+     * @param currentGame Gioco corrente che viene resettato.
+     * @throws WrongWordException Eccezione che controlla il corretto funzionamento del metodo.
+     */
+    public static void backGame(Game currentGame) throws WrongWordException{
+        if (currentGame.getSecretWord().equals("") || currentGame.isConfigurable()){
+            throw new WrongWordException("Non c'è già un game in corso.");
+        }else {
+            currentGame.setSecretWord("");
+        }
+    }
+
 
 }

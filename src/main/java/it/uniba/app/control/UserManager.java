@@ -14,12 +14,12 @@ public class UserManager{
     private Game currentGame = new Game();
 
     /**
-     * Metodo che demanda al paroliere l'impostazione della parola segreta.
+     * Metodo che demanda al gameManager di impostare la parola.
      *
-     * @param word parola da impostare.
-     */
+     * @param word parola da impostare
+    */
     public void setSecretWord(String word) throws WrongWordException{
-        wordSmith.setSecretWord(word);
+        GameManager.setSecretWord(wordSmith.getConfiguratedGame(),word);
     }
 
     /**
@@ -28,7 +28,7 @@ public class UserManager{
      * @return parola segreta
      */
     public String getSecretWord(){
-        return wordSmith.getSecretWord();
+        return GameManager.getSecretWord(wordSmith.getConfiguratedGame());
     }
 
     /**

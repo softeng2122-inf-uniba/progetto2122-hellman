@@ -60,7 +60,7 @@ public class Terminal extends Viewer{
      * @param p risultato del parser
      * @param out canale di output
      */
-    public void nextCommand(ParserOutput p, PrintStream out) {
+    private void nextCommand(ParserOutput p, PrintStream out) {
 
         if (p == null) {
             out.println("Non ho capito! Prova con un altro comando.");
@@ -110,7 +110,7 @@ public class Terminal extends Viewer{
      * 
      * @param out Canale di output.
      */
-    public void startGame(PrintStream out){
+    private void startGame(PrintStream out){
         out.println("Avvio partita...");
 
         try {
@@ -129,7 +129,7 @@ public class Terminal extends Viewer{
      * 
      * @param out Canale di output.
      */
-    public void backGame(PrintStream out){
+    private void backGame(PrintStream out){
         out.println("Sei sicuro di abbandonare il gioco ancora in corso? (si/no)");
 
         ParserOutput po = parser.readCommand(false,usrManager.isGameStarted());
@@ -188,7 +188,7 @@ public class Terminal extends Viewer{
      *
      * @param out canale di output
      */
-    public void closeApp(PrintStream out){
+    private void closeApp(PrintStream out){
         out.println("Sei sicuro di uscire dall'app? (si/no)");
 
         ParserOutput po = parser.readCommand(false,usrManager.isGameStarted());
@@ -220,7 +220,7 @@ public class Terminal extends Viewer{
      * @param word per effettuare il tentativo
      * @return stringa della risposta del tentativo
      */
-    public String makeTry(String word){
+    private String makeTry(String word){
         String str = "";
         Pair<Integer, List<Word>> res;
         try{
@@ -259,7 +259,7 @@ public class Terminal extends Viewer{
      * @param word
      * @return
      */
-    public String setSecretWord(String word){
+    private String setSecretWord(String word){
         String str= "";
 
         try{
@@ -275,7 +275,7 @@ public class Terminal extends Viewer{
     /**
      * Metodo che permette di stampare la parola segreta.
      */
-    public void printSecretWord(){
+    private void printSecretWord(){
         if(usrManager.getSecretWord().compareTo("") != 0){
         System.out.println("La parola segreta è " + usrManager.getSecretWord());
         } else {

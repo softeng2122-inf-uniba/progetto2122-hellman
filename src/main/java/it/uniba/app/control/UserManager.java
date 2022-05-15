@@ -2,7 +2,6 @@ package it.uniba.app.control;
 
 import it.uniba.app.models.Game;
 import it.uniba.app.utils.IPlayer;
-import it.uniba.app.utils.IWordSmith;
 import it.uniba.app.utils.WrongWordException;
 import java.util.List;
 import it.uniba.app.models.Word;
@@ -11,7 +10,7 @@ import it.uniba.app.utils.Pair;
 /**
  * Classe che serve per interfacciare l'utente con il game manager
  */
-public class UserManager implements IPlayer, IWordSmith{
+public class UserManager implements IPlayer{
     //private Player player = new Player();
     private WordSmith wordSmith = new WordSmith();
     private Game currentGame = new Game();

@@ -1,13 +1,12 @@
 package it.uniba.app.control;
 
 import it.uniba.app.models.Game;
-import it.uniba.app.utils.IWordSmith;
 import it.uniba.app.utils.WrongWordException;
 
 /**
  * Classe che sarebbe il paroliere che serve per impostare e visualizzare la parola.
  */
-public class WordSmith implements IWordSmith{
+public class WordSmith{
 
     private Game configuratedGame = new Game();
 

@@ -1,8 +1,5 @@
 package it.uniba.app.models;
 
-import it.uniba.app.control.GameManager;
-import it.uniba.app.utils.WrongWordException;
-
 /**
  * Classe che sarebbe il paroliere che serve per impostare e visualizzare la parola.
  */
@@ -11,25 +8,10 @@ public class WordSmith{
     private Game configuratedGame = new Game();
 
     /**
-     * Metodo che demanda al gameManager di impostare la parola.
-     *
-     * @param word parola da impostare
-     *
-    */
-    public void setSecretWord(String word) throws WrongWordException{
-
-		  GameManager.setSecretWord(configuratedGame,word);
-
-	  }
-
-    /**
-     * Metodo che restituisce la parola segreta.
-     * @return parola segreta
+     * Metodo che permette di far usare e modificare il Game configurabile al UserManager
+     * 
+     * @return ritorna il game configurabile
      */
-    public String getSecretWord(){
-		  return GameManager.getSecretWord(configuratedGame);
-	  }
-
     public Game getConfiguratedGame() {
         return configuratedGame;
     }

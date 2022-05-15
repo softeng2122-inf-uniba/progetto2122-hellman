@@ -7,7 +7,7 @@ import java.util.*;
 * La classe contiene il Parser, che permette la lettura dei comandi (del gioco o dell'inserimento di una nuova parola) in input dall'utente,
 * giocatore o paroliere che sia.
 */
-public class Parser {
+class Parser {
     
     // Scanner per leggere l'input da tastiera
     Scanner scanner = new Scanner(System.in);
@@ -48,7 +48,7 @@ public class Parser {
      * @param commands
      * @throws Exception
      */
-    public void init(List<Pair<String, CommandType>> commands) throws Exception {
+    private void init(List<Pair<String, CommandType>> commands) throws Exception {
         // Commands
         for(Pair<String, CommandType> command: commands){
             Commands newword = new Commands(command.getSecond(), command.getFirst());
@@ -68,7 +68,7 @@ public class Parser {
      * @param ignoreWords da ignorare
      * @return tokens
      */
-    public static List<String> parseString(String string, Set<String> ignoreWords) {
+    private static List<String> parseString(String string, Set<String> ignoreWords) {
         List<String> tokens = new ArrayList<>();
         String[] split = string.toLowerCase().split("\\s+");
         for (String t : split) {
@@ -136,7 +136,7 @@ public class Parser {
      *
      * @return indice nella lista di comandi possibili.
      */
-    public ParserOutput parse(String command, List<Commands> commands) {
+    private ParserOutput parse(String command, List<Commands> commands) {
         List<String> tokens = parseString(command, ignoreWords);
         if (!tokens.isEmpty()) {
             int ic = checkForCommand(tokens.get(0), commands);

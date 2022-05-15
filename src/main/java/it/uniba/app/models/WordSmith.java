@@ -1,6 +1,6 @@
-package it.uniba.app.control;
+package it.uniba.app.models;
 
-import it.uniba.app.models.Game;
+import it.uniba.app.control.GameManager;
 import it.uniba.app.utils.WrongWordException;
 
 /**

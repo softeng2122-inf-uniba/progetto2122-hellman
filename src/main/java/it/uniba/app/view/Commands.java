@@ -7,7 +7,7 @@ import java.util.*;
 /**
  * Classe che gestisce i comandi accettati dal gioco
  */
-public class Commands {
+class Commands {
 
     // Tipo del comando
     private final CommandType type;

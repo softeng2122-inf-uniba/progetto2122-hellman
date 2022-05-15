@@ -159,7 +159,9 @@ public class GameManager {
                 trys = currentGame.getTrys();
 
                 if(result == Helper.GAME_LOSE || result == Helper.GAME_WIN){
-                    trys.set(0, new Word(getSecretWord(currentGame), formats));
+                    if(result == Helper.GAME_LOSE)
+                        trys.set(0, new Word(getSecretWord(currentGame), formats));
+
                     currentGame.resetGame();
                 }
                 

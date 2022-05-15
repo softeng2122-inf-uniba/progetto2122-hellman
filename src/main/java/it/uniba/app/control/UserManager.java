@@ -1,10 +1,9 @@
 package it.uniba.app.control;
 
-import it.uniba.app.models.Game;
+import it.uniba.app.utils.Pair;
 import it.uniba.app.utils.WrongWordException;
 import java.util.List;
-import it.uniba.app.models.Word;
-import it.uniba.app.utils.Pair;
+import it.uniba.app.models.*;
 
 /**
  * Classe che serve per interfacciare l'utente con il game manager

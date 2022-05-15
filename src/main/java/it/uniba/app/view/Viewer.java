@@ -4,7 +4,7 @@ import it.uniba.app.control.UserManager;
 /**
  * Classe astratta per gestire le varie interfacce di input
  */
-public abstract class Viewer {
+abstract class Viewer {
     
     UserManager usrManager;
 

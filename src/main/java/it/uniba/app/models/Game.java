@@ -3,6 +3,8 @@ package it.uniba.app.models;
 import java.util.LinkedList;
 import java.util.List;
 
+import it.uniba.app.utils.Helper;
+
 /**
  * <<Entity>>
  * ! TODO
@@ -22,8 +24,8 @@ public class Game{
      * @param secretWord Parola segreta inizializzata alla creazione dell'oggetto.
      */
     public Game(String secretWord){
-        this.maxTry = 6;
-        this.numberLetter = 5;
+        this.maxTry = Helper.MAX_TRYS;
+        this.numberLetter = Helper.MAX_LETTERS;
         this.secretWord = secretWord;
         this.configurable = true;
         this.trys = new LinkedList<Word>();
@@ -117,5 +119,13 @@ public class Game{
      */
     public int getNumberTrys(){
         return this.trys.size();
+    }
+
+    public void resetGame(){
+        this.maxTry = Helper.MAX_TRYS;
+        this.numberLetter = Helper.MAX_LETTERS;
+        this.secretWord = "";
+        this.configurable = true;
+        this.trys = new LinkedList<Word>();
     }
 }

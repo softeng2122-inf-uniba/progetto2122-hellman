@@ -104,15 +104,21 @@ public class Parser {
      * parse con uno qualsiasi dei comandi supportati, se essa corrisponde ad uno
      * dei comandi, lo restituisce, altrimenti restituisce null
      * 
-     * @param print_command se true stampa "Inserisci un comando", altrimenti non stampa nulla
+     * @param printCommand se true stampa l'inserimento del comando, altrimenti non stampa nulla
+     * @param gameStarted se true stampa "Effettua un tentativo (o inserisci un comando):", altrimenti "Inserisci un comando:"
      * 
      * @return risultato di parse.
      */
-    public ParserOutput readCommand(boolean print_command) {
+    public ParserOutput readCommand(boolean printCommand, boolean gameStarted) {
         ParserOutput p = null;
 
-        if(print_command)
-            System.out.println("Inserisci un comando:");
+        if(printCommand){
+            if(gameStarted){
+                System.out.println("Effettua un tentativo (o inserisci un comando):");
+            }else{
+                System.out.println("Inserisci un comando:");
+            }
+        }
         
         while (scanner.hasNextLine()) {
             String command = scanner.nextLine();
@@ -135,6 +141,13 @@ public class Parser {
         if (!tokens.isEmpty()) {
             int ic = checkForCommand(tokens.get(0), commands);
             if (ic == -1) {
+                if(tokens.size() == 1)
+                {
+                    Commands inputWord = new Commands(CommandType.INPUT_WORD, tokens.get(0));
+                    inputWord.setAlias(new String[] { tokens.get(0).toLowerCase(), tokens.get(0).toUpperCase() });
+                    return new ParserOutput(inputWord);
+                }
+
                 return null;
             }
             if(commands.get(ic).getType() == CommandType.NUOVA)

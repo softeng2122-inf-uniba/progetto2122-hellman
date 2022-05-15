@@ -4,12 +4,15 @@ import it.uniba.app.models.Game;
 import it.uniba.app.utils.IPlayer;
 import it.uniba.app.utils.IWordSmith;
 import it.uniba.app.utils.WrongWordException;
+import java.util.List;
+import it.uniba.app.models.Word;
+import it.uniba.app.utils.Pair;
 
 /**
  * Classe che serve per interfacciare l'utente con il game manager
  */
 public class UserManager implements IPlayer, IWordSmith{
-    private Player player = new Player();
+    //private Player player = new Player();
     private WordSmith wordSmith = new WordSmith();
     private Game currentGame = new Game();
 
@@ -47,5 +50,25 @@ public class UserManager implements IPlayer, IWordSmith{
      */
     public void startGame() throws WrongWordException{
         GameManager.startGame(currentGame, wordSmith.getConfiguratedGame());
+    }
+
+    /**
+     * Metodo che richiama il makeTry del GameManager sul game corrente.
+     * 
+     * @param word Parola del tentativo effettuato.
+     * @return Pair contenente risultato del tentativo corrente e la lista dei tentativi effettuati.
+     * @throws WrongWordException Eccezione che controlla che il tentativo sia effettuato correttamente.
+     */
+    public Pair<Integer, List<Word>> makeTry(String word) throws WrongWordException{
+        return GameManager.makeTry(currentGame,word);
+	}
+    
+    /**
+     * Metodo usato per capire se è o meno iniziata una partita.
+     * 
+     * @return true se il currentGame è iniziato, false altrimenti.
+     */
+    public boolean isGameStarted(){
+        return GameManager.isGameStarted(currentGame);
     }
 }

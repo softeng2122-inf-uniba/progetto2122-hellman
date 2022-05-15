@@ -14,7 +14,7 @@ import it.uniba.app.utils.WrongWordException;
  * <<Control>>
  * Classe gestisce l'avvio e l'esecuzione del game.
  */
-public class GameManager {
+class GameManager {
 
     private GameManager() {};
 
@@ -26,7 +26,7 @@ public class GameManager {
      * @throws WrongWordException Eccezione sollevata nel caso in cui la parola inserita non sia adeguata
      * o nel caso in cui il gioco sia configurabile.
      */
-    public static void setSecretWord(Game game, String secretWord) throws WrongWordException {
+    static void setSecretWord(Game game, String secretWord) throws WrongWordException {
 
         if (game.isConfigurable()) {
             if (game.getNumberLetter() > secretWord.length()) {
@@ -49,7 +49,7 @@ public class GameManager {
      * @param game Game di cui accedere alla parola segreta.
      * @return Parola segreta di game.
      */
-    public static String getSecretWord(Game game) {
+    static String getSecretWord(Game game) {
         return game.getSecretWord();
     }
 
@@ -65,7 +65,7 @@ public class GameManager {
      * @throws WrongWordException Eccezione che controlla che la parola sia settata
      *                            correttamente.
      */
-    public static void startGame(Game currentGame, Game configuratedGame) throws WrongWordException{
+    static void startGame(Game currentGame, Game configuratedGame) throws WrongWordException{
         if (currentGame.getSecretWord().equals("")){
             if(configuratedGame != null && !configuratedGame.getSecretWord().equals("")){
                 currentGame.resetGame();
@@ -87,7 +87,7 @@ public class GameManager {
      * @param currentGame Gioco corrente che viene resettato.
      * @throws WrongWordException Eccezione che controlla il corretto funzionamento del metodo.
      */
-    public static void backGame(Game currentGame) throws WrongWordException{
+    static void backGame(Game currentGame) throws WrongWordException{
         if (currentGame.getSecretWord().equals("") || currentGame.isConfigurable()){
             throw new WrongWordException("Non c'è un game in corso.");
         }else {
@@ -104,7 +104,7 @@ public class GameManager {
      * @param wordCharPosition Posizione della carattere nella parola inserita nel tentativo.
      * @return Costante che stabilisce la presenza o meno del carattere ed eventualmente se la sua posizione è corretta.
      */
-    private static int matchCharacters(String secretword, char character, int wordCharPosition) {
+    static int matchCharacters(String secretword, char character, int wordCharPosition) {
         int secretwordCharFirstOccurrence = secretword.indexOf(character);
         
         if (secretwordCharFirstOccurrence < 0)
@@ -127,7 +127,7 @@ public class GameManager {
      * @throws WrongWordException Eccezione sollevata nel caso in cui la parola inserita non sia adeguata
      * o nel caso in cui il gioco sia configurabile.
      */
-    public static Pair<Integer, List<Word>> makeTry(Game currentGame, String word) throws WrongWordException {
+    static Pair<Integer, List<Word>> makeTry(Game currentGame, String word) throws WrongWordException {
         List<Word> trys;
         if (!currentGame.isConfigurable()) {
 
@@ -178,7 +178,7 @@ public class GameManager {
      * @param game game su cui effettuare il controllo.
      * @return true se il game è iniziato, false altrimenti.
      */
-    public static boolean isGameStarted(Game game){
+    static boolean isGameStarted(Game game){
         return !game.getSecretWord().equals("");
     }
 }

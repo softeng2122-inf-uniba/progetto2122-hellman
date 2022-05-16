@@ -7,6 +7,7 @@ import it.uniba.app.utils.*;
 import java.io.PrintStream;
 
 /**
+ * <<Boundary>>
  * Classe front-end che permette di dialogare con l'utente a linea di comando
  */
 public class Terminal extends Viewer{
@@ -55,7 +56,7 @@ public class Terminal extends Viewer{
     }
 
     /**
-     * Metodo che gestisce il comando inserito dall'utente
+     * Metodo che gestisce il comando inserito dall'utente da terminale
      *
      * @param p risultato del parser
      * @param out canale di output
@@ -257,7 +258,7 @@ public class Terminal extends Viewer{
      * Metodo che serve a impostare la parola segreta.
      *
      * @param word
-     * @return
+     * @return risposta dopo aver impostato la parola
      */
     private String setSecretWord(String word){
         String str= "";
@@ -286,8 +287,8 @@ public class Terminal extends Viewer{
     /**
      *
      * Restituisce la matrice delle parole inserite con i rispettivi colori nelle lettere
+     * 
      * @param words tentativi effettuati
-     *
      * @return matrice dei tentativi colorata
      */
     private String printMatrix(List<Word> words){

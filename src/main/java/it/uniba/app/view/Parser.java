@@ -1,12 +1,14 @@
 package it.uniba.app.view;
 
-import it.uniba.app.utils.*;
+import it.uniba.app.utils.CommandType;
+import it.uniba.app.utils.Pair;
 import java.util.*;
 
-/*
-* La classe contiene il Parser, che permette la lettura dei comandi (del gioco o dell'inserimento di una nuova parola) in input dall'utente,
-* giocatore o paroliere che sia.
-*/
+/**
+ * <<noECB>>
+ * La classe Parser permette la lettura dei comandi(del gioco o tentativo di una parola) dell'utente,
+ * paroliere o giocatore che sia.
+ */
 class Parser {
     
     // Scanner per leggere l'input da tastiera
@@ -36,7 +38,8 @@ class Parser {
 
     /**
      * Restituisce la lista dei comandi accettati dal parser
-     * @return commands
+     * 
+     * @return lista dei comandi
      */
     public List<Commands> getCommands() {
         return commands;
@@ -105,8 +108,8 @@ class Parser {
      * dei comandi, lo restituisce, altrimenti restituisce null
      * 
      * @param printCommand se true stampa l'inserimento del comando, altrimenti non stampa nulla
-     * @param gameStarted se true stampa "Effettua un tentativo (o inserisci un comando):", altrimenti "Inserisci un comando:"
-     * 
+     * @param gameStarted se true stampa "Effettua un tentativo (o inserisci un comando):", 
+     * altrimenti "Inserisci un comando:"
      * @return risultato di parse.
      */
     public ParserOutput readCommand(boolean printCommand, boolean gameStarted) {
@@ -134,6 +137,8 @@ class Parser {
      * con il risultato di checkForCommand, che restituira' l'indice appropriato
      * nella lista dei comandi.
      *
+     * @param command stringa analizzare
+     * @param commands lista dei comandi accettati
      * @return indice nella lista di comandi possibili.
      */
     private ParserOutput parse(String command, List<Commands> commands) {

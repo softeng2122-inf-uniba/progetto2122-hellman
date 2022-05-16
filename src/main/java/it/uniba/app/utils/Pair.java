@@ -5,14 +5,14 @@ package it.uniba.app.utils;
  * Classe parametrizzata che serve per gestire 2 oggetti I ed O.
  */
 public class Pair<I, O> {
-    // Primo oggetto del Pair
+    /** Primo oggetto del Pair */
     private I first;
-    // Secondo oggetto del Pair
+    /** Secondo oggetto del Pair */
     private O second;
 
     /** 
      * Costruttore della classe senza argomenti
-    */
+     */
     public Pair() {}
 
     /**

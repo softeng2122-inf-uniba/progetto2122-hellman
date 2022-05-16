@@ -12,11 +12,11 @@ import java.io.PrintStream;
  */
 public class Terminal extends Viewer{
 
-    // Parser utilizzato per il riconoscimento dei comandi accettati dal gioco
+    /** Parser utilizzato per il riconoscimento dei comandi accettati dal gioco */
     private Parser parser;
 
-    // Lista di comandi accettati dal gioco
-    List<Pair<String, CommandType>> commands = new ArrayList<>();
+    /** Lista di comandi accettati dal gioco */
+    private List<Pair<String, CommandType>> commands = new ArrayList<>();
 
     /**
      * Costruttore di terminal

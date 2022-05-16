@@ -6,7 +6,7 @@ package it.uniba.app.view;
  */
 class ParserOutput {
 
-    // Comando di cui gestire l'output
+    /** Comando di cui gestire l'output */
     private Commands command;
 
     /**

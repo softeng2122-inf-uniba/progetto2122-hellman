@@ -11,13 +11,13 @@ import java.util.*;
  */
 class Parser {
     
-    // Scanner per leggere l'input da tastiera
+    /** Scanner per leggere l'input da tastiera */
     Scanner scanner = new Scanner(System.in);
 
-    // Lista dei comandi del gioco
+    /** Lista dei comandi del gioco */
     private final List<Commands> commands = new ArrayList<>();
 
-    // Insieme di stringhe da ignorare durante il parsing
+    /** Insieme di stringhe da ignorare durante il parsing */
     private Set<String> ignoreWords; 
 
     /**
@@ -52,7 +52,6 @@ class Parser {
      * @throws Exception
      */
     private void init(List<Pair<String, CommandType>> commands) throws Exception {
-        // Commands
         for(Pair<String, CommandType> command: commands){
             Commands newword = new Commands(command.getSecond(), command.getFirst());
             newword.setAlias(new String[] { command.getFirst().toLowerCase(), command.getFirst().toUpperCase() });

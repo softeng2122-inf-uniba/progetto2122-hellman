@@ -9,16 +9,16 @@ import java.util.*;
  */
 class Commands {
 
-    // Tipo del comando
+    /** Tipo del comando */
     private final CommandType type;
 
-    // Nome del comando
+    /** Nome del comando */
     private final String name;
 
-    // Insieme degli alias associati al comando
+    /** Insieme degli alias associati al comando */
     private Set<String> alias;
 
-    // Insieme dei comandi accettati dal gioco
+    /** Insieme dei comandi accettati dal gioco */
     private static List<String> commands = new ArrayList<>();
 
     /**

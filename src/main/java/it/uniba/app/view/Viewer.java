@@ -7,7 +7,7 @@ import it.uniba.app.control.UserManager;
  */
 abstract class Viewer {
     
-    // Attributo control che gestisce l'utente(player e paroliere)
+    /** Attributo control che gestisce l'utente(player e paroliere) */
     UserManager usrManager;
 
     /**
@@ -17,6 +17,6 @@ abstract class Viewer {
         usrManager = new UserManager();
     }
     
-    // Classe astratta da implementare in ogni classe derivata per avviare l'input
+    /** Classe astratta da implementare in ogni classe derivata per avviare l'input */
     abstract protected void readInput();
 }

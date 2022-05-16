@@ -26,7 +26,7 @@ public class Word {
     }
 
     /**
-     * Serve per accedere al valore effettivo della parola.
+     * Restituisce la stringa della parola.
      * 
      * @return Valore della parola.
      */

@@ -5,7 +5,7 @@ package it.uniba.app.models;
  * Classe che identifica la figura del paroliere, contiene il game in stato di configurazione.
  */
 public class WordSmith{
-
+    /** Gioco che viene configurato prima dell'esecuzione. */
     private Game configuratedGame = new Game();
 
     /**

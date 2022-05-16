@@ -10,7 +10,7 @@ import it.uniba.app.models.*;
  * Classe che permette di far interfacciare l'utente con il game manager.
  */
 public class UserManager{
-    /** Attributo che assume il valore del paroleriere */
+    /** Attributo che assume il valore del paroliere */
     private WordSmith wordSmith = new WordSmith();
     /** Attributo che assume il valore del giocatore */
     private Player player = new Player();

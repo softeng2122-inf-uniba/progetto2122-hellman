@@ -16,6 +16,9 @@ import it.uniba.app.utils.WrongWordException;
  */
 class GameManager {
 
+    /**
+     * Metodo costruttore privato non richiamabile.
+     */
     private GameManager() {};
 
     /**
@@ -61,7 +64,7 @@ class GameManager {
      * 
      * @param currentGame      Game attuale da configurare.
      * @param configuratedGame Game configurato i cui valori verranno usati per
-     *                         instanziare il game attuale
+     *                         instanziare il game attuale.
      * @throws WrongWordException Eccezione che controlla che la parola sia settata
      *                            correttamente.
      */

@@ -1,7 +1,7 @@
 package it.uniba.app.control;
 
 import it.uniba.app.utils.Pair;
-import it.uniba.app.utils.WrongWordException;
+import it.uniba.app.utils.GameException;
 import java.util.List;
 import it.uniba.app.models.*;
 
@@ -20,7 +20,7 @@ public class UserManager{
      *
      * @param word Nuovo valore della parola segreta.
     */
-    public void setSecretWord(String word) throws WrongWordException{
+    public void setSecretWord(String word) throws GameException{
         GameManager.setSecretWord(wordSmith.getConfiguratedGame(),word);
     }
 
@@ -36,18 +36,18 @@ public class UserManager{
     /**
      *  Metodo che serve per uscire da una partita in corso.
      * 
-     * @throws WrongWordException Eccezione che controlla il corretto funzionamento del metodo
+     * @throws GameException Eccezione che controlla il corretto funzionamento del metodo
      */
-    public void backGame() throws WrongWordException{
+    public void backGame() throws GameException{
         GameManager.backGame(player.getCurrentGame());
     }
 
     /**
      * Metodo per avviare la partita attraverso il metodo statico di GameManager.
      * 
-     * @throws WrongWordException Eccezione che controlla che la parola sia settata correttamente.
+     * @throws GameException Eccezione che controlla che la parola sia settata correttamente.
      */
-    public void startGame() throws WrongWordException{
+    public void startGame() throws GameException{
         GameManager.startGame(player.getCurrentGame(), wordSmith.getConfiguratedGame());
     }
 
@@ -56,9 +56,9 @@ public class UserManager{
      * 
      * @param word Parola del tentativo effettuato.
      * @return Pair contenente il risultato del tentativo corrente e la lista dei tentativi effettuati.
-     * @throws WrongWordException Eccezione che controlla che il tentativo sia effettuato correttamente.
+     * @throws GameException Eccezione che controlla che il tentativo sia effettuato correttamente.
      */
-    public Pair<Integer, List<Word>> makeTry(String word) throws WrongWordException{
+    public Pair<Integer, List<Word>> makeTry(String word) throws GameException{
         return GameManager.makeTry(player.getCurrentGame(),word);
 	}
     

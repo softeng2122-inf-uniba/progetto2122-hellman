@@ -8,7 +8,7 @@ import it.uniba.app.models.Game;
 import it.uniba.app.models.Word;
 import it.uniba.app.utils.Helper;
 import it.uniba.app.utils.Pair;
-import it.uniba.app.utils.WrongWordException;
+import it.uniba.app.utils.GameException;
 
 /**
  * <<Control>>
@@ -26,23 +26,23 @@ class GameManager {
      *
      * @param game Game di cui modificare la parola segreta.
      * @param secretWord Parola segreta da impostare.
-     * @throws WrongWordException Eccezione sollevata nel caso in cui la parola inserita non sia adeguata
+     * @throws GameException Eccezione sollevata nel caso in cui la parola inserita non sia adeguata
      * o nel caso in cui il gioco sia configurabile.
      */
-    static void setSecretWord(Game game, String secretWord) throws WrongWordException {
+    static void setSecretWord(Game game, String secretWord) throws GameException {
 
         if (game.isConfigurable()) {
             if (game.getNumberLetter() > secretWord.length()) {
-                throw new WrongWordException("La parola inserita contiene un numero insufficiente di caratteri.");
+                throw new GameException("La parola inserita contiene un numero insufficiente di caratteri.");
             } else if (game.getNumberLetter() < secretWord.length()) {
-                throw new WrongWordException("La parola inserita contiene un numero troppo elevato di caratteri.");
+                throw new GameException("La parola inserita contiene un numero troppo elevato di caratteri.");
             } else if (!Pattern.matches("[a-zA-Z]+", secretWord)) {
-                throw new WrongWordException("La parola contiene caratteri non ammessi.");
+                throw new GameException("La parola contiene caratteri non ammessi.");
             } else {
                 game.setSecretWord(secretWord);
             }
         } else {
-            throw new WrongWordException("Il game non è configurabile.");
+            throw new GameException("Il game non è configurabile.");
         }
     }
 
@@ -65,10 +65,10 @@ class GameManager {
      * @param currentGame      Game attuale da configurare.
      * @param configuratedGame Game configurato i cui valori verranno usati per
      *                         instanziare il game attuale.
-     * @throws WrongWordException Eccezione che controlla che la parola sia settata
+     * @throws GameException Eccezione che controlla che la parola sia settata
      *                            correttamente.
      */
-    static void startGame(Game currentGame, Game configuratedGame) throws WrongWordException{
+    static void startGame(Game currentGame, Game configuratedGame) throws GameException{
         if (currentGame.getSecretWord().equals("")){
             if(configuratedGame != null && !configuratedGame.getSecretWord().equals("")){
                 currentGame.resetGame();
@@ -76,11 +76,11 @@ class GameManager {
                 currentGame.disableConfigurable();
 
             } else {
-                throw new WrongWordException("Non è ancora stata inserita la parola segreta!");
+                throw new GameException("Non è ancora stata inserita la parola segreta!");
             }
 
         } else {
-            throw new WrongWordException("C'è già un game in corso.");
+            throw new GameException("C'è già un game in corso.");
         }
     }
 
@@ -88,11 +88,11 @@ class GameManager {
      * Metodo per l'abbandono del gioco con reset dei dati in esso configurati.
      *  
      * @param currentGame Gioco corrente che viene resettato.
-     * @throws WrongWordException Eccezione che controlla il corretto funzionamento del metodo.
+     * @throws GameException Eccezione che controlla il corretto funzionamento del metodo.
      */
-    static void backGame(Game currentGame) throws WrongWordException{
+    static void backGame(Game currentGame) throws GameException{
         if (currentGame.getSecretWord().equals("") || currentGame.isConfigurable()){
-            throw new WrongWordException("Non c'è un game in corso.");
+            throw new GameException("Non c'è un game in corso.");
         }else {
             currentGame.resetGame();
         }
@@ -127,19 +127,19 @@ class GameManager {
      * @param currentGame Game attuale in cui effettuare il tentativo.
      * @param word Parola da inserire durante il tentativo.
      * @return Costante che stabilisce lo stato del game e la lista aggiornata dei tentativi effettuati.
-     * @throws WrongWordException Eccezione sollevata nel caso in cui la parola inserita non sia adeguata
+     * @throws GameException Eccezione sollevata nel caso in cui la parola inserita non sia adeguata
      * o nel caso in cui il gioco sia configurabile.
      */
-    static Pair<Integer, List<Word>> makeTry(Game currentGame, String word) throws WrongWordException {
+    static Pair<Integer, List<Word>> makeTry(Game currentGame, String word) throws GameException {
         List<Word> trys;
         if (!currentGame.isConfigurable()) {
 
             if (currentGame.getNumberLetter() > word.length()) {
-                throw new WrongWordException("La parola inserita contiene un numero insufficiente di caratteri.");
+                throw new GameException("La parola inserita contiene un numero insufficiente di caratteri.");
             } else if (currentGame.getNumberLetter() < word.length()) {
-                throw new WrongWordException("La parola inserita contiene un numero troppo elevato di caratteri.");
+                throw new GameException("La parola inserita contiene un numero troppo elevato di caratteri.");
             } else if (!Pattern.matches("[a-zA-Z]+", word)) {
-                throw new WrongWordException("La parola contiene caratteri non ammessi.");
+                throw new GameException("La parola contiene caratteri non ammessi.");
             } else {
                 
                 ArrayList<Integer> formats = new ArrayList<Integer>();
@@ -171,7 +171,7 @@ class GameManager {
                 return new Pair<Integer, List<Word>>(result, trys);
             }
         } else {
-            throw new WrongWordException("Il game non è iniziato.");
+            throw new GameException("Il game non è iniziato.");
         }
     }
 

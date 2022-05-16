@@ -116,7 +116,7 @@ public class Terminal extends Viewer{
 
         try {
             usrManager.startGame();
-        } catch (WrongWordException e) {
+        } catch (GameException e) {
             out.println(e.getMessage());
             out.println("");
             return;
@@ -141,7 +141,7 @@ public class Terminal extends Viewer{
                     try {
                         usrManager.backGame();
                         out.println("Abbandono partita...");
-                    } catch (WrongWordException e) {
+                    } catch (GameException e) {
                         out.println(e.getMessage());
                         out.println("");
                     }
@@ -226,7 +226,7 @@ public class Terminal extends Viewer{
         Pair<Integer, List<Word>> res;
         try{
             res = usrManager.makeTry(word);
-        }catch(WrongWordException e){
+        }catch(GameException e){
             return e.getMessage();
         }
 
@@ -266,7 +266,7 @@ public class Terminal extends Viewer{
         try{
 		    usrManager.setSecretWord(word);
             str += "La parola è stata inserita correttamente.";
-        }catch(WrongWordException w){
+        }catch(GameException w){
             System.out.println(w.getMessage());
         }
 

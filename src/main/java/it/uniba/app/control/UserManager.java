@@ -6,16 +6,19 @@ import java.util.List;
 import it.uniba.app.models.*;
 
 /**
- * Classe che serve per interfacciare l'utente con il game manager
+ * <<Control>>
+ * Classe che permette di far interfacciare l'utente con il game manager.
  */
 public class UserManager{
+    /** Attributo che assume il valore del paroleriere */
     private WordSmith wordSmith = new WordSmith();
+    /** Attributo che assume il valore del giocatore */
     private Player player = new Player();
 
     /**
      * Metodo che demanda al gameManager di impostare la parola.
      *
-     * @param word parola da impostare
+     * @param word Nuovo valore della parola segreta.
     */
     public void setSecretWord(String word) throws WrongWordException{
         GameManager.setSecretWord(wordSmith.getConfiguratedGame(),word);
@@ -24,7 +27,7 @@ public class UserManager{
     /**
      * Metodo che restituisce la parola segreta.
      * 
-     * @return parola segreta
+     * @return valore della parola segreta.
      */
     public String getSecretWord(){
         return GameManager.getSecretWord(wordSmith.getConfiguratedGame());
@@ -52,7 +55,7 @@ public class UserManager{
      * Metodo che richiama il makeTry del GameManager sul game corrente.
      * 
      * @param word Parola del tentativo effettuato.
-     * @return Pair contenente risultato del tentativo corrente e la lista dei tentativi effettuati.
+     * @return Pair contenente il risultato del tentativo corrente e la lista dei tentativi effettuati.
      * @throws WrongWordException Eccezione che controlla che il tentativo sia effettuato correttamente.
      */
     public Pair<Integer, List<Word>> makeTry(String word) throws WrongWordException{

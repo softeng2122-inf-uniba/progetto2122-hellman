@@ -1,10 +1,11 @@
 package it.uniba.app.utils;
 
 /**
+ * <<noECB>>
  * Classe eccezione per evitare che venga inserita una parola non idonea o che il game venga configurato
  * in situazioni poco opportune.
  */
-public class WrongWordException extends Exception {
+public class GameException extends Exception {
 
     /**
      * Costruttore di classe.
@@ -12,7 +13,7 @@ public class WrongWordException extends Exception {
      *
      * @param message Messaggio di errore passato durante il sollevamento dell'eccezione.
      */
-    public WrongWordException(String message) {
+    public GameException(String message) {
         super(message);
     }
 }

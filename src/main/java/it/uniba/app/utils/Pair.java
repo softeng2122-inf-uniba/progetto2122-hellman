@@ -1,18 +1,19 @@
 package it.uniba.app.utils;
 
 /**
+ * <<noECB>>
  * Classe parametrizzata che serve per gestire 2 oggetti I ed O.
  */
 public class Pair<I, O> {
+    /** Primo oggetto del Pair */
     private I first;
+    /** Secondo oggetto del Pair */
     private O second;
 
     /** 
      * Costruttore della classe senza argomenti
-    */
-    public Pair(){
-
-    }
+     */
+    public Pair() {}
 
     /**
      * Costruttore della classe con gli argomenti che sono degli oggetti
@@ -46,7 +47,7 @@ public class Pair<I, O> {
     /**
      * Metodo che imposta il primo oggetto
      * 
-     * @param fist primo oggetto che viene impostato
+     * @param first primo oggetto che viene impostato
      */
     public void setFirst(I first){
         this.first = first;

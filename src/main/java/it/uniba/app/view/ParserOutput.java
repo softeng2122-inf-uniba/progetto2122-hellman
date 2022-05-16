@@ -1,15 +1,17 @@
 package it.uniba.app.view;
 
 /**
+ * <<noECB>>
  * Classe che gestisce l'output del parser
  */
-public class ParserOutput {
+class ParserOutput {
 
-    // Comando di cui gestire l'output
+    /** Comando di cui gestire l'output */
     private Commands command;
 
     /**
      * Costruttore dell'output del parser
+     * 
      * @param command
      */
     public ParserOutput(Commands command) {
@@ -18,6 +20,7 @@ public class ParserOutput {
 
     /**
      * Restituisce il comando
+     * 
      * @return command
      */
      public Commands getCommand() {
@@ -26,6 +29,7 @@ public class ParserOutput {
 
     /**
      * Imposta il comando
+     * 
      * @param command
      */
     public void setCommand(Commands command) {

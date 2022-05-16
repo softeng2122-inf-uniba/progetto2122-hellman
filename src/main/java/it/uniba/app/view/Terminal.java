@@ -7,15 +7,16 @@ import it.uniba.app.utils.*;
 import java.io.PrintStream;
 
 /**
+ * <<Boundary>>
  * Classe front-end che permette di dialogare con l'utente a linea di comando
  */
 public class Terminal extends Viewer{
 
-    // Parser utilizzato per il riconoscimento dei comandi accettati dal gioco
+    /** Parser utilizzato per il riconoscimento dei comandi accettati dal gioco */
     private Parser parser;
 
-    // Lista di comandi accettati dal gioco
-    List<Pair<String, CommandType>> commands = new ArrayList<>();
+    /** Lista di comandi accettati dal gioco */
+    private List<Pair<String, CommandType>> commands = new ArrayList<>();
 
     /**
      * Costruttore di terminal
@@ -55,12 +56,12 @@ public class Terminal extends Viewer{
     }
 
     /**
-     * Metodo che gestisce il comando inserito dall'utente
+     * Metodo che gestisce il comando inserito dall'utente da terminale
      *
      * @param p risultato del parser
      * @param out canale di output
      */
-    public void nextCommand(ParserOutput p, PrintStream out) {
+    private void nextCommand(ParserOutput p, PrintStream out) {
 
         if (p == null) {
             out.println("Non ho capito! Prova con un altro comando.");
@@ -110,12 +111,12 @@ public class Terminal extends Viewer{
      * 
      * @param out Canale di output.
      */
-    public void startGame(PrintStream out){
+    private void startGame(PrintStream out){
         out.println("Avvio partita...");
 
         try {
             usrManager.startGame();
-        } catch (WrongWordException e) {
+        } catch (GameException e) {
             out.println(e.getMessage());
             out.println("");
             return;
@@ -129,7 +130,7 @@ public class Terminal extends Viewer{
      * 
      * @param out Canale di output.
      */
-    public void backGame(PrintStream out){
+    private void backGame(PrintStream out){
         out.println("Sei sicuro di abbandonare il gioco ancora in corso? (si/no)");
 
         ParserOutput po = parser.readCommand(false,usrManager.isGameStarted());
@@ -140,7 +141,7 @@ public class Terminal extends Viewer{
                     try {
                         usrManager.backGame();
                         out.println("Abbandono partita...");
-                    } catch (WrongWordException e) {
+                    } catch (GameException e) {
                         out.println(e.getMessage());
                         out.println("");
                     }
@@ -188,7 +189,7 @@ public class Terminal extends Viewer{
      *
      * @param out canale di output
      */
-    public void closeApp(PrintStream out){
+    private void closeApp(PrintStream out){
         out.println("Sei sicuro di uscire dall'app? (si/no)");
 
         ParserOutput po = parser.readCommand(false,usrManager.isGameStarted());
@@ -220,12 +221,12 @@ public class Terminal extends Viewer{
      * @param word per effettuare il tentativo
      * @return stringa della risposta del tentativo
      */
-    public String makeTry(String word){
+    private String makeTry(String word){
         String str = "";
         Pair<Integer, List<Word>> res;
         try{
             res = usrManager.makeTry(word);
-        }catch(WrongWordException e){
+        }catch(GameException e){
             return e.getMessage();
         }
 
@@ -257,15 +258,15 @@ public class Terminal extends Viewer{
      * Metodo che serve a impostare la parola segreta.
      *
      * @param word
-     * @return
+     * @return risposta dopo aver impostato la parola
      */
-    public String setSecretWord(String word){
+    private String setSecretWord(String word){
         String str= "";
 
         try{
 		    usrManager.setSecretWord(word);
             str += "La parola è stata inserita correttamente.";
-        }catch(WrongWordException w){
+        }catch(GameException w){
             System.out.println(w.getMessage());
         }
 
@@ -275,7 +276,7 @@ public class Terminal extends Viewer{
     /**
      * Metodo che permette di stampare la parola segreta.
      */
-    public void printSecretWord(){
+    private void printSecretWord(){
         if(usrManager.getSecretWord().compareTo("") != 0){
         System.out.println("La parola segreta è " + usrManager.getSecretWord());
         } else {
@@ -286,8 +287,8 @@ public class Terminal extends Viewer{
     /**
      *
      * Restituisce la matrice delle parole inserite con i rispettivi colori nelle lettere
+     * 
      * @param words tentativi effettuati
-     *
      * @return matrice dei tentativi colorata
      */
     private String printMatrix(List<Word> words){

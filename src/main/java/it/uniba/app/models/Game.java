@@ -7,13 +7,18 @@ import it.uniba.app.utils.Helper;
 
 /**
  * <<Entity>>
- * ! TODO
+ * Classe che identifica una partita salvandone settaggi pre inizio e tentativi effettuati.
  */
 public class Game{
+    /** Parola segreta */
     private String secretWord;
+    /** Numero massimo di tentativo */
     private int maxTry;
+    /** Numero lettere della parola segreta */
     private int numberLetter;
+    /** Flag di stato */
     private boolean configurable;
+    /** Lista di tentativi effettuati */
     private List<Word> trys;
 
     /**
@@ -31,6 +36,12 @@ public class Game{
         this.trys = new LinkedList<Word>();
     }
 
+    /**
+     * Costruttore di classe.
+     * Inizializza maxTry a 6 e numberLetter a 5.
+     * secretWord viene inizializzata a vuoto.
+     * 
+     */
     public Game() {
         this("");
     }
@@ -121,6 +132,9 @@ public class Game{
         return this.trys.size();
     }
 
+    /**
+     * Metodo che imposta i valori di tutti gli attributi a vuoti o default.
+     */
     public void resetGame(){
         this.maxTry = Helper.MAX_TRYS;
         this.numberLetter = Helper.MAX_LETTERS;

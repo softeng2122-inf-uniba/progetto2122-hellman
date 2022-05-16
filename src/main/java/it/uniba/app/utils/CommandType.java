@@ -1,6 +1,7 @@
 package it.uniba.app.utils;
 
 /**
+ * <<noECB>>
  * Classe enumerativa per la tipologia dei comandi
  */
 public enum CommandType {

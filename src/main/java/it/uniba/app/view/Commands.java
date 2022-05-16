@@ -1,24 +1,24 @@
 package it.uniba.app.view;
 
-import it.uniba.app.utils.*;
+import it.uniba.app.utils.CommandType;
 import java.util.*;
 
-
 /**
+ * <<noECB>>
  * Classe che gestisce i comandi accettati dal gioco
  */
-public class Commands {
+class Commands {
 
-    // Tipo del comando
+    /** Tipo del comando */
     private final CommandType type;
 
-    // Nome del comando
+    /** Nome del comando */
     private final String name;
 
-    // Insieme degli alias associati al comando
+    /** Insieme degli alias associati al comando */
     private Set<String> alias;
 
-    // Insieme dei comandi accettati dal gioco
+    /** Insieme dei comandi accettati dal gioco */
     private static List<String> commands = new ArrayList<>();
 
     /**
@@ -42,6 +42,7 @@ public class Commands {
 
     /**
      * Restituisce il nome del comando
+     * 
      * @return name del comando
      */
     public String getName() {
@@ -50,6 +51,7 @@ public class Commands {
 
     /**
      * Restituisce l'insieme degli alias associati a quel comando
+     * 
      * @return alias
      */
     public Set<String> getAlias() {
@@ -58,6 +60,7 @@ public class Commands {
 
     /**
      * Imposta gli alias per quel comando
+     * 
      * @param alias da impostare
      */
     public void setAlias(String[] alias) {
@@ -66,6 +69,7 @@ public class Commands {
 
     /**
      * Restituisce il tipo di quel comando
+     * 
      * @return type
      */
     public CommandType getType() {

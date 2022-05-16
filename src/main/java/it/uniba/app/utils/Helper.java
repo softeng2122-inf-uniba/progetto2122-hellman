@@ -1,9 +1,12 @@
 package it.uniba.app.utils;
 
-/** 
- * Classe di supporto che ha tutta una serie di costanti che servono per mostrare se le lettere della parola inserita
- * dall'utente sono in posizione corretta oppure errata oppure per l'esito del gioco cioè se l'utente ha perso o vinto.
-*/
+/**
+ * <<noECB>>
+ * Classe di supporto che ha tutta una serie di costanti che servono per mostrare se le lettere 
+ * della parola inserita dall'utente sono in posizione corretta oppure errata, per l'esito 
+ * del gioco cioè se l'utente ha perso o vinto, per il numero massimo di lettere e di tentativi
+ * e per i colori dello sfondo delle lettere.
+ */
 public class Helper {
     final public static int FORMAT_LETTER_NEVER_TYPED = 0;
     final public static int FORMAT_LETTER_NOT_FOUND = 1;
@@ -22,5 +25,8 @@ public class Helper {
     final public static String ANSI_YELLOW = "\u001B[33m";
     final public static String ANSI_GREY = "\u001b[0m";
 
-    private Helper(){}
+    /**
+     * Costruttore privato non richiamabile
+     */
+    private Helper() {}
 }

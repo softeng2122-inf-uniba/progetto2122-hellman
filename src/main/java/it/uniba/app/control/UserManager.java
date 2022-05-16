@@ -9,9 +9,8 @@ import it.uniba.app.models.*;
  * Classe che serve per interfacciare l'utente con il game manager
  */
 public class UserManager{
-    //private Player player = new Player();
     private WordSmith wordSmith = new WordSmith();
-    private Game currentGame = new Game();
+    private Player player = new Player();
 
     /**
      * Metodo che demanda al gameManager di impostare la parola.
@@ -37,7 +36,7 @@ public class UserManager{
      * @throws WrongWordException Eccezione che controlla il corretto funzionamento del metodo
      */
     public void backGame() throws WrongWordException{
-        GameManager.backGame(currentGame);
+        GameManager.backGame(player.getCurrentGame());
     }
 
     /**
@@ -46,7 +45,7 @@ public class UserManager{
      * @throws WrongWordException Eccezione che controlla che la parola sia settata correttamente.
      */
     public void startGame() throws WrongWordException{
-        GameManager.startGame(currentGame, wordSmith.getConfiguratedGame());
+        GameManager.startGame(player.getCurrentGame(), wordSmith.getConfiguratedGame());
     }
 
     /**
@@ -57,7 +56,7 @@ public class UserManager{
      * @throws WrongWordException Eccezione che controlla che il tentativo sia effettuato correttamente.
      */
     public Pair<Integer, List<Word>> makeTry(String word) throws WrongWordException{
-        return GameManager.makeTry(currentGame,word);
+        return GameManager.makeTry(player.getCurrentGame(),word);
 	}
     
     /**
@@ -66,6 +65,6 @@ public class UserManager{
      * @return true se il currentGame è iniziato, false altrimenti.
      */
     public boolean isGameStarted(){
-        return GameManager.isGameStarted(currentGame);
+        return GameManager.isGameStarted(player.getCurrentGame());
     }
 }

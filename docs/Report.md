@@ -81,16 +81,39 @@ Le seguenti user story inizierebbero con *Come paroliere voglio*...
     - Parola segreta troppo corta se i caratteri sono inferiori a quelli del gioco;
     - Parola segreta troppo lunga se i caratteri sono superiori a quelli del gioco;
     - Parola segreta non valida se ci sono caratteri che non corrispondono a lettere dell’alfabeto;
-
-&emsp;&emsp;Altrimenti l’applicazione risponde con OK e memorizza la parola fino a chiusura applicazione.
+    - Altrimenti l’applicazione risponde con OK e memorizza la parola fino a chiusura applicazione.
 È possibile cambiare la parola durante una sessione di gioco anche senza uscire dall’applicazione;
 
 2. Mostrare la parola segreta: Al comando `/mostra` l’applicazione risponde visualizzando la parola segreta;
 
 ---
 
+Le seguenti user story inizierebbero con *Come giocatore voglio*...
+1. Mostrare l'help con elenco comandi e regole del gioco: Al comando `/help` o invocando l'app con flag `--help` o `-h` il risultato è una descrizione concisa, che normalmente appare all'avvio del programma, seguita dalla lista di comandi disponibili, uno per riga, come da esempio successivo:
+    - `gioca`;
+    - `esci`;
+    - ...
 
+2. Iniziare una nuova partita: Al comando `/gioca` se nessuna partita è in corso l'app mostra la matrice dei tentativi vuota, ma senza mostrare la tastiera, e si predispone a ricevere il primo tentativo o altri comandi.
 
+3. Abbandonare una partita: Al comando `/abbandona` l'app chiede conferma.
+    - Se la conferma è positiva, l'app comunica l’abbandono;
+    - Se la conferma è negativa, l'app si predispone a ricevere un altro tentativo o altri comandi;
 
+4. Chiudere il gioco: Al comando `/esci` l'applicazione chiede conferma.
+    - Se la conferma è positiva, l'app si chiude restituendo un __zero exit code__;
+    - Se la conferma è negativa, l'app si predispone a ricevere nuovi tentativi o comandi;
 
+5. Effettuare un **tentativo** per indovinare la parola segreta. Digitando caratteri sulla tastiera e inviando l’applicazione risponde:
+    - Tentativo incompleto se i caratteri sono inferiori a quelli della parola segreta;
+    - Tentativo eccessivo se i caratteri sono superiori a quelli della parola segreta;
+    - Tentativo non valido se ci sono caratteri che non corrispondono a lettere dell’alfabeto;
+    - Altrimenti riempiendo la prima riga libera della matrice dei tentativi con i caratteri inseriti e colorando lo sfondo di verde se la lettera è nella parola segreta e nel posto giusto, di giallo se la lettera è nella parola segreta ma nel posto sbagliato e di grigio se la lettera non è nella parola segreta;
+
+    - Se le lettere sono tutte verdi l’applicazione risponde:
+        - `Parola segreta indovinata - Numero tentativi: <…>`; E si predispone a nuovi comandi;
+    - Se il tentativo fallito è l’ultimo possibile, l’applicazione risponde:
+        - `Hai raggiunto il numero massimo di tentativi. La parola segreta è <…>`; E si predispone a nuovi comandi;
+
+---
 

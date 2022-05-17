@@ -117,3 +117,17 @@ Le seguenti user story inizierebbero con *Come giocatore voglio*...
 
 ---
 
+## Requisiti non funzionali
+
+---
+
+Il container docker dell’app deve essere eseguito da terminali che supportano Unicode con encoding UTF-8 o UTF-16.
+Elenco di terminali supportati:
+>- **Linux**: terminal
+>- **macOS**: terminal
+>- **Windows**: Powershell - Gitbash (in quest'ultimo caso il comando Docker ha come prefisso winpty; es: winpty docker -it ...)
+
+### Comando per l’esecuzione del container
+Dopo aver eseguito il comando `docker pull` copiandolo da GitHub Packages, il comando Docker da usare per eseguire il container contenente l’applicazione è:
+
+>`docker run --rm -it ghcr.io/softeng2122-inf-uniba/wordle-hellman:latest`

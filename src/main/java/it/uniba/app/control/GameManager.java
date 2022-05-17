@@ -1,7 +1,9 @@
 package it.uniba.app.control;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 import it.uniba.app.models.Game;
@@ -99,25 +101,66 @@ class GameManager {
     }
 
     /**
-     * Metodo per verificare la presenza o meno di un carattere nella parola
-     * così da controllare eventualmente anche se questo è nella posizione corretta o errata.
+     * Metodo che conta il numero di occorrenze di ciascuna lettera della parola segreta.
      * 
-     * @param secretword Parola segreta di cui verificare la presenza del carattere.
-     * @param character Carattere della parola del tentativo di cui verificare la presenza in word.
-     * @param wordCharPosition Posizione della carattere nella parola inserita nel tentativo.
-     * @return Costante che stabilisce la presenza o meno del carattere ed eventualmente se la sua posizione è corretta.
+     * @param lettersQuantity numero di occorrenze per lettera della parola segreta.
+     * @param secretword valore della parola segreta.
      */
-    static int matchCharacters(String secretword, char character, int wordCharPosition) {
-        int secretwordCharFirstOccurrence = secretword.indexOf(character);
-        
-        if (secretwordCharFirstOccurrence < 0)
-            return Helper.FORMAT_LETTER_NOT_FOUND;
-        if (secretword.charAt(wordCharPosition) == character)
-            return Helper.FORMAT_LETTER_FOUND_RIGHT_POSITION;
-        if (secretword.charAt(wordCharPosition) != character)
-            return Helper.FORMAT_LETTER_FOUND_WRONG_POSITION;
+    private static void countLetters(Map<Character,Integer> lettersQuantity, String secretword) {
+        for(int i = 0; i < secretword.length(); i++) {
+            char key = secretword.charAt(i);
+            try{
+                lettersQuantity.put(key, lettersQuantity.get(key)+1);
+            }catch(NullPointerException exception){
+                lettersQuantity.put(key, 1);
+            }
+        }
+    }
 
-        return -1;
+    /**
+     * Metodo che verifica quali lettere sono nella giusta posizione e ne ritorna la quantità.
+     * 
+     * @param secretword valore della parola segreta.
+     * @param word valore del tentativo inserito.
+     * @param lettersQuantity numero di occorrenze per lettera della parola segreta.
+     * @param formats array di formati per i caratteri del tentativo inserito.
+     * @return il numero di lettere nella posizione corretta del tentativo inserito.
+     */
+    private static int matchRightPositionCharacters(String secretword, String word, Map<Character,Integer> lettersQuantity, int[] formats) {
+        int rightPositions = 0;
+        for(int i=0; i < word.length(); i++) {
+            if(secretword.charAt(i) == word.charAt(i)){
+                lettersQuantity.put(word.charAt(i), lettersQuantity.get(word.charAt(i))-1);
+                formats[i] = Helper.FORMAT_LETTER_FOUND_RIGHT_POSITION;
+                rightPositions++;
+            }
+        }
+        return rightPositions;
+    }
+
+    /**
+     * Metodo che verifica quali lettere sono nella posizione sbagliata o assente.
+     * 
+     * @param secretword valore della parola segreta.
+     * @param word valore del tentativo inserito.
+     * @param lettersQuantity numero di occorrenze per lettera della parola segreta.
+     * @param formats array di formati per i caratteri del tentativo inserito.
+     */
+    private static void matchWrongCharacters(String secretword, String word, Map<Character,Integer> lettersQuantity, int[] formats) {
+        for(int i=0; i < word.length(); i++) {
+            if(formats[i] != Helper.FORMAT_LETTER_FOUND_RIGHT_POSITION){
+                try{
+                    if(lettersQuantity.get(word.charAt(i))>0){
+                        lettersQuantity.put(word.charAt(i), lettersQuantity.get(word.charAt(i))-1);
+                        formats[i] = Helper.FORMAT_LETTER_FOUND_WRONG_POSITION;
+                    }else{
+                        formats[i] = Helper.FORMAT_LETTER_NOT_FOUND;
+                    }
+                }catch(NullPointerException exception2){
+                    formats[i] = Helper.FORMAT_LETTER_NOT_FOUND;
+                }
+            }
+        }
     }
 
     /**
@@ -142,17 +185,19 @@ class GameManager {
                 throw new GameException("La parola contiene caratteri non ammessi.");
             } else {
                 
-                ArrayList<Integer> formats = new ArrayList<Integer>();
+                int[] formatsArray = new int[currentGame.getNumberLetter()];
+                List<Integer> formats = new ArrayList<Integer> ();
                 int result = Helper.GAME_WIN;
 
-                for(int i = 0; i < word.length(); i++) {
-                    int format = matchCharacters(currentGame.getSecretWord(), word.charAt(i), i);
+                Map<Character,Integer> lettersQuantity = new HashMap<Character,Integer>(currentGame.getNumberLetter());
+                countLetters(lettersQuantity, currentGame.getSecretWord());
 
-                    if(format != Helper.FORMAT_LETTER_FOUND_RIGHT_POSITION)
-                        result = Helper.GAME_LOSE;
-
-                    formats.add(format);
+                if(matchRightPositionCharacters(currentGame.getSecretWord(), word, lettersQuantity, formatsArray)!=currentGame.getNumberLetter()){
+                    matchWrongCharacters(currentGame.getSecretWord(), word, lettersQuantity, formatsArray);
+                    result = Helper.GAME_LOSE;
                 }
+
+                Helper.arrayToArrayList(formatsArray, formats);
 
                 currentGame.addTry(new Word(word, formats));
 

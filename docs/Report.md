@@ -56,6 +56,8 @@ Di seguito è presentato il modello di dominio del progetto.
 >       - 3.2. Requisiti non funzionali;
 >   - 4.0. OO Design (diagrammi delle classi e diagrammi di sequenza delle user story più importanti con eventuali commenti alle decisioni prese);
 
+---
+
 Criteri che devono essere soddisfatti per qualsiasi user story:
 >- C'è un'issue con label «user story»;
 >- La issue è in un Milestone e in una Project Board;
@@ -71,3 +73,24 @@ Criteri che devono essere soddisfatti per qualsiasi user story:
 >- Build costruito con successo;
 >- Docker image caricata con successo;
 >- L'esecuzione rispetta i criteri di accettazione;
+
+---
+
+Le seguenti user story inizierebbero con *Come paroliere voglio*...
+1. Impostare una parola segreta manualmente: Al comando `/nuova <parola>` l’applicazione risponde:
+    - Parola segreta troppo corta se i caratteri sono inferiori a quelli del gioco;
+    - Parola segreta troppo lunga se i caratteri sono superiori a quelli del gioco;
+    - Parola segreta non valida se ci sono caratteri che non corrispondono a lettere dell’alfabeto;
+
+&emsp;&emsp;Altrimenti l’applicazione risponde con OK e memorizza la parola fino a chiusura applicazione.
+È possibile cambiare la parola durante una sessione di gioco anche senza uscire dall’applicazione;
+
+2. Mostrare la parola segreta: Al comando `/mostra` l’applicazione risponde visualizzando la parola segreta;
+
+---
+
+
+
+
+
+

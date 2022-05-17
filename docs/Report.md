@@ -55,4 +55,19 @@ Di seguito è presentato il modello di dominio del progetto.
 >       - 3.1. Requisiti funzionali;
 >       - 3.2. Requisiti non funzionali;
 >   - 4.0. OO Design (diagrammi delle classi e diagrammi di sequenza delle user story più importanti con eventuali commenti alle decisioni prese);
- 
+
+Criteri che devono essere soddisfatti per qualsiasi user story:
+>- C'è un'issue con label «user story»;
+>- La issue è in un Milestone e in una Project Board;
+>- Assegnazione a uno o al più due componenti del team;
+>- Ogni classe è preceduta da un commento che riassume la responsabilità della classe; 
+>- Ogni classe è preceduta da un commento per indicare se è di tipo &lt;&lt;Entity&gt;&gt;, &lt;&lt;Control&gt;&gt;, &lt;&lt;Boundary&gt;&gt;, &lt;&lt;noECB&gt;&gt;;
+>- i commenti iniziano con /** e terminano con with */;
+>- I commit devono avere una descrizione breve ma significativa;
+>- C'è una Pull Request (PR) che corrisponde alla user story;
+>- La PR è in un Milestone ma non in una Project Board;
+>- C'è un commento che linka la PR all'issue (es. "closes #22");
+>- La PR è accettata a review avvenuto ed esplicito;
+>- Build costruito con successo;
+>- Docker image caricata con successo;
+>- L'esecuzione rispetta i criteri di accettazione;

@@ -1,5 +1,7 @@
 package it.uniba.app.utils;
 
+import java.util.List;
+
 /**
  * <<noECB>>
  * Classe di supporto che ha tutta una serie di costanti che servono per mostrare se le lettere 
@@ -29,4 +31,17 @@ public class Helper {
      * Costruttore privato non richiamabile
      */
     private Helper() {}
+    
+    /**
+     * Metodo per inserire i valori di un Array di int all'interno di una List di Integer
+     * 
+     * @param array Arry di int.
+     * @param arrayList List di Integer.
+     */
+    public static void arrayToArrayList(int[] array, List<Integer> arrayList) {
+        for(int i = 0; i < array.length; i++) {
+            arrayList.add(array[i]);
+        }
+        return;
+    }
 }

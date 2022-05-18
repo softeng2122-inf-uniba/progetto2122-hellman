@@ -140,7 +140,7 @@ Dopo aver eseguito il comando `docker pull` copiandolo da GitHub Packages, il co
 ---
 Di seguito è presentato il modello a prospettiva software del progetto.
 
-![prospettivaSW](/drawings/prospettivaSW.png)
+![prospettivaSW](../drawings/prospettivaSw.png)
 
 Come pattern architetturale è stato utilizzato l'MVC. La sigla MVC sta per Model View Controller ove Model fornisce i metodi per accedere ai dati utili all'applicazione, View visualizza i dati contenuti nel model e si occupa dell'interazione con utenti e agenti, Controller riceve i comandi dell'utente e li attua modificando lo stato degli altri due componenti.
 

@@ -131,3 +131,21 @@ Elenco di terminali supportati:
 Dopo aver eseguito il comando `docker pull` copiandolo da GitHub Packages, il comando Docker da usare per eseguire il container contenente l’applicazione è:
 
 >`docker run --rm -it ghcr.io/softeng2122-inf-uniba/wordle-hellman:latest`
+
+---
+
+# OO Design
+## Diagrammi delle classi
+
+---
+Di seguito è presentato il modello a prospettiva software del progetto.
+
+![prospettivaSW](/drawings/prospettivaSW.png)
+
+Come pattern architetturale è stato utilizzato l'MVC. La sigla MVC sta per Model View Controller ove Model fornisce i metodi per accedere ai dati utili all'applicazione, View visualizza i dati contenuti nel model e si occupa dell'interazione con utenti e agenti, Controller riceve i comandi dell'utente e li attua modificando lo stato degli altri due componenti.
+
+In questo progetto sono stati scelti come Model le classi WordSmith, Player, Game e Word.
+
+Come View sono state scelte le classi UserManager e GameManager.
+
+Come Controller sono state scelte le classi Viewer, Terminal e Parser.

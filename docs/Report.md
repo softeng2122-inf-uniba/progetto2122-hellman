@@ -36,7 +36,7 @@ La parola da indovinare viene decisa dal paroliere, prima che il gioco inizi.
 ---
 Di seguito è presentato il modello di dominio del progetto.
 
-![dominio](./img/Dominio.png)
+![dominio](../drawings/Dominio.png)
 
 ---
 

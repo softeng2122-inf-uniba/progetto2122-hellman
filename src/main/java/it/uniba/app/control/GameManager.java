@@ -208,8 +208,6 @@ class GameManager {
 
                 if(result == Helper.GAME_LOSE || result == Helper.GAME_WIN){
                     if(result == Helper.GAME_LOSE)
-                        trys.set(0, new Word(getSecretWord(currentGame), formats));
-
                     currentGame.resetGame();
                 }
                 

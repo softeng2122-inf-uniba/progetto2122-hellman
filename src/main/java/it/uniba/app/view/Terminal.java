@@ -239,6 +239,7 @@ public class Terminal extends Viewer{
                 break;
 
             case Helper.GAME_LOSE:
+                str += printMatrix(res.getSecond());
                 break;
 
             case Helper.GAME_WAITING:

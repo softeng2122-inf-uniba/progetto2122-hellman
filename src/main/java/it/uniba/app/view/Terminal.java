@@ -2,7 +2,6 @@ package it.uniba.app.view;
 
 import java.util.*;
 
-
 import it.uniba.app.models.Word;
 import it.uniba.app.utils.*;
 import java.io.PrintStream;
@@ -240,9 +239,7 @@ public class Terminal extends Viewer{
                 break;
 
             case Helper.GAME_LOSE:
-                str += printMatrix(res.getSecond());
-                str += "Hai raggiunto il numero massimo di tentativi.\nLa parola segreta è: " + res.getSecond().get(res.getSecond().size() - 1).getWord();
-                res.getSecond().remove(res.getSecond().size() - 1).getWord();
+                str += "Hai raggiunto il numero massimo di tentativi.\nLa parola segreta è: " + res.getSecond().get(0).getWord();
                 break;
 
             case Helper.GAME_WAITING:

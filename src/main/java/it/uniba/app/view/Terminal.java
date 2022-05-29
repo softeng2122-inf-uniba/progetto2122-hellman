@@ -304,8 +304,9 @@ public class Terminal extends Viewer{
             }
 
             for(int j = 0; j < Helper.MAX_LETTERS; j++){
-                str += (emptyWord == true) ? "_" : getCharColored(word.getWord().charAt(j), word.getFormat().get(j));
-                str += " ";
+                str += Helper.ANSI_GREY;   
+                str += (emptyWord == true) ? " _ " : getCharColored(word.getWord().charAt(j), word.getFormat().get(j));
+                str += Helper.ANSI_RESET;
             }
             str += "\n";
         }
@@ -322,19 +323,18 @@ public class Terminal extends Viewer{
      */
     private String getCharColored(char c, int format){
         String str = "";
-
         switch(format)
         {
             case Helper.FORMAT_LETTER_NOT_FOUND:
-                str += Helper.ANSI_GREY + c + Helper.ANSI_RESET;
+                str += Helper.ANSI_GREY + Helper.ANSI_BLACK + " " + c + " " + Helper.ANSI_RESET;
                 break;
 
             case Helper.FORMAT_LETTER_FOUND_RIGHT_POSITION:
-                str += Helper.ANSI_GREEN + c + Helper.ANSI_RESET;
+                str += Helper.ANSI_GREEN + Helper.ANSI_BLACK + " " + c + " " + Helper.ANSI_RESET;
                 break;
 
             case Helper.FORMAT_LETTER_FOUND_WRONG_POSITION:
-                str += Helper.ANSI_YELLOW + c + Helper.ANSI_RESET;
+                str += Helper.ANSI_YELLOW + Helper.ANSI_BLACK + " " + c + " " + Helper.ANSI_RESET;
                 break;
 
             default:

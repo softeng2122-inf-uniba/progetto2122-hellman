@@ -241,7 +241,7 @@ public class Terminal extends Viewer{
             case Helper.GAME_LOSE:
                 str += printMatrix(res.getSecond());
                 str += "Hai raggiunto il numero massimo di tentativi.\nLa parola segreta è: " + res.getSecond().get(res.getSecond().size() - 1).getWord();
-                res.getSecond().remove(res.getSecond().size() - 1).getWord();
+                res.getSecond().remove(res.getSecond().size() - 1);
                 break;
 
             case Helper.GAME_WAITING:

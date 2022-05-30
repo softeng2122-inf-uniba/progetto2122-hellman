@@ -21,13 +21,18 @@ public class Helper {
     final public static int GAME_WIN = 5;
     final public static int GAME_LOSE = 6;
     final public static int GAME_WAITING = 7;
-
+    
     final public static String ANSI_RESET = "\u001B[0m";
     final public static String ANSI_GREEN = "\u001B[42m";
     final public static String ANSI_YELLOW = "\u001B[43m";
     final public static String ANSI_GREY = "\u001b[47;1m";
     final public static String ANSI_BLACK = "\u001b[30m";
     final public static String ANSI_WHITE = "\u001b[47m";
+    
+    final public static String ANSI_GREEN_TEXT = "\033[0;32m";
+    final public static String ANSI_YELLOW_TEXT = "\033[0;33m";
+    final public static String ANSI_CYAN_TEXT = "\033[0;36m";
+    final public static String ANSI_RED_TEXT = "\033[0;31m";
 
     /**
      * Costruttore privato non richiamabile

@@ -36,6 +36,8 @@ public class Terminal extends Viewer{
         commands.add(new Pair<String, CommandType>("/abbandona", CommandType.EXIT_GAME));
 
         parser = new Parser(commands);
+        
+        System.out.println(printWelcome());
 
         if(flags.length > 0){
             if(flags[0].equals("-h") || flags[0].equals("--help")){
@@ -344,5 +346,52 @@ public class Terminal extends Viewer{
         }
 
         return str;
+    }
+
+    /**
+     * Metodo che ritorna una stringa contenente il Welcome dell'app.
+     * 
+     * @return stringa contenente il Welcome dell'app.
+     */
+    private String printWelcome(){
+        String welcomeString = "" +
+        Helper.ANSI_CYAN_TEXT + " - (+) - ]|[ - (+) - ]|[ - (+) - ]|[ - (+) - ]|[ - (+) - ]|[ - (+) - ]|[ - (+) - ]|[ - (+) - \n" +
+        "|" + Helper.ANSI_GREEN_TEXT + "     _____                   _____         _____        _____    ____             ______   " + Helper.ANSI_CYAN_TEXT + "|\n" +
+        "|" + Helper.ANSI_GREEN_TEXT + "   |\\    \\   _____     ____|\\    \\    ___|\\    \\   ___|\\    \\  |    |        ___|\\     \\   " + Helper.ANSI_CYAN_TEXT + "|\n" +
+        "|" + Helper.ANSI_GREEN_TEXT + "   | |    | /    /|   /     /\\    \\  |    |\\    \\ |    |\\    \\ |    |       |     \\     \\  " + Helper.ANSI_CYAN_TEXT + "|\n" +
+        "|" + Helper.ANSI_GREEN_TEXT + "   \\/     / |    ||  /     /  \\    \\ |    | |    ||    | |    ||    |       |     ,_____/| " + Helper.ANSI_CYAN_TEXT + "|\n" +
+        "|" + Helper.ANSI_GREEN_TEXT + "   /     /_  \\   \\/ |     |    |    ||    |/____/ |    | |    ||    |  ____ |     \\--'\\_|/ " + Helper.ANSI_CYAN_TEXT + "|\n" +
+        "|" + Helper.ANSI_GREEN_TEXT + "  |     // \\  \\   \\ |     |    |    ||    |\\    \\ |    | |    ||    | |    ||     /___/|   " + Helper.ANSI_CYAN_TEXT + "|\n" +
+        "|" + Helper.ANSI_GREEN_TEXT + "  |    |/   \\ |    ||\\     \\  /    /||    | |    ||    | |    ||    | |    ||     \\____|\\  " + Helper.ANSI_CYAN_TEXT + "|\n" +
+        "|" + Helper.ANSI_GREEN_TEXT + "  |\\ ___/\\   \\|   /|| \\_____\\/____/ ||____| |____||____|/____/||____|/____/||____ '     /| " + Helper.ANSI_CYAN_TEXT + "|\n" +
+        "|" + Helper.ANSI_GREEN_TEXT + "  | |   | \\______/ | \\ |    ||    | /|    | |    ||    /    | ||    |     |||    /_____/ | " + Helper.ANSI_CYAN_TEXT + "|\n" +
+        "|" + Helper.ANSI_GREEN_TEXT + "   \\|___|/\\ |    | |  \\|____||____|/ |____| |____||____|____|/ |____|_____|/|____|     | / " + Helper.ANSI_CYAN_TEXT + "|\n" +
+        "|" + Helper.ANSI_GREEN_TEXT + "      \\(   \\|____|/      \\(    )/      \\(     )/    \\(    )/     \\(    )/     \\( |_____|/  " + Helper.ANSI_CYAN_TEXT + "|\n" +
+        "|" + Helper.ANSI_GREEN_TEXT + "       '      )/          '    '        '     '      '    '       '    '       '    )/     " + Helper.ANSI_CYAN_TEXT + "|\n" +
+        "|" + Helper.ANSI_GREEN_TEXT + "              '                                                                     '      " + Helper.ANSI_CYAN_TEXT + "|\n" +
+        " - (+) - ]|[ - (+) - ]|[ - (+) - ]|[ - (+) - ]|[ - (+) - ]|[ - (+) - ]|[ - (+) - ]|[ - (+) - \n" +
+        "|                                                                                           |\n" +
+        "|" + Helper.ANSI_YELLOW_TEXT + "   _     ___   _          _____  ___       ___   _      __    _         ___                " + Helper.ANSI_CYAN_TEXT + "|\n" +
+        "|" + Helper.ANSI_YELLOW_TEXT + "  | |_| / / \\ \\ \\    /     | |  / / \\     | |_) | |    / /\\  \\ \\_/     '_)_)               " + Helper.ANSI_CYAN_TEXT + "|\n" +
+        "|" + Helper.ANSI_YELLOW_TEXT + "  |_| | \\_\\_/  \\_\\/\\/      |_|  \\_\\_/     |_|   |_|__ /_/--\\  |_|      (_)                 " + Helper.ANSI_CYAN_TEXT + "|\n" +
+        "|                                                                                           |\n" +
+        " - (+) - ]|[ - (+) - ]|[ - (+) - ]|[ - (+) - ]|[ - (+) - ]|[ - (+) - ]|[ - (+) - ]|[ - (+) - \n" +
+        "|                                                                                           |\n" +
+        "|" + Helper.ANSI_RESET + "  Indovina la "+ Helper.ANSI_GREEN_TEXT + "WORDLE" + Helper.ANSI_RESET + " in un numero fissato di tentativi.                                    " + Helper.ANSI_CYAN_TEXT + "|\n" +
+        "|" + Helper.ANSI_RESET + "  La parola ha un numero di caratteri prefissati.                                          " + Helper.ANSI_CYAN_TEXT + "|\n" +
+        "|                                                                                           |\n" +
+        "|" + Helper.ANSI_RESET + "  Ogni qualvolta si effettuerà un tentativo,                                               " + Helper.ANSI_CYAN_TEXT + "|\n" +
+        "|" + Helper.ANSI_RESET + "  le lettere della parola inserita si colorererano:                                        " + Helper.ANSI_CYAN_TEXT + "|\n" +
+        "|" + Helper.ANSI_RED_TEXT + "  +" + Helper.ANSI_RESET + " di "+ Helper.ANSI_GREY + Helper.ANSI_BLACK + " grigio " + Helper.ANSI_RESET + " se non esiste alcuna occorrenza della lettera;                             " + Helper.ANSI_CYAN_TEXT + "|\n" +
+        "|" + Helper.ANSI_RED_TEXT + "  +" + Helper.ANSI_RESET + " di "+ Helper.ANSI_YELLOW + Helper.ANSI_BLACK + " giallo " + Helper.ANSI_RESET + " nel caso esista una o più occorrenze della lettera,                        " + Helper.ANSI_CYAN_TEXT + "|\n" +
+        "|" + Helper.ANSI_RESET + "    ma in una posizione errata;                                                            " + Helper.ANSI_CYAN_TEXT + "|\n" +
+        "|" + Helper.ANSI_RED_TEXT + "  +" + Helper.ANSI_RESET + " di "+ Helper.ANSI_GREEN + Helper.ANSI_BLACK + " verde "+ Helper.ANSI_RESET + " se la lettera inserita si trova nella posizone corretta.                    " + Helper.ANSI_CYAN_TEXT + "|\n" +
+        "|                                                                                           |\n" +
+        "|" + Helper.ANSI_RESET + "  Per vincere bisogna indovinare la parola entro il numero di tentativi dispnibili.        " + Helper.ANSI_CYAN_TEXT + "|\n" +
+        "|                                                                                           |\n" +
+        "|" + Helper.ANSI_RESET + "  Nel caso ti serva un aiuto, digitare come comando /help.                                 " + Helper.ANSI_CYAN_TEXT + "|\n" +
+        "|                                                                                           |\n" +
+        " - (+) - ]|[ - (+) - ]|[ - (+) - ]|[ - (+) - ]|[ - (+) - ]|[ - (+) - ]|[ - (+) - ]|[ - (+) - " + Helper.ANSI_RESET + "\n";
+        return welcomeString;
     }
 }

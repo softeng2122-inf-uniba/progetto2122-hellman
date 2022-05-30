@@ -305,7 +305,7 @@ public class Terminal extends Viewer{
 
             for(int j = 0; j < Helper.MAX_LETTERS; j++){
                 str += Helper.ANSI_GREY;   
-                str += (emptyWord == true) ? " _ " : getCharColored(word.getWord().charAt(j), word.getFormat().get(j));
+                str += (emptyWord == true) ? Helper.ANSI_BLACK + " _ " : getCharColored(word.getWord().charAt(j), word.getFormat().get(j));
                 str += Helper.ANSI_RESET;
             }
             str += "\n";

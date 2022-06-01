@@ -1,5 +1,8 @@
 package it.uniba.app.utils;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.util.List;
 
 /**
@@ -34,6 +37,8 @@ public class Helper {
     final public static String ANSI_CYAN_TEXT = "\033[0;36m";
     final public static String ANSI_RED_TEXT = "\033[0;31m";
 
+    final public static String PATH_WELCOME_STRING = "src/main/java/it/uniba/app/view/welcomeApp.dat";
+
     /**
      * Costruttore privato non richiamabile
      */
@@ -50,5 +55,22 @@ public class Helper {
             arrayList.add(array[i]);
         }
         return;
+    }
+
+    /**
+     * Carica da file binario un oggetto di classe T e lo restituisce
+     * 
+     * @param <T> classe dell'oggetto da caricare da file binario
+     * @param relativePath del file
+     * @return oggetto binario
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
+    public static <T> T carica(String relativePath) throws IOException, ClassNotFoundException{
+        ObjectInputStream in = new ObjectInputStream(new FileInputStream(relativePath));
+        T obj = (T) in.readObject();
+        in.close();
+
+        return obj;
     }
 }

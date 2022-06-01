@@ -53,7 +53,7 @@ public class Terminal extends Viewer{
      */
     protected void readInput(){
         while (true){
-            nextCommand(parser.readCommand(true,usrManager.isGameStarted()), System.out);
+            nextCommand(parser.readCommand(true,getUserManager().isGameStarted()), System.out);
         }
     }
 
@@ -117,7 +117,7 @@ public class Terminal extends Viewer{
         out.println("Avvio partita...");
 
         try {
-            usrManager.startGame();
+            getUserManager().startGame();
         } catch (GameException e) {
             out.println(e.getMessage());
             out.println("");
@@ -135,13 +135,13 @@ public class Terminal extends Viewer{
     private void backGame(PrintStream out){
         out.println("Sei sicuro di abbandonare il gioco ancora in corso? (si/no)");
 
-        ParserOutput po = parser.readCommand(false,usrManager.isGameStarted());
+        ParserOutput po = parser.readCommand(false,getUserManager().isGameStarted());
         if(po != null){
             CommandType type = po.getCommand().getType();
             switch(type){
                 case EXIT_YES:
                     try {
-                        usrManager.backGame();
+                        getUserManager().backGame();
                         out.println("Abbandono partita...");
                     } catch (GameException e) {
                         out.println(e.getMessage());
@@ -194,7 +194,7 @@ public class Terminal extends Viewer{
     private void closeApp(PrintStream out){
         out.println("Sei sicuro di uscire dall'app? (si/no)");
 
-        ParserOutput po = parser.readCommand(false,usrManager.isGameStarted());
+        ParserOutput po = parser.readCommand(false,getUserManager().isGameStarted());
         if(po != null){
             CommandType type = po.getCommand().getType();
             switch(type){
@@ -227,7 +227,7 @@ public class Terminal extends Viewer{
         String str = "";
         Pair<Integer, List<Word>> res;
         try{
-            res = usrManager.makeTry(word);
+            res = getUserManager().makeTry(word);
         }catch(GameException e){
             return e.getMessage();
         }
@@ -268,7 +268,7 @@ public class Terminal extends Viewer{
         String str= "";
 
         try{
-		    usrManager.setSecretWord(word);
+		    getUserManager().setSecretWord(word);
             str += "La parola è stata inserita correttamente.";
         }catch(GameException w){
             System.out.println(w.getMessage());
@@ -281,8 +281,8 @@ public class Terminal extends Viewer{
      * Metodo che permette di stampare la parola segreta.
      */
     private void printSecretWord(){
-        if(usrManager.getSecretWord().compareTo("") != 0){
-        System.out.println("La parola segreta è " + usrManager.getSecretWord());
+        if(getUserManager().getSecretWord().compareTo("") != 0){
+        System.out.println("La parola segreta è " + getUserManager().getSecretWord());
         } else {
             System.out.println("Errore, non e' stata inserita alcuna parola segreta.");
         }
@@ -354,44 +354,14 @@ public class Terminal extends Viewer{
      * @return stringa contenente il Welcome dell'app.
      */
     private String printWelcome(){
-        String welcomeString = "" +
-        Helper.ANSI_CYAN_TEXT + " - (+) - ]|[ - (+) - ]|[ - (+) - ]|[ - (+) - ]|[ - (+) - ]|[ - (+) - ]|[ - (+) - ]|[ - (+) - \n" +
-        "|" + Helper.ANSI_GREEN_TEXT + "     _____                   _____         _____        _____    ____             ______   " + Helper.ANSI_CYAN_TEXT + "|\n" +
-        "|" + Helper.ANSI_GREEN_TEXT + "   |\\    \\   _____     ____|\\    \\    ___|\\    \\   ___|\\    \\  |    |        ___|\\     \\   " + Helper.ANSI_CYAN_TEXT + "|\n" +
-        "|" + Helper.ANSI_GREEN_TEXT + "   | |    | /    /|   /     /\\    \\  |    |\\    \\ |    |\\    \\ |    |       |     \\     \\  " + Helper.ANSI_CYAN_TEXT + "|\n" +
-        "|" + Helper.ANSI_GREEN_TEXT + "   \\/     / |    ||  /     /  \\    \\ |    | |    ||    | |    ||    |       |     ,_____/| " + Helper.ANSI_CYAN_TEXT + "|\n" +
-        "|" + Helper.ANSI_GREEN_TEXT + "   /     /_  \\   \\/ |     |    |    ||    |/____/ |    | |    ||    |  ____ |     \\--'\\_|/ " + Helper.ANSI_CYAN_TEXT + "|\n" +
-        "|" + Helper.ANSI_GREEN_TEXT + "  |     // \\  \\   \\ |     |    |    ||    |\\    \\ |    | |    ||    | |    ||     /___/|   " + Helper.ANSI_CYAN_TEXT + "|\n" +
-        "|" + Helper.ANSI_GREEN_TEXT + "  |    |/   \\ |    ||\\     \\  /    /||    | |    ||    | |    ||    | |    ||     \\____|\\  " + Helper.ANSI_CYAN_TEXT + "|\n" +
-        "|" + Helper.ANSI_GREEN_TEXT + "  |\\ ___/\\   \\|   /|| \\_____\\/____/ ||____| |____||____|/____/||____|/____/||____ '     /| " + Helper.ANSI_CYAN_TEXT + "|\n" +
-        "|" + Helper.ANSI_GREEN_TEXT + "  | |   | \\______/ | \\ |    ||    | /|    | |    ||    /    | ||    |     |||    /_____/ | " + Helper.ANSI_CYAN_TEXT + "|\n" +
-        "|" + Helper.ANSI_GREEN_TEXT + "   \\|___|/\\ |    | |  \\|____||____|/ |____| |____||____|____|/ |____|_____|/|____|     | / " + Helper.ANSI_CYAN_TEXT + "|\n" +
-        "|" + Helper.ANSI_GREEN_TEXT + "      \\(   \\|____|/      \\(    )/      \\(     )/    \\(    )/     \\(    )/     \\( |_____|/  " + Helper.ANSI_CYAN_TEXT + "|\n" +
-        "|" + Helper.ANSI_GREEN_TEXT + "       '      )/          '    '        '     '      '    '       '    '       '    )/     " + Helper.ANSI_CYAN_TEXT + "|\n" +
-        "|" + Helper.ANSI_GREEN_TEXT + "              '                                                                     '      " + Helper.ANSI_CYAN_TEXT + "|\n" +
-        " - (+) - ]|[ - (+) - ]|[ - (+) - ]|[ - (+) - ]|[ - (+) - ]|[ - (+) - ]|[ - (+) - ]|[ - (+) - \n" +
-        "|                                                                                           |\n" +
-        "|" + Helper.ANSI_YELLOW_TEXT + "   _     ___   _          _____  ___       ___   _      __    _         ___                " + Helper.ANSI_CYAN_TEXT + "|\n" +
-        "|" + Helper.ANSI_YELLOW_TEXT + "  | |_| / / \\ \\ \\    /     | |  / / \\     | |_) | |    / /\\  \\ \\_/     '_)_)               " + Helper.ANSI_CYAN_TEXT + "|\n" +
-        "|" + Helper.ANSI_YELLOW_TEXT + "  |_| | \\_\\_/  \\_\\/\\/      |_|  \\_\\_/     |_|   |_|__ /_/--\\  |_|      (_)                 " + Helper.ANSI_CYAN_TEXT + "|\n" +
-        "|                                                                                           |\n" +
-        " - (+) - ]|[ - (+) - ]|[ - (+) - ]|[ - (+) - ]|[ - (+) - ]|[ - (+) - ]|[ - (+) - ]|[ - (+) - \n" +
-        "|                                                                                           |\n" +
-        "|" + Helper.ANSI_RESET + "  Indovina la "+ Helper.ANSI_GREEN_TEXT + "WORDLE" + Helper.ANSI_RESET + " in un numero fissato di tentativi.                                    " + Helper.ANSI_CYAN_TEXT + "|\n" +
-        "|" + Helper.ANSI_RESET + "  La parola ha un numero di caratteri prefissati.                                          " + Helper.ANSI_CYAN_TEXT + "|\n" +
-        "|                                                                                           |\n" +
-        "|" + Helper.ANSI_RESET + "  Ogni qualvolta si effettuerà un tentativo,                                               " + Helper.ANSI_CYAN_TEXT + "|\n" +
-        "|" + Helper.ANSI_RESET + "  le lettere della parola inserita si colorererano:                                        " + Helper.ANSI_CYAN_TEXT + "|\n" +
-        "|" + Helper.ANSI_RED_TEXT + "  +" + Helper.ANSI_RESET + " di "+ Helper.ANSI_GREY + Helper.ANSI_BLACK + " grigio " + Helper.ANSI_RESET + " se non esiste alcuna occorrenza della lettera;                             " + Helper.ANSI_CYAN_TEXT + "|\n" +
-        "|" + Helper.ANSI_RED_TEXT + "  +" + Helper.ANSI_RESET + " di "+ Helper.ANSI_YELLOW + Helper.ANSI_BLACK + " giallo " + Helper.ANSI_RESET + " nel caso esista una o più occorrenze della lettera,                        " + Helper.ANSI_CYAN_TEXT + "|\n" +
-        "|" + Helper.ANSI_RESET + "    ma in una posizione errata;                                                            " + Helper.ANSI_CYAN_TEXT + "|\n" +
-        "|" + Helper.ANSI_RED_TEXT + "  +" + Helper.ANSI_RESET + " di "+ Helper.ANSI_GREEN + Helper.ANSI_BLACK + " verde "+ Helper.ANSI_RESET + " se la lettera inserita si trova nella posizone corretta.                    " + Helper.ANSI_CYAN_TEXT + "|\n" +
-        "|                                                                                           |\n" +
-        "|" + Helper.ANSI_RESET + "  Per vincere bisogna indovinare la parola entro il numero di tentativi dispnibili.        " + Helper.ANSI_CYAN_TEXT + "|\n" +
-        "|                                                                                           |\n" +
-        "|" + Helper.ANSI_RESET + "  Nel caso ti serva un aiuto, digitare come comando /help.                                 " + Helper.ANSI_CYAN_TEXT + "|\n" +
-        "|                                                                                           |\n" +
-        " - (+) - ]|[ - (+) - ]|[ - (+) - ]|[ - (+) - ]|[ - (+) - ]|[ - (+) - ]|[ - (+) - ]|[ - (+) - " + Helper.ANSI_RESET + "\n";
+        String welcomeString;
+
+        try{
+            welcomeString = Helper.carica(Helper.PATH_WELCOME_STRING);
+        }catch(Exception e){
+            welcomeString = "Benvenuto in Wordle! Digita /help.\n";
+        }
+        
         return welcomeString;
     }
 }

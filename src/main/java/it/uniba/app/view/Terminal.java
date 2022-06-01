@@ -1,44 +1,43 @@
 package it.uniba.app.view;
 
-import java.util.*;
-
 import it.uniba.app.models.Word;
-import it.uniba.app.utils.*;
+import it.uniba.app.utils.CommandType;
+import it.uniba.app.utils.Helper;
+import it.uniba.app.utils.Pair;
+import it.uniba.app.utils.GameException;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <<Boundary>>
- * Classe front-end che permette di dialogare con l'utente a linea di comando
+ * Classe front-end che permette di dialogare con l'utente a linea di comando.
  */
 public class Terminal extends Viewer {
 
-    /** Parser utilizzato per il riconoscimento dei comandi accettati dal gioco */
+    /** Parser utilizzato per il riconoscimento dei comandi del gioco. */
     private Parser parser;
 
-    /** Lista di comandi accettati dal gioco */
+    /** Lista di comandi accettati dal gioco. */
     private List<Pair<String, CommandType>> commands = new ArrayList<>();
 
     /**
-     * Costruttore di terminal
-     * 
+     * Costruttore di terminal.
      * @param flags passato all'apertura del terminale
      */
-    public Terminal(String[] flags){
+    public Terminal(final String[] flags) {
         super();
 
         // Aggiungere i comandi accettati dal parser
-        commands.add(new Pair<String, CommandType>("/help", CommandType.HELP));
-        commands.add(new Pair<String, CommandType>("/esci", CommandType.EXIT_APP));
-        commands.add(new Pair<String, CommandType>("/gioca", CommandType.START_GAME));
-        commands.add(new Pair<String, CommandType>("si", CommandType.EXIT_YES));
-        commands.add(new Pair<String, CommandType>("no", CommandType.EXIT_NO));
-        commands.add(new Pair<String, CommandType>("/nuova", CommandType.NUOVA));
-        commands.add(new Pair<String, CommandType>("/mostra", CommandType.SHOW));
-        commands.add(new Pair<String, CommandType>("/abbandona", CommandType.EXIT_GAME));
+        commands.add(newCmd("/help", CommandType.HELP));
+        commands.add(newCmd("/esci", CommandType.EXIT_APP));
+        commands.add(newCmd("/gioca", CommandType.START_GAME));
+        commands.add(newCmd("/si", CommandType.EXIT_YES));
+        commands.add(newCmd("/no", CommandType.EXIT_NO));
+        commands.add(newCmd("/nuova", CommandType.NEW));
+        commands.add(newCmd("/mostra", CommandType.SHOW));
+        commands.add(newCmd("/abbandona", CommandType.EXIT_GAME));
 
         parser = new Parser(commands);
 
@@ -54,21 +53,35 @@ public class Terminal extends Viewer {
     }
 
     /**
-     * Metodo che invoca l'inserimento di nuovi comandi da tastiera
+     * Restituisce il nuovo comando creato.
+     *
+     * @param command stringa del comando
+     * @param cType identificativo del comando
+     * @return comando creato
+     */
+    private Pair<String, CommandType> newCmd(final String command,
+                                            final CommandType cType) {
+        return new Pair<String, CommandType>(command, cType);
+    }
+
+    /**
+     * Metodo che invoca l'inserimento di nuovi comandi da tastiera.
      */
     protected void readInput() {
         while (true) {
-            nextCommand(parser.readCommand(true, getUserManager().isGameStarted()), System.out);
+            boolean isGameStarted = getUserManager().isGameStarted();
+
+            nextCommand(parser.readCommand(true, isGameStarted), System.out);
         }
     }
 
     /**
-     * Metodo che gestisce il comando inserito dall'utente da terminale
+     * Metodo che gestisce il comando inserito dall'utente da terminale.
      *
      * @param p   risultato del parser
      * @param out canale di output
      */
-    private void nextCommand(ParserOutput p, PrintStream out) {
+    private void nextCommand(final ParserOutput p, final PrintStream out) {
 
         if (p == null) {
             out.println("Non ho capito! Prova con un altro comando.");
@@ -88,7 +101,7 @@ public class Terminal extends Viewer {
                     out.println(makeTry(p.getCommand().getName()));
                     break;
 
-                case NUOVA:
+                case NEW:
                     out.println(setSecretWord(p.getCommand().getName()));
                     break;
 
@@ -113,8 +126,8 @@ public class Terminal extends Viewer {
     }
 
     /**
-     * Metodo per l'avvio della partita nel caso in cui la parola segreta sia stata
-     * impostata.
+     * Metodo per l'avvio della partita nel caso in cui la
+     * parola segreta sia stata impostata.
      * @return messaggio di avvio partita.
      */
     private String startGame() {
@@ -132,15 +145,17 @@ public class Terminal extends Viewer {
     }
 
     /**
-     * Metodo per l'abbandono della partita nel caso in cui si decide di non voler
-     * più giocare.
-     * 
+     * Metodo per l'abbandono della partita nel caso in cui si
+     * decide di non voler più giocare.
+     *
      * @param out Canale di output.
      */
-    private void backGame(PrintStream out) {
-        out.println("Sei sicuro di abbandonare il gioco ancora in corso? (si/no)");
+    private void backGame(final PrintStream out) {
+        out.println("Sei sicuro di abbandonare il gioco in corso? (si/no)");
 
-        ParserOutput po = parser.readCommand(false, getUserManager().isGameStarted());
+        boolean isGameStarted = getUserManager().isGameStarted();
+        ParserOutput po = parser.readCommand(false, isGameStarted);
+
         if (po != null) {
             CommandType type = po.getCommand().getType();
             switch (type) {
@@ -169,43 +184,18 @@ public class Terminal extends Viewer {
     }
 
     /**
-     * Restituisce la stringa del comando di help
-     *
+     * Restituisce la stringa del comando di help.
      * @return comando di help
      */
     private String help() {
         String str = "";
 
-        str += "==============================================================================================\n";
-        str += "Wordle è un videogioco in cui il giocatore deve indovinare una parola di cinque lettere in meno di sei tentativi. \n";
-        str += "I comandi del paroliere per interagire con il gioco sono: \n";
-        str += "   - imposta parola segreta (comando /nuova)\n";
-        str += "   - mostra parola segreta (comando /mostra) \n \n";
-        str += "I comandi del giocatore per interagire con il gioco sono:\n";
-        str += "   - inizia una nuova partita (comando /gioca)\n";
-        str += "   - abbandona la partita corrente (comando /abbandona)\n";
-        str += "   - chiudere il gioco (comando /esci)\n";
-        str += "   - effettua un tentativo per indovinare la parola segreta (inserendo qualsiasi input dopo /gioca)\n";
-        str += "==============================================================================================\n";
-
-        try{
-            salva("helpApp.dat", str);
-        }catch(Exception e){
-            
+        try {
+            str = Helper.carica(Helper.PATH_HELP_STRING);
+        } catch (Exception e) {
+            str = "Help non trovato\n";
         }
         return str;
-    }
-
-    /**
-     * Salva l'oggetto di classe KNN in un file binario <nomeFile>.dat
-     * 
-     * @param nomeFile Nome del file in cui salvare il la classe (comprende l'estensione).
-     * @throws IOException Eccezione per il controllo dei flussi di Input/Output.
-     */
-    public void salva(String nomeFile, String txt) throws IOException {
-        ObjectOutputStream outStream = new ObjectOutputStream(new FileOutputStream(nomeFile));
-        outStream.writeObject(txt);
-        outStream.close();
     }
 
     /**

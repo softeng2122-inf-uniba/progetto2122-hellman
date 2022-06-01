@@ -154,10 +154,10 @@ class Parser {
 
                 return null;
             }
-            if(commands.get(ic).getType() == CommandType.NUOVA)
+            if(commands.get(ic).getType() == CommandType.NEW)
             {
                 if (tokens.size() == 2){
-                    Commands inputWord = new Commands(CommandType.NUOVA, tokens.get(1).toLowerCase());
+                    Commands inputWord = new Commands(CommandType.NEW, tokens.get(1).toLowerCase());
                     return new ParserOutput(inputWord);
                 } else
                     return null;

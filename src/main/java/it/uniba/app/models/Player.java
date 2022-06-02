@@ -10,7 +10,8 @@ public class Player {
     private Game currentGame = new Game();
 
     /**
-     * Metodo che permette di far usare e modificare il Game attuale al UserManager.
+     * Metodo che permette di far usare e modificare il Game
+     * attuale al UserManager.
      *
      * @return game corrente
      */

@@ -123,7 +123,8 @@ class Parser {
      *                     comando):", altrimenti "Inserisci un comando:".
      * @return risultato di parse.
      */
-    public ParserOutput readCommand(final boolean printCommand, final boolean gameStarted) {
+    public ParserOutput readCommand(final boolean printCommand,
+                                    final boolean gameStarted) {
         ParserOutput p = null;
 
         if (printCommand) {

@@ -26,7 +26,7 @@ abstract class Viewer {
 
     /**
      * Restituisce l'istanza di usrManager.
-     * 
+     *
      * @return usrManager
      */
     UserManager getUserManager() {

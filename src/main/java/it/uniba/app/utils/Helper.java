@@ -37,8 +37,8 @@ public class Helper {
     final public static String ANSI_CYAN_TEXT = "\033[0;36m";
     final public static String ANSI_RED_TEXT = "\033[0;31m";
 
-    final public static String PATH_WELCOME_STRING = "src/main/java/it/uniba/app/view/welcomeApp.dat";
-    final public static String PATH_HELP_STRING = "src/main/java/it/uniba/app/view/helpApp.dat";
+    final public static String PATH_WELCOME_STRING = "src/main/java/it/uniba/app/utils/welcomeApp.dat";
+    final public static String PATH_HELP_STRING = "src/main/java/it/uniba/app/utils/helpApp.dat";
 
     /**
      * Costruttore privato non richiamabile

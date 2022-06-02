@@ -331,12 +331,14 @@ public class Terminal extends Viewer {
             }
 
             for (int j = 0; j < Helper.MAX_LETTERS; j++) {
-                char c = word.getWord().charAt(j);
+                String cell = Helper.ANSI_BLACK + " _ ";
 
-                str += Helper.ANSI_GREY;
-                str += emptyWord ? Helper.ANSI_BLACK + " _ "
-                        : getCharColored(c, word.getFormat().get(j));
-                str += Helper.ANSI_RESET;
+                if (!emptyWord) {
+                    char c = word.getWord().charAt(j);
+                    cell = getCharColored(c, word.getFormat().get(j));
+                }
+
+                str += Helper.ANSI_GREY + cell + Helper.ANSI_RESET;
             }
             str += "\n";
         }

@@ -46,7 +46,7 @@ class Parser {
      *
      * @return lista dei comandi
      */
-    public List<Commands> getCommands() {
+    List<Commands> getCommands() {
         return commands;
     }
 

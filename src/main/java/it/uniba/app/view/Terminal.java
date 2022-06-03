@@ -1,46 +1,50 @@
 package it.uniba.app.view;
 
-import java.util.*;
-
 import it.uniba.app.models.Word;
-import it.uniba.app.utils.*;
+import it.uniba.app.utils.CommandType;
+import it.uniba.app.utils.Helper;
+import it.uniba.app.utils.Pair;
+import it.uniba.app.utils.GameException;
+
 import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <<Boundary>>
- * Classe front-end che permette di dialogare con l'utente a linea di comando
+ * Classe front-end che permette di dialogare con l'utente a linea di comando.
  */
-public class Terminal extends Viewer{
+public class Terminal extends Viewer {
 
-    /** Parser utilizzato per il riconoscimento dei comandi accettati dal gioco */
+    /** Parser utilizzato per il riconoscimento dei comandi del gioco. */
     private Parser parser;
 
-    /** Lista di comandi accettati dal gioco */
+    /** Lista di comandi accettati dal gioco. */
     private List<Pair<String, CommandType>> commands = new ArrayList<>();
 
     /**
-     * Costruttore di terminal
+     * Costruttore di terminal.
      * @param flags passato all'apertura del terminale
      */
-    public Terminal(String[] flags){
+    public Terminal(final String[] flags) {
         super();
 
         // Aggiungere i comandi accettati dal parser
-        commands.add(new Pair<String, CommandType>("/help", CommandType.HELP));
-        commands.add(new Pair<String, CommandType>("/esci", CommandType.EXIT_APP));
-        commands.add(new Pair<String, CommandType>("/gioca", CommandType.START_GAME));
-        commands.add(new Pair<String, CommandType>("si", CommandType.EXIT_YES));
-        commands.add(new Pair<String, CommandType>("no", CommandType.EXIT_NO));
-        commands.add(new Pair<String, CommandType>("/nuova", CommandType.NUOVA));
-        commands.add(new Pair<String, CommandType>("/mostra", CommandType.SHOW));
-        commands.add(new Pair<String, CommandType>("/abbandona", CommandType.EXIT_GAME));
+        commands.add(newCmd("/help", CommandType.HELP));
+        commands.add(newCmd("/esci", CommandType.EXIT_APP));
+        commands.add(newCmd("/gioca", CommandType.START_GAME));
+        commands.add(newCmd("si", CommandType.EXIT_YES));
+        commands.add(newCmd("no", CommandType.EXIT_NO));
+        commands.add(newCmd("/nuova", CommandType.NEW));
+        commands.add(newCmd("/mostra", CommandType.SHOW));
+        commands.add(newCmd("/abbandona", CommandType.EXIT_GAME));
 
         parser = new Parser(commands);
-        
+
         System.out.println(printWelcome());
 
-        if(flags.length > 0){
-            if(flags[0].equals("-h") || flags[0].equals("--help")){
+        if (flags.length > 0) {
+            if (flags[0].equals("-h") || flags[0].equals("--help")) {
                 System.out.println(help());
             }
         }
@@ -49,28 +53,42 @@ public class Terminal extends Viewer{
     }
 
     /**
-     * Metodo che invoca l'inserimento di nuovi comandi da tastiera
+     * Restituisce il nuovo comando creato.
+     *
+     * @param command stringa del comando
+     * @param cType identificativo del comando
+     * @return comando creato
      */
-    protected void readInput(){
-        while (true){
-            nextCommand(parser.readCommand(true,usrManager.isGameStarted()), System.out);
+    private Pair<String, CommandType> newCmd(final String command,
+                                            final CommandType cType) {
+        return new Pair<String, CommandType>(command, cType);
+    }
+
+    /**
+     * Metodo che invoca l'inserimento di nuovi comandi da tastiera.
+     */
+    protected void readInput() {
+        while (true) {
+            boolean isGameStarted = getUserManager().isGameStarted();
+
+            nextCommand(parser.readCommand(true, isGameStarted), System.out);
         }
     }
 
     /**
-     * Metodo che gestisce il comando inserito dall'utente da terminale
+     * Metodo che gestisce il comando inserito dall'utente da terminale.
      *
-     * @param p risultato del parser
+     * @param p   risultato del parser
      * @param out canale di output
      */
-    private void nextCommand(ParserOutput p, PrintStream out) {
+    private void nextCommand(final ParserOutput p, final PrintStream out) {
 
         if (p == null) {
             out.println("Non ho capito! Prova con un altro comando.");
-        }else{
+        } else {
             CommandType type = p.getCommand().getType();
 
-            switch(type){
+            switch (type) {
                 case HELP:
                     out.println(help());
                     break;
@@ -82,17 +100,17 @@ public class Terminal extends Viewer{
                 case INPUT_WORD:
                     out.println(makeTry(p.getCommand().getName()));
                     break;
-                    
-                case NUOVA:
+
+                case NEW:
                     out.println(setSecretWord(p.getCommand().getName()));
                     break;
 
                 case SHOW:
-                    printSecretWord();
+                    out.println(printSecretWord());
                     break;
 
                 case START_GAME:
-                    startGame(out);
+                    out.println(startGame());
                     break;
 
                 case EXIT_GAME:
@@ -108,40 +126,42 @@ public class Terminal extends Viewer{
     }
 
     /**
-     * Metodo per l'avvio della partita nel caso in cui la parola segreta sia stata
-     * impostata.
-     * 
-     * @param out Canale di output.
+     * Metodo per l'avvio della partita nel caso in cui la
+     * parola segreta sia stata impostata.
+     * @return messaggio di avvio partita.
      */
-    private void startGame(PrintStream out){
-        out.println("Avvio partita...");
+    private String startGame() {
+        String str = "Avvio partita...\n";
 
         try {
-            usrManager.startGame();
+            getUserManager().startGame();
         } catch (GameException e) {
-            out.println(e.getMessage());
-            out.println("");
-            return;
+            str += e.getMessage() + "\n\n";
+            return str;
         }
 
-        out.println(printMatrix(new ArrayList<Word>()));
+        str += printMatrix(new ArrayList<Word>()) + "\n";
+        return str;
     }
 
     /**
-     * Metodo per l'abbandono della partita nel caso in cui si decide di non voler più giocare.
-     * 
+     * Metodo per l'abbandono della partita nel caso in cui si
+     * decide di non voler più giocare.
+     *
      * @param out Canale di output.
      */
-    private void backGame(PrintStream out){
-        out.println("Sei sicuro di abbandonare il gioco ancora in corso? (si/no)");
+    private void backGame(final PrintStream out) {
+        out.println("Sei sicuro di abbandonare il gioco in corso? (si/no)");
 
-        ParserOutput po = parser.readCommand(false,usrManager.isGameStarted());
-        if(po != null){
+        boolean isGameStarted = getUserManager().isGameStarted();
+        ParserOutput po = parser.readCommand(false, isGameStarted);
+
+        if (po != null) {
             CommandType type = po.getCommand().getType();
-            switch(type){
+            switch (type) {
                 case EXIT_YES:
                     try {
-                        usrManager.backGame();
+                        getUserManager().backGame();
                         out.println("Abbandono partita...");
                     } catch (GameException e) {
                         out.println(e.getMessage());
@@ -164,40 +184,34 @@ public class Terminal extends Viewer{
     }
 
     /**
-     * Restituisce la stringa del comando di help
-     *
+     * Restituisce la stringa del comando di help.
      * @return comando di help
      */
-    public static String help(){
+    private String help() {
         String str = "";
 
-        str += "==============================================================================================\n";
-        str += "Wordle è un videogioco in cui il giocatore deve indovinare una parola di cinque lettere in meno di sei tentativi. \n";
-        str += "I comandi del paroliere per interagire con il gioco sono: \n";
-        str += "   - imposta parola segreta (comando /nuova)\n";
-        str += "   - mostra parola segreta (comando /mostra) \n \n";
-        str += "I comandi del giocatore per interagire con il gioco sono:\n";
-        str += "   - inizia una nuova partita (comando /gioca)\n";
-        str += "   - abbandona la partita corrente (comando /abbandona)\n";
-        str += "   - chiudere il gioco (comando /esci)\n";
-        str += "   - effettua un tentativo per indovinare la parola segreta (inserendo qualsiasi input dopo /gioca)\n";
-        str += "==============================================================================================\n";
-
+        try {
+            str = Helper.carica(Helper.PATH_HELP_STRING);
+        } catch (Exception e) {
+            str = "Help non trovato\n";
+        }
         return str;
     }
 
     /**
-     * Gestisce la chiusura dell'app
+     * Gestisce la chiusura dell'app.
      *
      * @param out canale di output
      */
-    private void closeApp(PrintStream out){
+    private void closeApp(final PrintStream out) {
         out.println("Sei sicuro di uscire dall'app? (si/no)");
 
-        ParserOutput po = parser.readCommand(false,usrManager.isGameStarted());
-        if(po != null){
+        boolean isGameStarted = getUserManager().isGameStarted();
+
+        ParserOutput po = parser.readCommand(false, isGameStarted);
+        if (po != null) {
             CommandType type = po.getCommand().getType();
-            switch(type){
+            switch (type) {
                 case EXIT_YES:
                     out.println("Ciao!");
                     System.exit(0);
@@ -218,22 +232,21 @@ public class Terminal extends Viewer{
     }
 
     /**
-     * Gestisce il tentativo della parola
-     *  
+     * Gestisce il tentativo della parola.
+     *
      * @param word per effettuare il tentativo
      * @return stringa della risposta del tentativo
      */
-    private String makeTry(String word){
+    private String makeTry(final String word) {
         String str = "";
         Pair<Integer, List<Word>> res;
-        try{
-            res = usrManager.makeTry(word);
-        }catch(GameException e){
+        try {
+            res = getUserManager().makeTry(word);
+        } catch (GameException e) {
             return e.getMessage();
         }
 
-        switch(res.getFirst())
-        {
+        switch (res.getFirst()) {
             case Helper.GAME_WIN:
                 str += printMatrix(res.getSecond());
                 str += "Parola segreta indovinata\nNumero tentativi: ";
@@ -241,9 +254,13 @@ public class Terminal extends Viewer{
                 break;
 
             case Helper.GAME_LOSE:
+                int lastIndex = res.getSecond().size() - 1;
+                String secretWord = res.getSecond().get(lastIndex).getWord();
+                res.getSecond().remove(lastIndex);
+
                 str += printMatrix(res.getSecond());
-                str += "Hai raggiunto il numero massimo di tentativi.\nLa parola segreta è: " + res.getSecond().get(res.getSecond().size() - 1).getWord();
-                res.getSecond().remove(res.getSecond().size() - 1);
+                str += "Hai raggiunto il numero massimo di tentativi.\n"
+                        + "La parola segreta è: " + secretWord;
                 break;
 
             case Helper.GAME_WAITING:
@@ -257,60 +274,71 @@ public class Terminal extends Viewer{
 
         return str;
     }
-    
+
     /**
      * Metodo che serve a impostare la parola segreta.
      *
      * @param word
      * @return risposta dopo aver impostato la parola
      */
-    private String setSecretWord(String word){
-        String str= "";
+    private String setSecretWord(final String word) {
+        String str = "";
 
-        try{
-		    usrManager.setSecretWord(word);
+        try {
+            getUserManager().setSecretWord(word);
             str += "La parola è stata inserita correttamente.";
-        }catch(GameException w){
-            System.out.println(w.getMessage());
+        } catch (GameException w) {
+            str += w.getMessage();
         }
 
         return str;
-	}
-
-    /**
-     * Metodo che permette di stampare la parola segreta.
-     */
-    private void printSecretWord(){
-        if(usrManager.getSecretWord().compareTo("") != 0){
-        System.out.println("La parola segreta è " + usrManager.getSecretWord());
-        } else {
-            System.out.println("Errore, non e' stata inserita alcuna parola segreta.");
-        }
     }
 
     /**
+     * Metodo che permette di stampare la parola segreta.
+     * @return stringa della parola segreta, se presente
+     */
+    private String printSecretWord() {
+        String str = "";
+
+        if (getUserManager().getSecretWord().compareTo("") != 0) {
+            String secretWord = getUserManager().getSecretWord();
+            str = "La parola segreta è " + secretWord;
+        } else {
+            str = "Non è stata inserita alcuna parola segreta.";
+        }
+
+        return str;
+    }
+
+    /**
+     * Restituisce la matrice delle parole inserite con i rispettivi
+     * colori nelle lettere.
      *
-     * Restituisce la matrice delle parole inserite con i rispettivi colori nelle lettere
-     * 
      * @param words tentativi effettuati
      * @return matrice dei tentativi colorata
      */
-    private String printMatrix(List<Word> words){
+    private String printMatrix(final List<Word> words) {
         String str = "\n";
 
-        for(int i = 0; i < Helper.MAX_TRYS; i++){
+        for (int i = 0; i < Helper.MAX_TRYS; i++) {
             boolean emptyWord = false;
             Word word = null;
-            try{
+            try {
                 word = words.get(i);
-            }catch(IndexOutOfBoundsException e){
+            } catch (IndexOutOfBoundsException e) {
                 emptyWord = true;
             }
 
-            for(int j = 0; j < Helper.MAX_LETTERS; j++){
-                str += Helper.ANSI_GREY;   
-                str += (emptyWord == true) ? Helper.ANSI_BLACK + " _ " : getCharColored(word.getWord().charAt(j), word.getFormat().get(j));
-                str += Helper.ANSI_RESET;
+            for (int j = 0; j < Helper.MAX_LETTERS; j++) {
+                String cell = Helper.ANSI_BLACK + " _ ";
+
+                if (!emptyWord) {
+                    char c = word.getWord().charAt(j);
+                    cell = getCharColored(c, word.getFormat().get(j));
+                }
+
+                str += Helper.ANSI_GREY + cell + Helper.ANSI_RESET;
             }
             str += "\n";
         }
@@ -319,26 +347,28 @@ public class Terminal extends Viewer{
     }
 
     /**
-     * Restituisce il carattere colorato del formato passato in input
-     * 
-     * @param c carattere da colorare
+     * Restituisce il carattere colorato del formato passato in input.
+     *
+     * @param c      carattere da colorare
      * @param format formato del colore
      * @return carattere colorato
      */
-    private String getCharColored(char c, int format){
+    private String getCharColored(final char c, final int format) {
         String str = "";
-        switch(format)
-        {
+        switch (format) {
             case Helper.FORMAT_LETTER_NOT_FOUND:
-                str += Helper.ANSI_GREY + Helper.ANSI_BLACK + " " + c + " " + Helper.ANSI_RESET;
+                str += Helper.ANSI_GREY + Helper.ANSI_BLACK + " " + c
+                        + " " + Helper.ANSI_RESET;
                 break;
 
             case Helper.FORMAT_LETTER_FOUND_RIGHT_POSITION:
-                str += Helper.ANSI_GREEN + Helper.ANSI_BLACK + " " + c + " " + Helper.ANSI_RESET;
+                str += Helper.ANSI_GREEN + Helper.ANSI_BLACK + " " + c
+                        + " " + Helper.ANSI_RESET;
                 break;
 
             case Helper.FORMAT_LETTER_FOUND_WRONG_POSITION:
-                str += Helper.ANSI_YELLOW + Helper.ANSI_BLACK + " " + c + " " + Helper.ANSI_RESET;
+                str += Helper.ANSI_YELLOW + Helper.ANSI_BLACK + " " + c
+                        + " " + Helper.ANSI_RESET;
                 break;
 
             default:
@@ -350,48 +380,17 @@ public class Terminal extends Viewer{
 
     /**
      * Metodo che ritorna una stringa contenente il Welcome dell'app.
-     * 
      * @return stringa contenente il Welcome dell'app.
      */
-    private String printWelcome(){
-        String welcomeString = "" +
-        Helper.ANSI_CYAN_TEXT + " - (+) - ]|[ - (+) - ]|[ - (+) - ]|[ - (+) - ]|[ - (+) - ]|[ - (+) - ]|[ - (+) - ]|[ - (+) - \n" +
-        "|" + Helper.ANSI_GREEN_TEXT + "     _____                   _____         _____        _____    ____             ______   " + Helper.ANSI_CYAN_TEXT + "|\n" +
-        "|" + Helper.ANSI_GREEN_TEXT + "   |\\    \\   _____     ____|\\    \\    ___|\\    \\   ___|\\    \\  |    |        ___|\\     \\   " + Helper.ANSI_CYAN_TEXT + "|\n" +
-        "|" + Helper.ANSI_GREEN_TEXT + "   | |    | /    /|   /     /\\    \\  |    |\\    \\ |    |\\    \\ |    |       |     \\     \\  " + Helper.ANSI_CYAN_TEXT + "|\n" +
-        "|" + Helper.ANSI_GREEN_TEXT + "   \\/     / |    ||  /     /  \\    \\ |    | |    ||    | |    ||    |       |     ,_____/| " + Helper.ANSI_CYAN_TEXT + "|\n" +
-        "|" + Helper.ANSI_GREEN_TEXT + "   /     /_  \\   \\/ |     |    |    ||    |/____/ |    | |    ||    |  ____ |     \\--'\\_|/ " + Helper.ANSI_CYAN_TEXT + "|\n" +
-        "|" + Helper.ANSI_GREEN_TEXT + "  |     // \\  \\   \\ |     |    |    ||    |\\    \\ |    | |    ||    | |    ||     /___/|   " + Helper.ANSI_CYAN_TEXT + "|\n" +
-        "|" + Helper.ANSI_GREEN_TEXT + "  |    |/   \\ |    ||\\     \\  /    /||    | |    ||    | |    ||    | |    ||     \\____|\\  " + Helper.ANSI_CYAN_TEXT + "|\n" +
-        "|" + Helper.ANSI_GREEN_TEXT + "  |\\ ___/\\   \\|   /|| \\_____\\/____/ ||____| |____||____|/____/||____|/____/||____ '     /| " + Helper.ANSI_CYAN_TEXT + "|\n" +
-        "|" + Helper.ANSI_GREEN_TEXT + "  | |   | \\______/ | \\ |    ||    | /|    | |    ||    /    | ||    |     |||    /_____/ | " + Helper.ANSI_CYAN_TEXT + "|\n" +
-        "|" + Helper.ANSI_GREEN_TEXT + "   \\|___|/\\ |    | |  \\|____||____|/ |____| |____||____|____|/ |____|_____|/|____|     | / " + Helper.ANSI_CYAN_TEXT + "|\n" +
-        "|" + Helper.ANSI_GREEN_TEXT + "      \\(   \\|____|/      \\(    )/      \\(     )/    \\(    )/     \\(    )/     \\( |_____|/  " + Helper.ANSI_CYAN_TEXT + "|\n" +
-        "|" + Helper.ANSI_GREEN_TEXT + "       '      )/          '    '        '     '      '    '       '    '       '    )/     " + Helper.ANSI_CYAN_TEXT + "|\n" +
-        "|" + Helper.ANSI_GREEN_TEXT + "              '                                                                     '      " + Helper.ANSI_CYAN_TEXT + "|\n" +
-        " - (+) - ]|[ - (+) - ]|[ - (+) - ]|[ - (+) - ]|[ - (+) - ]|[ - (+) - ]|[ - (+) - ]|[ - (+) - \n" +
-        "|                                                                                           |\n" +
-        "|" + Helper.ANSI_YELLOW_TEXT + "   _     ___   _          _____  ___       ___   _      __    _         ___                " + Helper.ANSI_CYAN_TEXT + "|\n" +
-        "|" + Helper.ANSI_YELLOW_TEXT + "  | |_| / / \\ \\ \\    /     | |  / / \\     | |_) | |    / /\\  \\ \\_/     '_)_)               " + Helper.ANSI_CYAN_TEXT + "|\n" +
-        "|" + Helper.ANSI_YELLOW_TEXT + "  |_| | \\_\\_/  \\_\\/\\/      |_|  \\_\\_/     |_|   |_|__ /_/--\\  |_|      (_)                 " + Helper.ANSI_CYAN_TEXT + "|\n" +
-        "|                                                                                           |\n" +
-        " - (+) - ]|[ - (+) - ]|[ - (+) - ]|[ - (+) - ]|[ - (+) - ]|[ - (+) - ]|[ - (+) - ]|[ - (+) - \n" +
-        "|                                                                                           |\n" +
-        "|" + Helper.ANSI_RESET + "  Indovina la "+ Helper.ANSI_GREEN_TEXT + "WORDLE" + Helper.ANSI_RESET + " in un numero fissato di tentativi.                                    " + Helper.ANSI_CYAN_TEXT + "|\n" +
-        "|" + Helper.ANSI_RESET + "  La parola ha un numero di caratteri prefissati.                                          " + Helper.ANSI_CYAN_TEXT + "|\n" +
-        "|                                                                                           |\n" +
-        "|" + Helper.ANSI_RESET + "  Ogni qualvolta si effettuerà un tentativo,                                               " + Helper.ANSI_CYAN_TEXT + "|\n" +
-        "|" + Helper.ANSI_RESET + "  le lettere della parola inserita si colorererano:                                        " + Helper.ANSI_CYAN_TEXT + "|\n" +
-        "|" + Helper.ANSI_RED_TEXT + "  +" + Helper.ANSI_RESET + " di "+ Helper.ANSI_GREY + Helper.ANSI_BLACK + " grigio " + Helper.ANSI_RESET + " se non esiste alcuna occorrenza della lettera;                             " + Helper.ANSI_CYAN_TEXT + "|\n" +
-        "|" + Helper.ANSI_RED_TEXT + "  +" + Helper.ANSI_RESET + " di "+ Helper.ANSI_YELLOW + Helper.ANSI_BLACK + " giallo " + Helper.ANSI_RESET + " nel caso esista una o più occorrenze della lettera,                        " + Helper.ANSI_CYAN_TEXT + "|\n" +
-        "|" + Helper.ANSI_RESET + "    ma in una posizione errata;                                                            " + Helper.ANSI_CYAN_TEXT + "|\n" +
-        "|" + Helper.ANSI_RED_TEXT + "  +" + Helper.ANSI_RESET + " di "+ Helper.ANSI_GREEN + Helper.ANSI_BLACK + " verde "+ Helper.ANSI_RESET + " se la lettera inserita si trova nella posizone corretta.                    " + Helper.ANSI_CYAN_TEXT + "|\n" +
-        "|                                                                                           |\n" +
-        "|" + Helper.ANSI_RESET + "  Per vincere bisogna indovinare la parola entro il numero di tentativi dispnibili.        " + Helper.ANSI_CYAN_TEXT + "|\n" +
-        "|                                                                                           |\n" +
-        "|" + Helper.ANSI_RESET + "  Nel caso ti serva un aiuto, digitare come comando /help.                                 " + Helper.ANSI_CYAN_TEXT + "|\n" +
-        "|                                                                                           |\n" +
-        " - (+) - ]|[ - (+) - ]|[ - (+) - ]|[ - (+) - ]|[ - (+) - ]|[ - (+) - ]|[ - (+) - ]|[ - (+) - " + Helper.ANSI_RESET + "\n";
+    private String printWelcome() {
+        String welcomeString;
+
+        try {
+            welcomeString = Helper.carica(Helper.PATH_WELCOME_STRING);
+        } catch (Exception e) {
+            welcomeString = "Benvenuto in Wordle! Digita /help.\n";
+        }
+
         return welcomeString;
     }
 }

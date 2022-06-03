@@ -7,31 +7,34 @@ import it.uniba.app.utils.Helper;
 
 /**
  * <<Entity>>
- * Classe che identifica una partita salvandone settaggi pre inizio e tentativi effettuati.
+ * Classe che identifica una partita salvandone settaggi pre inizio e
+ * tentativi effettuati.
  */
-public class Game{
-    /** Parola segreta */
+public class Game {
+    /** Parola segreta. */
     private String secretWord;
-    /** Numero massimo di tentativo */
+    /** Numero massimo di tentativo. */
     private int maxTry;
-    /** Numero lettere della parola segreta */
+    /** Numero lettere della parola segreta. */
     private int numberLetter;
-    /** Flag di stato */
+    /** Flag di stato. */
     private boolean configurable;
-    /** Lista di tentativi effettuati */
+    /** Lista di tentativi effettuati. */
     private List<Word> trys;
 
     /**
      * Costruttore di classe.
      * Inizializza maxTry a 6 e numberLetter a 5.
-     * secretWord viene inizializzata attraverso il parametro e trys viene instanziata come LinkedList.
+     * secretWord viene inizializzata attraverso il parametro e trys viene
+     * instanziata come LinkedList.
      *
-     * @param secretWord Parola segreta inizializzata alla creazione dell'oggetto.
+     * @param newSecretWord Parola segreta inizializzata alla
+     *                      creazione dell'oggetto.
      */
-    public Game(String secretWord){
+    public Game(final String newSecretWord) {
         this.maxTry = Helper.MAX_TRYS;
         this.numberLetter = Helper.MAX_LETTERS;
-        this.secretWord = secretWord;
+        this.secretWord = newSecretWord;
         this.configurable = true;
         this.trys = new LinkedList<Word>();
     }
@@ -40,7 +43,6 @@ public class Game{
      * Costruttore di classe.
      * Inizializza maxTry a 6 e numberLetter a 5.
      * secretWord viene inizializzata a vuoto.
-     * 
      */
     public Game() {
         this("");
@@ -51,17 +53,17 @@ public class Game{
      *
      * @return Valore della parola segreta.
      */
-    public String getSecretWord(){
+    public String getSecretWord() {
         return this.secretWord;
     }
 
     /**
      * Serve per modificare il valore della parola segreta.
      *
-     * @param secretWord Parola segreta con cui sostituire l'attuale.
+     * @param newSecretWord Parola segreta con cui sostituire l'attuale.
      */
-    public void setSecretWord(String secretWord){
-        this.secretWord = secretWord;
+    public void setSecretWord(final String newSecretWord) {
+        this.secretWord = newSecretWord;
     }
 
     /**
@@ -69,7 +71,7 @@ public class Game{
      *
      * @return Valore dei tentativi massimi effettuabili.
      */
-    public int getMaxTry(){
+    public int getMaxTry() {
         return this.maxTry;
     }
 
@@ -78,23 +80,24 @@ public class Game{
      *
      * @return Valore del numero di lettere che formano le parole.
      */
-    public int getNumberLetter(){
+    public int getNumberLetter() {
         return this.numberLetter;
     }
 
     /**
      * Serve per controllare che il gioco sia configurabile.
      *
-     * @return Valore della variabile booleana che stabilisce se il gioco è configurabile.
+     * @return Valore della variabile booleana che stabilisce se il gioco è
+     *         configurabile.
      */
-    public boolean isConfigurable(){
+    public boolean isConfigurable() {
         return this.configurable;
     }
 
     /**
      * Serve a disabilitare la possibilità di configurare il gioco.
      */
-    public void disableConfigurable(){
+    public void disableConfigurable() {
         this.configurable = false;
     }
 
@@ -110,16 +113,16 @@ public class Game{
      *
      * @param word Parola inserita nell'ultimo tentativo effettuato.
      */
-    public void addTry(Word word){
+    public void addTry(final Word word) {
         this.trys.add(word);
     }
 
     /**
      * Serve per accedere alla lista dei tentativi effettuati.
-     * 
+     *
      * @return Lista con tutti i tentativi effettuati.
      */
-    public List<Word> getTrys(){
+    public List<Word> getTrys() {
         return this.trys;
     }
 
@@ -128,14 +131,14 @@ public class Game{
      *
      * @return Valore che stabilisce il numero dei tentativi effettuati.
      */
-    public int getNumberTrys(){
+    public int getNumberTrys() {
         return this.trys.size();
     }
 
     /**
      * Metodo che imposta i valori di tutti gli attributi a vuoti o default.
      */
-    public void resetGame(){
+    public void resetGame() {
         this.maxTry = Helper.MAX_TRYS;
         this.numberLetter = Helper.MAX_LETTERS;
         this.secretWord = "";

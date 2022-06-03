@@ -2,38 +2,38 @@ package it.uniba.app.view;
 
 /**
  * <<noECB>>
- * Classe che gestisce l'output del parser
+ * Classe che gestisce l'output del parser.
  */
 class ParserOutput {
 
-    /** Comando di cui gestire l'output */
+    /** Comando di cui gestire l'output. */
     private Commands command;
 
     /**
-     * Costruttore dell'output del parser
-     * 
-     * @param command
+     * Costruttore dell'output del parser.
+     *
+     * @param newCommand
      */
-    public ParserOutput(Commands command) {
-        this.command = command;
+    ParserOutput(final Commands newCommand) {
+        this.command = newCommand;
     }
 
     /**
-     * Restituisce il comando
-     * 
+     * Restituisce il comando.
+     *
      * @return command
      */
-     public Commands getCommand() {
+    public Commands getCommand() {
         return command;
     }
 
     /**
-     * Imposta il comando
-     * 
-     * @param command
+     * Imposta il comando.
+     *
+     * @param newCommand
      */
-    public void setCommand(Commands command) {
-        this.command = command;
+    public void setCommand(final Commands newCommand) {
+        this.command = newCommand;
     }
 
 }

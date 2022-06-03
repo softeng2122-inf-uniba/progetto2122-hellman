@@ -42,7 +42,7 @@ class Commands {
      *
      * @return commands
      */
-    public List<String> getCommands() {
+    List<String> getCommands() {
         return commands;
     }
 

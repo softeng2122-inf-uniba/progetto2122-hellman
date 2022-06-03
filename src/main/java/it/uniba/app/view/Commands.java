@@ -69,7 +69,7 @@ class Commands {
      *
      * @param newAlias da impostare
      */
-    public void setAlias(final String[] newAlias) {
+    void setAlias(final String[] newAlias) {
         this.alias = new HashSet<>(Arrays.asList(newAlias));
     }
 

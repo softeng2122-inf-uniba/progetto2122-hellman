@@ -60,7 +60,7 @@ class Commands {
      *
      * @return alias
      */
-    public Set<String> getAlias() {
+    Set<String> getAlias() {
         return alias;
     }
 

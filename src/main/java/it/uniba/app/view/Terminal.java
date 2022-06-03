@@ -67,7 +67,7 @@ public class Terminal extends Viewer {
     /**
      * Metodo che invoca l'inserimento di nuovi comandi da tastiera.
      */
-    protected void readInput() {
+    void readInput() {
         while (true) {
             boolean isGameStarted = getUserManager().isGameStarted();
 

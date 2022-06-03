@@ -33,8 +33,8 @@ public class Terminal extends Viewer {
         commands.add(newCmd("/help", CommandType.HELP));
         commands.add(newCmd("/esci", CommandType.EXIT_APP));
         commands.add(newCmd("/gioca", CommandType.START_GAME));
-        commands.add(newCmd("/si", CommandType.EXIT_YES));
-        commands.add(newCmd("/no", CommandType.EXIT_NO));
+        commands.add(newCmd("si", CommandType.EXIT_YES));
+        commands.add(newCmd("no", CommandType.EXIT_NO));
         commands.add(newCmd("/nuova", CommandType.NEW));
         commands.add(newCmd("/mostra", CommandType.SHOW));
         commands.add(newCmd("/abbandona", CommandType.EXIT_GAME));

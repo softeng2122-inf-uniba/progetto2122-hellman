@@ -78,7 +78,7 @@ class Commands {
      *
      * @return type
      */
-    public CommandType getType() {
+    CommandType getType() {
         return type;
     }
 

@@ -158,7 +158,6 @@ class Parser {
             int ic = checkForCommand(firstWord);
             if (ic == -1) {
                 if (tokens.size() == 1) {
-                    String firstLower = firstWord.toUpperCase();
                     String firstUpper = firstWord.toUpperCase();
                     CommandType typeInput = CommandType.INPUT_WORD;
                     Commands inputWord = new Commands(typeInput, firstWord);

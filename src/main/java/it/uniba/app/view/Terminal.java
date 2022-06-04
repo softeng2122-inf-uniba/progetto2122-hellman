@@ -222,7 +222,7 @@ public class Terminal extends Viewer {
     }
 
     /**
-     * Gestisce il tentativo della parola.
+     * Metodo che effettua il tentativo della parola.
      *
      * @param word per effettuare il tentativo
      * @return stringa della risposta del tentativo

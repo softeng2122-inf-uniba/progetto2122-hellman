@@ -29,6 +29,7 @@ public class Terminal extends Viewer {
     public Terminal(final String[] flags) {
         super();
 
+        addCommands();
 
         parser = new Parser(commands);
 
@@ -391,5 +392,19 @@ public class Terminal extends Viewer {
             }
         }
         return tempbool;
+    }
+
+    /**
+     * Metodo che inserisce i comandi supportati dal gioco.
+     */
+    private void addCommands() {
+        commands.add(newCmd("/help", CommandType.HELP));
+        commands.add(newCmd("/esci", CommandType.EXIT_APP));
+        commands.add(newCmd("/gioca", CommandType.START_GAME));
+        commands.add(newCmd("si", CommandType.EXIT_YES));
+        commands.add(newCmd("no", CommandType.EXIT_NO));
+        commands.add(newCmd("/nuova", CommandType.NEW));
+        commands.add(newCmd("/mostra", CommandType.SHOW));
+        commands.add(newCmd("/abbandona", CommandType.EXIT_GAME));
     }
 }

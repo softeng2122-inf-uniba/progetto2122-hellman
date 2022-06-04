@@ -43,10 +43,6 @@ public class Terminal extends Viewer {
 
         System.out.println(getWelcome());
 
-        if (flags.length > 0) {
-            if (flags[0].equals("-h") || flags[0].equals("--help")) {
-                System.out.println(help());
-            }
         }
 
         readInput();

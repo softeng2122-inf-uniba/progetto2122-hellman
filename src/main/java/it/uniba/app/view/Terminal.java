@@ -41,7 +41,7 @@ public class Terminal extends Viewer {
 
         parser = new Parser(commands);
 
-        System.out.println(printWelcome());
+        System.out.println(getWelcome());
 
         if (flags.length > 0) {
             if (flags[0].equals("-h") || flags[0].equals("--help")) {
@@ -382,7 +382,7 @@ public class Terminal extends Viewer {
      * Metodo che ritorna una stringa contenente il Welcome dell'app.
      * @return stringa contenente il Welcome dell'app.
      */
-    private String printWelcome() {
+    private String getWelcome() {
         String welcomeString;
 
         try {

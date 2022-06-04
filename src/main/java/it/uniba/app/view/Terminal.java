@@ -236,18 +236,36 @@ public class Terminal extends Viewer {
             return e.getMessage();
         }
 
+    /**
+     * Metodo che gestisce tutti i possibili risultati
+     * ottenibili dall'effettuazione di un tentativo.
+     *
+     * @param newRes coppia di valori che indica lo stato
+     * del game e la lista di tentativi finora effettuati.
+     * @return Stringa da stampare.
+     */
+    private String handleTry(final Pair<Integer, List<Word>> newRes) {
+        String str = "";
+        switch (newRes.getFirst()) {
             case Helper.GAME_WIN:
+                str += printMatrix(newRes.getSecond());
                 str += "Parola segreta indovinata\nNumero tentativi: ";
+                str += newRes.getSecond().size();
                 break;
 
             case Helper.GAME_LOSE:
+                int lastIndex = newRes.getSecond().size() - 1;
+                String secretWord = newRes.getSecond().get(lastIndex).getWord();
+                newRes.getSecond().remove(lastIndex);
 
+                str += printMatrix(newRes.getSecond());
                 str += "Hai raggiunto il numero massimo di tentativi.\n"
                         + "La parola segreta è: " + secretWord;
                 break;
 
             case Helper.GAME_WAITING:
                 str += "Tentativo errato! ";
+                str += printMatrix(newRes.getSecond());
                 break;
 
             default:

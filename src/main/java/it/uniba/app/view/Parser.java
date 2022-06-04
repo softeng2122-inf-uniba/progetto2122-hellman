@@ -162,7 +162,7 @@ class Parser {
                     CommandType typeInput = CommandType.INPUT_WORD;
                     Commands inputWord = new Commands(typeInput, firstWord);
 
-                    inputWord.setAlias(new String[] {firstLower, firstUpper});
+                    inputWord.setAlias(new String[] {firstUpper});
                     return new ParserOutput(inputWord);
                 }
 

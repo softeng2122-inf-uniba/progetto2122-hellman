@@ -236,32 +236,23 @@ public class Terminal extends Viewer {
             return e.getMessage();
         }
 
-        switch (res.getFirst()) {
             case Helper.GAME_WIN:
-                str += printMatrix(res.getSecond());
                 str += "Parola segreta indovinata\nNumero tentativi: ";
-                str += res.getSecond().size();
                 break;
 
             case Helper.GAME_LOSE:
-                int lastIndex = res.getSecond().size() - 1;
-                String secretWord = res.getSecond().get(lastIndex).getWord();
-                res.getSecond().remove(lastIndex);
 
-                str += printMatrix(res.getSecond());
                 str += "Hai raggiunto il numero massimo di tentativi.\n"
                         + "La parola segreta è: " + secretWord;
                 break;
 
             case Helper.GAME_WAITING:
                 str += "Tentativo errato! ";
-                str += printMatrix(res.getSecond());
                 break;
 
             default:
                 break;
         }
-
         return str;
     }
 

@@ -96,11 +96,11 @@ public final class Helper {
      * @throws IOException
      * @throws ClassNotFoundException
      */
-    public static <T> T carica(final String relativePath)
+    public static String carica(final String relativePath)
     throws IOException, ClassNotFoundException {
         FileInputStream file = new FileInputStream(relativePath);
         ObjectInputStream in = new ObjectInputStream(file);
-        T obj = (T) in.readObject();
+        String obj = (String) in.readObject();
         in.close();
 
         return obj;

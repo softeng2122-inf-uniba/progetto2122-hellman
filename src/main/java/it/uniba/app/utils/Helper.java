@@ -90,7 +90,6 @@ public final class Helper {
     /**
      * Carica da file binario un oggetto di classe T e lo restituisce.
      *
-     * @param <T> classe dell'oggetto da caricare da file binario
      * @param relativePath del file
      * @return oggetto binario
      * @throws IOException

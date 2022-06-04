@@ -396,6 +396,12 @@ public class Terminal extends Viewer {
         return welcomeString;
     }
 
+    /**
+     * Metodo che controlla la lunghezza dei flag inseriti
+     * all'avvio dell'applicazione.
+     * @param newFlags array di argomenti in input al lancio dell'applicazione
+     * @return variabile booleana che controlla i flag inseriti.
+     */
     private boolean checkFlags(final String[] newFlags) {
         boolean tempbool = false;
         if (newFlags.length > 0) {

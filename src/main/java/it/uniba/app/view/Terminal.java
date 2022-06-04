@@ -235,6 +235,9 @@ public class Terminal extends Viewer {
         } catch (GameException e) {
             return e.getMessage();
         }
+        str = handleTry(res);
+        return str;
+    }
 
     /**
      * Metodo che gestisce tutti i possibili risultati

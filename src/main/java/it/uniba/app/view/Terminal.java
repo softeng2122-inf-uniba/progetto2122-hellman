@@ -43,6 +43,8 @@ public class Terminal extends Viewer {
 
         System.out.println(getWelcome());
 
+        if (checkFlags(flags)) {
+            System.out.println(help());
         }
 
         readInput();
@@ -388,5 +390,15 @@ public class Terminal extends Viewer {
         }
 
         return welcomeString;
+    }
+
+    private boolean checkFlags(final String[] newFlags) {
+        boolean tempbool = false;
+        if (newFlags.length > 0) {
+            if (newFlags[0].equals("-h") || newFlags[0].equals("--help")) {
+                tempbool = true;
+            }
+        }
+        return tempbool;
     }
 }

@@ -29,24 +29,14 @@ public class Terminal extends Viewer {
     public Terminal(final String[] flags) {
         super();
 
-        // Aggiungere i comandi accettati dal parser
-        commands.add(newCmd("/help", CommandType.HELP));
-        commands.add(newCmd("/esci", CommandType.EXIT_APP));
-        commands.add(newCmd("/gioca", CommandType.START_GAME));
-        commands.add(newCmd("si", CommandType.EXIT_YES));
-        commands.add(newCmd("no", CommandType.EXIT_NO));
-        commands.add(newCmd("/nuova", CommandType.NEW));
-        commands.add(newCmd("/mostra", CommandType.SHOW));
-        commands.add(newCmd("/abbandona", CommandType.EXIT_GAME));
+        addCommands();
 
         parser = new Parser(commands);
 
-        System.out.println(printWelcome());
+        System.out.println(getWelcome());
 
-        if (flags.length > 0) {
-            if (flags[0].equals("-h") || flags[0].equals("--help")) {
-                System.out.println(help());
-            }
+        if (checkFlags(flags)) {
+            System.out.println(help());
         }
 
         readInput();
@@ -67,7 +57,7 @@ public class Terminal extends Viewer {
     /**
      * Metodo che invoca l'inserimento di nuovi comandi da tastiera.
      */
-    protected void readInput() {
+    void readInput() {
         while (true) {
             boolean isGameStarted = getUserManager().isGameStarted();
 
@@ -232,7 +222,7 @@ public class Terminal extends Viewer {
     }
 
     /**
-     * Gestisce il tentativo della parola.
+     * Metodo che effettua il tentativo della parola.
      *
      * @param word per effettuare il tentativo
      * @return stringa della risposta del tentativo
@@ -245,33 +235,45 @@ public class Terminal extends Viewer {
         } catch (GameException e) {
             return e.getMessage();
         }
+        str = handleTry(res);
+        return str;
+    }
 
-        switch (res.getFirst()) {
+    /**
+     * Metodo che gestisce tutti i possibili risultati
+     * ottenibili dall'effettuazione di un tentativo.
+     *
+     * @param newRes coppia di valori che indica lo stato
+     * del game e la lista di tentativi finora effettuati.
+     * @return Stringa da stampare.
+     */
+    private String handleTry(final Pair<Integer, List<Word>> newRes) {
+        String str = "";
+        switch (newRes.getFirst()) {
             case Helper.GAME_WIN:
-                str += printMatrix(res.getSecond());
+                str += printMatrix(newRes.getSecond());
                 str += "Parola segreta indovinata\nNumero tentativi: ";
-                str += res.getSecond().size();
+                str += newRes.getSecond().size();
                 break;
 
             case Helper.GAME_LOSE:
-                int lastIndex = res.getSecond().size() - 1;
-                String secretWord = res.getSecond().get(lastIndex).getWord();
-                res.getSecond().remove(lastIndex);
+                int lastIndex = newRes.getSecond().size() - 1;
+                String secretWord = newRes.getSecond().get(lastIndex).getWord();
+                newRes.getSecond().remove(lastIndex);
 
-                str += printMatrix(res.getSecond());
+                str += printMatrix(newRes.getSecond());
                 str += "Hai raggiunto il numero massimo di tentativi.\n"
                         + "La parola segreta è: " + secretWord;
                 break;
 
             case Helper.GAME_WAITING:
                 str += "Tentativo errato! ";
-                str += printMatrix(res.getSecond());
+                str += printMatrix(newRes.getSecond());
                 break;
 
             default:
                 break;
         }
-
         return str;
     }
 
@@ -382,7 +384,7 @@ public class Terminal extends Viewer {
      * Metodo che ritorna una stringa contenente il Welcome dell'app.
      * @return stringa contenente il Welcome dell'app.
      */
-    private String printWelcome() {
+    private String getWelcome() {
         String welcomeString;
 
         try {
@@ -392,5 +394,35 @@ public class Terminal extends Viewer {
         }
 
         return welcomeString;
+    }
+
+    /**
+     * Metodo che controlla la lunghezza dei flag inseriti
+     * all'avvio dell'applicazione.
+     * @param newFlags array di argomenti in input al lancio dell'applicazione
+     * @return variabile booleana che controlla i flag inseriti.
+     */
+    private boolean checkFlags(final String[] newFlags) {
+        boolean tempbool = false;
+        if (newFlags.length > 0) {
+            if (newFlags[0].equals("-h") || newFlags[0].equals("--help")) {
+                tempbool = true;
+            }
+        }
+        return tempbool;
+    }
+
+    /**
+     * Metodo che inserisce i comandi supportati dal gioco.
+     */
+    private void addCommands() {
+        commands.add(newCmd("/help", CommandType.HELP));
+        commands.add(newCmd("/esci", CommandType.EXIT_APP));
+        commands.add(newCmd("/gioca", CommandType.START_GAME));
+        commands.add(newCmd("si", CommandType.EXIT_YES));
+        commands.add(newCmd("no", CommandType.EXIT_NO));
+        commands.add(newCmd("/nuova", CommandType.NEW));
+        commands.add(newCmd("/mostra", CommandType.SHOW));
+        commands.add(newCmd("/abbandona", CommandType.EXIT_GAME));
     }
 }

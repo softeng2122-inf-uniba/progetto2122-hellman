@@ -90,17 +90,16 @@ public final class Helper {
     /**
      * Carica da file binario un oggetto di classe T e lo restituisce.
      *
-     * @param <T> classe dell'oggetto da caricare da file binario
      * @param relativePath del file
      * @return oggetto binario
      * @throws IOException
      * @throws ClassNotFoundException
      */
-    public static <T> T carica(final String relativePath)
+    public static String carica(final String relativePath)
     throws IOException, ClassNotFoundException {
         FileInputStream file = new FileInputStream(relativePath);
         ObjectInputStream in = new ObjectInputStream(file);
-        T obj = (T) in.readObject();
+        String obj = (String) in.readObject();
         in.close();
 
         return obj;

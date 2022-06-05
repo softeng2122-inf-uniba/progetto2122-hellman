@@ -31,7 +31,7 @@ public class Game {
      * @param newSecretWord Parola segreta inizializzata alla
      *                      creazione dell'oggetto.
      */
-    public Game(final String newSecretWord) {
+    private Game(final String newSecretWord) {
         this.maxTry = Helper.MAX_TRYS;
         this.numberLetter = Helper.MAX_LETTERS;
         this.secretWord = newSecretWord;
@@ -44,7 +44,7 @@ public class Game {
      * Inizializza maxTry a 6 e numberLetter a 5.
      * secretWord viene inizializzata a vuoto.
      */
-    public Game() {
+    Game() {
         this("");
     }
 

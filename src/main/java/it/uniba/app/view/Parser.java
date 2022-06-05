@@ -46,7 +46,7 @@ class Parser {
      *
      * @return lista dei comandi
      */
-    public List<Commands> getCommands() {
+    List<Commands> getCommands() {
         return commands;
     }
 
@@ -123,7 +123,7 @@ class Parser {
      *                     comando):", altrimenti "Inserisci un comando:".
      * @return risultato di parse.
      */
-    public ParserOutput readCommand(final boolean printCommand,
+    ParserOutput readCommand(final boolean printCommand,
                                     final boolean gameStarted) {
         ParserOutput p = null;
 
@@ -158,12 +158,11 @@ class Parser {
             int ic = checkForCommand(firstWord);
             if (ic == -1) {
                 if (tokens.size() == 1) {
-                    String firstLower = firstWord.toUpperCase();
                     String firstUpper = firstWord.toUpperCase();
                     CommandType typeInput = CommandType.INPUT_WORD;
                     Commands inputWord = new Commands(typeInput, firstWord);
 
-                    inputWord.setAlias(new String[] {firstLower, firstUpper});
+                    inputWord.setAlias(new String[] {firstUpper});
                     return new ParserOutput(inputWord);
                 }
 

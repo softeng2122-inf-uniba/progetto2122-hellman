@@ -23,7 +23,7 @@ class ParserOutput {
      *
      * @return command
      */
-    public Commands getCommand() {
+    Commands getCommand() {
         return command;
     }
 

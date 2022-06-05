@@ -42,7 +42,7 @@ class Commands {
      *
      * @return commands
      */
-    public List<String> getCommands() {
+    List<String> getCommands() {
         return commands;
     }
 
@@ -51,7 +51,7 @@ class Commands {
      *
      * @return name del comando
      */
-    public String getName() {
+    String getName() {
         return name;
     }
 
@@ -60,7 +60,7 @@ class Commands {
      *
      * @return alias
      */
-    public Set<String> getAlias() {
+    Set<String> getAlias() {
         return alias;
     }
 
@@ -69,7 +69,7 @@ class Commands {
      *
      * @param newAlias da impostare
      */
-    public void setAlias(final String[] newAlias) {
+    void setAlias(final String[] newAlias) {
         this.alias = new HashSet<>(Arrays.asList(newAlias));
     }
 
@@ -78,7 +78,7 @@ class Commands {
      *
      * @return type
      */
-    public CommandType getType() {
+    CommandType getType() {
         return type;
     }
 

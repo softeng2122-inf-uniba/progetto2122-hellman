@@ -1,5 +1,6 @@
 package it.uniba.app.utils;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -58,13 +59,16 @@ public final class Helper {
     /** Colore testo rosso. */
     public static final String ANSI_RED_TEXT = "\033[0;31m";
 
+    /** Percorso assoluto del progetto. */
+    private static final String PATH_ABSOLUTE = new File("").getAbsolutePath();
+
     /** Percorso dove è salvato il welcome. */
-    public static final String PATH_WELCOME_STRING =
-    "src/main/java/it/uniba/app/utils/welcomeApp.dat";
+    public static final String PATH_WELCOME_STRING = Helper.PATH_ABSOLUTE
+    + "/src/main/java/it/uniba/app/utils/welcomeApp.dat";
 
     /** Percorso dove è salvato l'help. */
-    public static final String PATH_HELP_STRING =
-    "src/main/java/it/uniba/app/utils/helpApp.dat";
+    public static final String PATH_HELP_STRING = Helper.PATH_ABSOLUTE
+    + "/src/main/java/it/uniba/app/utils/helpApp.dat";
 
     /**
      * Costruttore privato non richiamabile.

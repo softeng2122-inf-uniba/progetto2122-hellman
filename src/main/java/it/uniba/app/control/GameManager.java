@@ -125,9 +125,9 @@ final class GameManager {
         final String secretword) {
         for (int i = 0; i < secretword.length(); i++) {
             char key = secretword.charAt(i);
-            try {
+            if (lettersQuantity.containsKey(key)) {
                 lettersQuantity.put(key, lettersQuantity.get(key) + 1);
-            } catch (NullPointerException exception) {
+            } else {
                 lettersQuantity.put(key, 1);
             }
         }
@@ -177,7 +177,7 @@ final class GameManager {
         final int[] formats) {
         for (int i = 0; i < word.length(); i++) {
             if (formats[i] != Helper.FORMAT_LETTER_FOUND_RIGHT_POSITION) {
-                try {
+                if (lettersQuantity.containsKey(word.charAt(i))) {
                     if (lettersQuantity.get(word.charAt(i)) > 0) {
                         lettersQuantity.put(word.charAt(i),
                         lettersQuantity.get(word.charAt(i)) - 1);
@@ -185,7 +185,7 @@ final class GameManager {
                     } else {
                         formats[i] = Helper.FORMAT_LETTER_NOT_FOUND;
                     }
-                } catch (NullPointerException exception2) {
+                } else {
                     formats[i] = Helper.FORMAT_LETTER_NOT_FOUND;
                 }
             }

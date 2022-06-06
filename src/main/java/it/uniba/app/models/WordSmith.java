@@ -16,6 +16,15 @@ public class WordSmith {
      * @return ritorna il game configurabile
      */
     public Game getConfiguratedGame() {
-        return configuratedGame;
+        return new Game(configuratedGame);
+    }
+
+    /**
+     * Metodo che permette di settare il Game configurabile.
+     *
+     * @param configuratedGame Game con il quale settare il Game configurabile.
+     */
+    public void setConfiguratedGame(final Game configuratedGame) {
+        this.configuratedGame = new Game(configuratedGame);
     }
 }

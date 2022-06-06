@@ -40,11 +40,26 @@ public class Game {
     }
 
     /**
+     * Costrutturo di classe.
+     * Inizializza il game con i dati di quello passato come parametro.
+     *
+     * @param game game usato per inizializzare i valori alla
+     *                      creazione dell'oggetto.
+     */
+    public Game(final Game game) {
+        this.maxTry = game.getMaxTry();
+        this.numberLetter = Helper.MAX_LETTERS;
+        this.secretWord = game.getSecretWord();
+        this.configurable = game.isConfigurable();
+        this.trys = game.getTrys();
+    }
+
+    /**
      * Costruttore di classe.
      * Inizializza maxTry a 6 e numberLetter a 5.
      * secretWord viene inizializzata a vuoto.
      */
-    Game() {
+    public Game() {
         this("");
     }
 
@@ -123,7 +138,7 @@ public class Game {
      * @return Lista con tutti i tentativi effettuati.
      */
     public List<Word> getTrys() {
-        return this.trys;
+        return new LinkedList<Word>(this.trys);
     }
 
     /**

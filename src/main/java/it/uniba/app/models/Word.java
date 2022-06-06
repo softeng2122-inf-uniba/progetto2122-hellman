@@ -1,5 +1,6 @@
 package it.uniba.app.models;
 
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -26,7 +27,7 @@ public class Word {
      */
     public Word(final String newWord, final List<Integer> newFormat) {
         this.word = newWord;
-        this.format = newFormat;
+        this.format = new LinkedList<Integer>(newFormat);
     }
 
     /**
@@ -44,7 +45,7 @@ public class Word {
      * @return Format della parola.
      */
     public List<Integer> getFormat() {
-        return format;
+        return new LinkedList<Integer>(format);
     }
 
 }

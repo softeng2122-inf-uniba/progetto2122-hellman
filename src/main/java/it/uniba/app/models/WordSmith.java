@@ -22,9 +22,10 @@ public class WordSmith {
     /**
      * Metodo che permette di settare il Game configurabile.
      *
-     * @param configuratedGame Game con il quale settare il Game configurabile.
+     * @param newConfiguratedGame Game con il quale settare il Game
+     * configurabile.
      */
-    public void setConfiguratedGame(final Game configuratedGame) {
-        this.configuratedGame = new Game(configuratedGame);
+    public void setConfiguratedGame(final Game newConfiguratedGame) {
+        this.configuratedGame = new Game(newConfiguratedGame);
     }
 }

@@ -9,9 +9,17 @@ import org.junit.jupiter.api.Test;
 
 import it.uniba.app.utils.Helper;
 
+/**
+ * Classe dedicata ai test dei metodi della classe Game.
+ */
 public class GameTest {
-    Game game = new Game();
+    /** Oggetto di tipo Game creato per effettuare i test
+     * sui vari metodi della classe. */
+    private Game game = new Game();
 
+    /**
+     * Metodo per il testing del metodo testSetSecretWord() di Game.
+     */
     @Test
     public void testSetSecretWord() {
         String secretWord = "clock";
@@ -21,16 +29,25 @@ public class GameTest {
         assertEquals(secretWord, game.getSecretWord());
     }
 
+    /**
+     * Metodo per il testing del metodo getMaxTry() di Game.
+     */
     @Test
     public void testGetMaxTry() {
-        assertTrue(game.getMaxTry() == Helper.MAX_TRYS);
+        assertEquals(game.getMaxTry(), Helper.MAX_TRYS);
     }
 
+    /**
+     * Metodo per il testing del metodo getNumberLetter() di Game.
+     */
     @Test
     public void testGetNumberLetter() {
-        assertTrue(game.getNumberLetter() == Helper.MAX_LETTERS);
+        assertEquals(game.getNumberLetter(), Helper.MAX_LETTERS);
     }
 
+    /**
+     * Metodo per il testing del metodo isConfigurable() di Game.
+     */
     @Test
     public void testIsConfigurable() {
         game.disableConfigurable();
@@ -39,18 +56,27 @@ public class GameTest {
         assertTrue(game.isConfigurable());
     }
 
+    /**
+     * Metodo per il testing del metodo enableConfigurable() di Game.
+     */
     @Test
     public void testEnableConfigurable() {
         game.enableConfigurable();
         assertTrue(game.isConfigurable());
     }
 
+    /**
+     * Metodo per il testing del metodo disableConfigurable() di Game.
+     */
     @Test
     public void testDisableConfigurable() {
         game.disableConfigurable();
         assertTrue(!game.isConfigurable());
     }
 
+    /**
+     * Metodo per il testing del metodo getAddTry() di Game.
+     */
     @Test
     public void testAddTry() {
         Word word = new Word("words", new LinkedList<Integer>());
@@ -59,6 +85,9 @@ public class GameTest {
         assertTrue(game.getTrys().contains(word));
     }
 
+    /**
+     * Metodo per il testing del metodo getTrys() di Game.
+     */
     @Test
     public void testGetTrys() {
         Word word = new Word("words", new LinkedList<Integer>());
@@ -69,11 +98,15 @@ public class GameTest {
         assertEquals(game.getTrys(), list);
     }
 
+    /**
+     * Metodo per il testing del metodo getNumberTrys() di Game.
+     */
     @Test
     public void testGetNumberTrys() {
         int i;
+        int maxTrys = game.getMaxTry();
 
-        for (i = 0; i < 5; i++) {
+        for (i = 0; i < maxTrys; i++) {
             Word word = new Word("month", new LinkedList<Integer>());
             game.addTry(word);
         }
@@ -81,9 +114,11 @@ public class GameTest {
         assertEquals(game.getNumberTrys(), i);
     }
 
+    /**
+     * Metodo per il testing del metodo resetGame() di Game.
+     */
     @Test
     public void testResetGame() {
-        Game game = new Game();
 
         game.setSecretWord("tests");
         game.disableConfigurable();

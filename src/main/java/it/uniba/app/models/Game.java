@@ -6,7 +6,7 @@ import java.util.List;
 import it.uniba.app.utils.Helper;
 
 /**
- * <<Entity>>
+ * {@literal <<Entity>>}
  * Classe che identifica una partita salvandone settaggi pre inizio e
  * tentativi effettuati.
  */

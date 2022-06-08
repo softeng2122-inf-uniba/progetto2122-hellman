@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * <<Boundary>>
+ * {@literal <<Boundary>>}
  * Classe front-end che permette di dialogare con l'utente a linea di comando.
  */
 public class Terminal extends Viewer {

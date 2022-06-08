@@ -1,7 +1,7 @@
 package it.uniba.app.utils;
 
 /**
- * <<noECB>>
+ * {@literal <<noECB>>}
  * Classe eccezione per evitare che venga inserita una parola non idonea o che
  * il game venga configurato in situazioni poco opportune.
  */

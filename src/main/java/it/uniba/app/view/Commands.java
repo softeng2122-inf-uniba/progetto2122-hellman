@@ -9,7 +9,7 @@ import java.util.Set;
 import it.uniba.app.utils.CommandType;
 
 /**
- * <<noECB>>
+ * {@literal <<noECB>>}
  * Classe che gestisce i comandi accettati dal gioco.
  */
 class Commands {

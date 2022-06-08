@@ -3,7 +3,7 @@ package it.uniba.app.view;
 import it.uniba.app.control.UserManager;
 
 /**
- * <<Boundary>>
+ * {@literal <<Boundary>>}
  * Classe astratta per gestire le varie interfacce di input.
  */
 abstract class Viewer {

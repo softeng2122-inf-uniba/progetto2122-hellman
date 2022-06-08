@@ -11,7 +11,7 @@ import it.uniba.app.models.WordSmith;
 import java.util.List;
 
 /**
- * <<Control>>
+ * {@literal <<Control>>}
  * Classe che permette di far interfacciare l'utente con il game manager.
  */
 public class UserManager {
@@ -24,6 +24,8 @@ public class UserManager {
      * Metodo che demanda al gameManager di impostare la parola.
      *
      * @param word Nuovo valore della parola segreta.
+     * @throws GameException Eccezione che controlla il corretto funzionamento
+     *                       del metodo.
      */
     public void setSecretWord(final String word) throws GameException {
         Game configuratedGame = wordSmith.getConfiguratedGame();

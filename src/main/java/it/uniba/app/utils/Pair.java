@@ -1,7 +1,7 @@
 package it.uniba.app.utils;
 
 /**
- * <<noECB>>
+ * {@literal <<noECB>>}
  * Classe parametrizzata che serve per gestire 2 oggetti I ed O.
  *
  * @param <I> primo oggetto del Pair.

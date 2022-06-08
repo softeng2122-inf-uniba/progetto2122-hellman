@@ -1,7 +1,7 @@
 package it.uniba.app.view;
 
 /**
- * <<noECB>>
+ * {@literal <<noECB>>}
  * Classe che gestisce l'output del parser.
  */
 class ParserOutput {

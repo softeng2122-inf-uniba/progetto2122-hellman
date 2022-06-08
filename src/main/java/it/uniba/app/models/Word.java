@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * <<Entity>>
+ * {@literal <<Entity>>}
  * Classe descrive la parola inserita nei tentativi attraverso la parola stessa
  * descritta come stringa e la formattazione di questa in base alla presenza
  * o meno dei suoi caratteri nella parola segreta.

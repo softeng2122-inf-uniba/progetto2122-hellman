@@ -13,7 +13,7 @@ import it.uniba.app.utils.Pair;
 import it.uniba.app.utils.GameException;
 
 /**
- * <<Control>>
+ * {@literal <<Control>>}
  * Classe gestisce l'avvio e l'esecuzione del game.
  */
 final class GameManager {

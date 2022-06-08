@@ -1,7 +1,7 @@
 package it.uniba.app.models;
 
 /**
- * <<Entity>>
+ * {@literal <<Entity>>}
  * Classe che identifica la figura del paroliere, contiene il game in stato di
  * configurazione.
  */
@@ -22,9 +22,10 @@ public class WordSmith {
     /**
      * Metodo che permette di settare il Game configurabile.
      *
-     * @param configuratedGame Game con il quale settare il Game configurabile.
+     * @param newConfiguratedGame Game con il quale settare il Game
+     * configurabile.
      */
-    public void setConfiguratedGame(final Game configuratedGame) {
-        this.configuratedGame = new Game(configuratedGame);
+    public void setConfiguratedGame(final Game newConfiguratedGame) {
+        this.configuratedGame = new Game(newConfiguratedGame);
     }
 }

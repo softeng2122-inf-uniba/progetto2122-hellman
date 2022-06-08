@@ -346,7 +346,7 @@ public class Terminal extends Viewer {
             }
             str = str.concat("\n");
         }
- 
+
         return str;
     }
 

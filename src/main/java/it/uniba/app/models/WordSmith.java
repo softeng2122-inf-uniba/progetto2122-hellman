@@ -1,7 +1,7 @@
 package it.uniba.app.models;
 
 /**
- * <<Entity>>
+ * {@literal <<Entity>>}
  * Classe che identifica la figura del paroliere, contiene il game in stato di
  * configurazione.
  */

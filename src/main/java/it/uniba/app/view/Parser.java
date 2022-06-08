@@ -10,7 +10,7 @@ import it.uniba.app.utils.CommandType;
 import it.uniba.app.utils.Pair;
 
 /**
- * <<noECB>>
+ * {@literal <<noECB>>}
  * La classe Parser permette la lettura dei comandi(del gioco o tentativo di una
  * parola) dell'utente, paroliere o giocatore che sia.
  */

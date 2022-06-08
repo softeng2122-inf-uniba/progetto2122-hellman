@@ -38,7 +38,7 @@ final class GameManager {
 
         if (game.isConfigurable()) {
             if (game.getNumberLetter() > secretWord.length()) {
-                throw new GameException("La parola inserita contiene"
+                throw new GameException("La parola inserita contiene "
                 + "un numero insufficiente di caratteri.");
             } else if (game.getNumberLetter() < secretWord.length()) {
                 throw new GameException("La parola inserita contiene un"

@@ -7,7 +7,7 @@ import java.io.ObjectInputStream;
 import java.util.List;
 
 /**
- * <<noECB>>
+ * {@literal <<noECB>>}
  * Classe di supporto che ha tutta una serie di costanti che servono per
  * mostrare se le lettere della parola inserita dall'utente sono in posizione
  * corretta oppure errata, per l'esito del gioco cioè se l'utente ha perso o
@@ -96,8 +96,8 @@ public final class Helper {
      *
      * @param relativePath del file
      * @return oggetto binario
-     * @throws IOException
-     * @throws ClassNotFoundException
+     * @throws IOException eccezione input output
+     * @throws ClassNotFoundException eccezione classe non trovata
      */
     public static String carica(final String relativePath)
     throws IOException, ClassNotFoundException {

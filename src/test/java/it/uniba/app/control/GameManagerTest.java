@@ -149,5 +149,41 @@ public class GameManagerTest {
         assertEquals("C'è già un game in corso.", exception.getMessage());
     }
 
-    
+    @Test
+    public void testBackGame() {
+        game.setSecretWord("bread");
+        game.disableConfigurable();
+
+        try {
+            GameManager.backGame(game);
+        } catch (GameException e) {
+            e.printStackTrace();
+        }
+
+        assertEquals(GameManager.getSecretWord(game), "");
+    }
+
+    @Test
+    public void testBackGameConfigurableGame() {
+
+        Throwable exception = assertThrows(
+                GameException.class, () -> {
+                    game.setSecretWord("mouse");
+                    GameManager.backGame(game);
+                });
+
+        assertEquals("Non c'è un game in corso.", exception.getMessage());
+    }
+
+    @Test
+    public void testBackGameEmptySecretWord() {
+
+        Throwable exception = assertThrows(
+                GameException.class, () -> {
+                    game.disableConfigurable();
+                    GameManager.backGame(game);
+                });
+
+        assertEquals("Non c'è un game in corso.", exception.getMessage());
+    }
 }

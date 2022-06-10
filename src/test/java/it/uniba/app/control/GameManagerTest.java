@@ -186,4 +186,51 @@ public class GameManagerTest {
 
         assertEquals("Non c'è un game in corso.", exception.getMessage());
     }
+
+    @Test
+    public void testMakeTryWordTooLong() {
+        Throwable exception = assertThrows(
+                GameException.class, () -> {
+                    game.disableConfigurable();
+                    GameManager.makeTry(game, "tooLong");
+                });
+
+        assertEquals("La parola inserita contiene un numero"
+                + " troppo elevato di caratteri.", exception.getMessage());
+    }
+
+    @Test
+    public void testMakeTryWordTooShort() {
+        Throwable exception = assertThrows(
+                GameException.class, () -> {
+                    game.disableConfigurable();
+                    GameManager.makeTry(game, "test");
+                });
+
+        assertEquals("La parola inserita contiene un numero insufficiente di "
+                + "caratteri.", exception.getMessage());
+    }
+
+    @Test
+    public void testMakeTryWordUnavailableCharacters() {
+        Throwable exception = assertThrows(
+                GameException.class, () -> {
+                    game.disableConfigurable();
+                    GameManager.makeTry(game, "te$st");
+                });
+
+        assertEquals("La parola contiene caratteri non ammessi.",
+                exception.getMessage());
+    }
+
+    @Test
+    public void testMakeTryWordGameNotStarted() {
+        Throwable exception = assertThrows(
+                GameException.class, () -> {
+                    game.enableConfigurable();
+                    GameManager.makeTry(game, "river");
+                });
+
+        assertEquals("Il game non è iniziato.", exception.getMessage());
+    }
 }

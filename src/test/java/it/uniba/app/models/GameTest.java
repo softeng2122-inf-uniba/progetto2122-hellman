@@ -1,6 +1,7 @@
 package it.uniba.app.models;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.LinkedList;
@@ -46,12 +47,22 @@ public class GameTest {
     }
 
     /**
-     * Metodo per il testing del metodo isConfigurable() di Game.
+     * Metodo per il testing del metodo isConfigurable() di Game
+     * nel caso in cui il gioco sia settato come non configurabile.
      */
     @Test
-    public void testIsConfigurable() {
+    public void testIsConfigurableCaseFalse() {
         game.disableConfigurable();
-        assertTrue(!game.isConfigurable());
+        assertFalse(game.isConfigurable());
+        
+    }
+
+    /**
+     * Metodo per il testing del metodo isConfigurable() di Game
+     * nel caso in cui il gioco sia settato come configurabile.
+     */
+    @Test
+    public void testIsConfigurableCaseTrue() {
         game.enableConfigurable();
         assertTrue(game.isConfigurable());
     }
@@ -62,6 +73,7 @@ public class GameTest {
     @Test
     public void testEnableConfigurable() {
         game.enableConfigurable();
+
         assertTrue(game.isConfigurable());
     }
 
@@ -71,7 +83,8 @@ public class GameTest {
     @Test
     public void testDisableConfigurable() {
         game.disableConfigurable();
-        assertTrue(!game.isConfigurable());
+
+        assertFalse(game.isConfigurable());
     }
 
     /**
@@ -106,7 +119,7 @@ public class GameTest {
         int i;
         int maxTrys = game.getMaxTry();
 
-        for (i = 0; i < maxTrys; i++) {
+        for (i = 0; i < maxTrys; i++) { 
             Word word = new Word("month", new LinkedList<Integer>());
             game.addTry(word);
         }
@@ -115,19 +128,44 @@ public class GameTest {
     }
 
     /**
-     * Metodo per il testing del metodo resetGame() di Game.
+     * Metodo per il testing del reset della secret word
+     * con il metodo resetGame() di Game.
      */
     @Test
-    public void testResetGame() {
+    public void testResetGameSecretWord() {
 
         game.setSecretWord("tests");
-        game.disableConfigurable();
-        game.addTry(new Word("words", new LinkedList<Integer>()));
 
         game.resetGame();
 
         assertEquals(game.getSecretWord(), new Game().getSecretWord());
+    }
+
+    /**
+     * Metodo per il testing del reset della configurabilità
+     * con il metodo resetGame() di Game.
+     */
+    @Test
+    public void testResetGameConfigurable() {
+        
+        game.disableConfigurable();
+
+        game.resetGame();
+
         assertEquals(game.isConfigurable(), new Game().isConfigurable());
+    }
+
+    /**
+     * Metodo per il testing del reset dei tentativi
+     * con il metodo resetGame() di Game.
+     */
+    @Test
+    public void testResetGameTrys() {
+        
+        game.addTry(new Word("words", new LinkedList<Integer>()));
+
+        game.resetGame();
+
         assertEquals(game.getTrys(), new Game().getTrys());
     }
 }

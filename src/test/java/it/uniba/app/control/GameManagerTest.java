@@ -2,25 +2,28 @@ package it.uniba.app.control;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
+
+import it.uniba.app.models.Game;
 
 import it.uniba.app.utils.GameException;
 
 public class GameManagerTest {
-    private UserManager userManager = new UserManager();
+    private Game game = new Game();
 
     @Test
     public void testSetSecretWord() {
         String secretWord = "clock";
 
         try {
-            userManager.setSecretWord(secretWord);
+            GameManager.setSecretWord(game, secretWord);
         } catch (GameException e) {
             e.printStackTrace();
         }
 
-        assertEquals(secretWord, userManager.getSecretWord());
+        assertEquals(secretWord, game.getSecretWord());
     }
 
     @Test
@@ -28,7 +31,7 @@ public class GameManagerTest {
 
         Throwable exception = assertThrows(
                 GameException.class, () -> {
-                    userManager.setSecretWord("tooLong");
+                    GameManager.setSecretWord(game, "tooLong");
                 });
 
         assertEquals("La parola inserita contiene un numero"
@@ -39,7 +42,7 @@ public class GameManagerTest {
     public void testSecretWordTooShort() {
         Throwable exception = assertThrows(
                 GameException.class, () -> {
-                    userManager.setSecretWord("test");
+                    GameManager.setSecretWord(game, "test");
                 });
 
         assertEquals("La parola inserita contiene un numero insufficiente di "
@@ -50,37 +53,32 @@ public class GameManagerTest {
     public void testSecretWordUnavailableCharacters() {
         Throwable exception = assertThrows(
                 GameException.class, () -> {
-                    userManager.setSecretWord("te$st");
+                    GameManager.setSecretWord(game, "te$st");
                 });
 
         assertEquals("La parola contiene caratteri non ammessi.",
                 exception.getMessage());
     }
 
-    /*
-     * @Test
-     * public void testSecretWordUnconfigurableGame() {
-     * Throwable exception = assertThrows(
-     * GameException.class, () -> {
-     * Game game = new Game();
-     * game.disableConfigurable();
-     * GameManager.setSecretWord(game, "river");
-     * });
-     * 
-     * assertEquals("Il game non è configurabile.", exception.getMessage());
-     * }
-     */
+    @Test
+    public void testSecretWordUnconfigurableGame() {
+        Throwable exception = assertThrows(
+                GameException.class, () -> {
+                    game.disableConfigurable();
+                    GameManager.setSecretWord(game, "river");
+                });
+
+        assertEquals("Il game non è configurabile.", exception.getMessage());
+    }
 
     @Test
     public void testGetSecretWord() {
         String secretWord = "hands";
 
-        try {
-            userManager.setSecretWord(secretWord);
-        } catch (GameException e) {
-            e.printStackTrace();
-        }
+        game.setSecretWord(secretWord);
 
-        assertEquals(userManager.getSecretWord(), secretWord);
+        assertEquals(GameManager.getSecretWord(game), secretWord);
     }
+
+    
 }

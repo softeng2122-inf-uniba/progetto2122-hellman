@@ -80,5 +80,74 @@ public class GameManagerTest {
         assertEquals(GameManager.getSecretWord(game), secretWord);
     }
 
+    @Test
+    public void testStartGameSetSecretWord() {
+        Game configuratedGame = new Game();
+
+        configuratedGame.setSecretWord("month");
+
+        try {
+            GameManager.startGame(game, configuratedGame);
+        } catch (GameException e) {
+            e.printStackTrace();
+        }
+
+        assertEquals(GameManager.getSecretWord(game),
+                GameManager.getSecretWord(configuratedGame));
+    }
+
+    @Test
+    public void testStartGameGameNotConfigurable() {
+        Game configuratedGame = new Game();
+
+        configuratedGame.setSecretWord("month");
+
+        try {
+            GameManager.startGame(game, configuratedGame);
+        } catch (GameException e) {
+            e.printStackTrace();
+        }
+
+        assertTrue(!game.isConfigurable());
+    }
+
+    @Test
+    public void testStartGameConfiguratedGameNull() {
+        Throwable exception = assertThrows(
+                GameException.class, () -> {
+                    Game configuratedGame = null;
+                    GameManager.startGame(game, configuratedGame);
+                });
+
+        assertEquals("Non è ancora stata inserita la parola segreta!",
+                exception.getMessage());
+    }
+
+    @Test
+    public void testStartGameConfiguratedGameEmptySecretWord() {
+        Throwable exception = assertThrows(
+                GameException.class, () -> {
+                    Game configuratedGame = new Game();
+                    GameManager.startGame(game, configuratedGame);
+                });
+
+        assertEquals("Non è ancora stata inserita la parola segreta!",
+                exception.getMessage());
+    }
+
+    @Test
+    public void testStartGameCurrentGameHasSecretWord() {
+        Throwable exception = assertThrows(
+                GameException.class, () -> {
+                    Game configuratedGame = new Game();
+
+                    game.setSecretWord("glass");
+
+                    GameManager.startGame(game, configuratedGame);
+                });
+
+        assertEquals("C'è già un game in corso.", exception.getMessage());
+    }
+
     
 }

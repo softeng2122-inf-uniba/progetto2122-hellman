@@ -10,14 +10,14 @@ import it.uniba.app.utils.CommandType;
 import it.uniba.app.utils.Pair;
 
 /**
- * <<noECB>>
+ * {@literal <<noECB>>}
  * La classe Parser permette la lettura dei comandi(del gioco o tentativo di una
  * parola) dell'utente, paroliere o giocatore che sia.
  */
 class Parser {
 
     /** Scanner per leggere l'input da tastiera. */
-    private Scanner scanner = new Scanner(System.in);
+    private Scanner scanner = new Scanner(System.in, "UTF-8");
 
     /** Lista dei comandi del gioco. */
     private final List<Commands> commands = new ArrayList<>();
@@ -36,7 +36,7 @@ class Parser {
             init(newCommands);
         } catch (Exception exception) {
             System.out.println("Il programma non è terminato correttamente.");
-            System.exit(-1);
+            Runtime.getRuntime().exit(-1);
         }
 
     }

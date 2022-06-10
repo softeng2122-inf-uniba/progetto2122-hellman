@@ -1,9 +1,10 @@
 package it.uniba.app.models;
 
+import java.util.LinkedList;
 import java.util.List;
 
 /**
- * <<Entity>>
+ * {@literal <<Entity>>}
  * Classe descrive la parola inserita nei tentativi attraverso la parola stessa
  * descritta come stringa e la formattazione di questa in base alla presenza
  * o meno dei suoi caratteri nella parola segreta.
@@ -26,7 +27,7 @@ public class Word {
      */
     public Word(final String newWord, final List<Integer> newFormat) {
         this.word = newWord;
-        this.format = newFormat;
+        this.format = new LinkedList<Integer>(newFormat);
     }
 
     /**
@@ -44,7 +45,7 @@ public class Word {
      * @return Format della parola.
      */
     public List<Integer> getFormat() {
-        return format;
+        return new LinkedList<Integer>(format);
     }
 
 }

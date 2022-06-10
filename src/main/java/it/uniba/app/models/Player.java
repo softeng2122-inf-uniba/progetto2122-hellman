@@ -1,7 +1,7 @@
 package it.uniba.app.models;
 
 /**
- * <<Entity>>
+ * {@literal <<Entity>>}
  * Classe che identifica la figura del giocatore, contiene il game
  * in stato di esecuzione.
  */
@@ -16,7 +16,16 @@ public class Player {
      * @return game corrente
      */
     public Game getCurrentGame() {
-        return currentGame;
+        return new Game(currentGame);
+    }
+
+    /**
+     * Metodo che permette di settare il Game corrente.
+     *
+     * @param newCurrentGame Game con il quale settare il Game corrente.
+     */
+    public void setCurrentGame(final Game newCurrentGame) {
+        this.currentGame = new Game(newCurrentGame);
     }
 
 }

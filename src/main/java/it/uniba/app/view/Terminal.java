@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * <<Boundary>>
+ * {@literal <<Boundary>>}
  * Classe front-end che permette di dialogare con l'utente a linea di comando.
  */
 public class Terminal extends Viewer {
@@ -204,7 +204,7 @@ public class Terminal extends Viewer {
             switch (type) {
                 case EXIT_YES:
                     out.println("Ciao!");
-                    System.exit(0);
+                    Runtime.getRuntime().exit(0);
                     return;
 
                 case EXIT_NO:
@@ -333,16 +333,18 @@ public class Terminal extends Viewer {
             }
 
             for (int j = 0; j < Helper.MAX_LETTERS; j++) {
-                String cell = Helper.ANSI_BLACK + " _ ";
+                String cell = Helper.ANSI_BLACK.concat(" _ ");
 
                 if (!emptyWord) {
                     char c = word.getWord().charAt(j);
                     cell = getCharColored(c, word.getFormat().get(j));
                 }
 
-                str += Helper.ANSI_GREY + cell + Helper.ANSI_RESET;
+                str = str.concat(
+                    Helper.ANSI_GREY.concat(
+                        cell.concat(Helper.ANSI_RESET)));
             }
-            str += "\n";
+            str = str.concat("\n");
         }
 
         return str;

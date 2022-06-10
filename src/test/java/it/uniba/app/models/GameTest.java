@@ -14,8 +14,10 @@ import it.uniba.app.utils.Helper;
  * Classe dedicata ai test dei metodi della classe Game.
  */
 public class GameTest {
-    /** Oggetto di tipo Game creato per effettuare i test
-     * sui vari metodi della classe. */
+    /**
+     * Oggetto di tipo Game creato per effettuare i test
+     * sui vari metodi della classe.
+     */
     private Game game = new Game();
 
     /**
@@ -54,7 +56,7 @@ public class GameTest {
     public void testIsConfigurableCaseFalse() {
         game.disableConfigurable();
         assertFalse(game.isConfigurable());
-        
+
     }
 
     /**
@@ -119,7 +121,7 @@ public class GameTest {
         int i;
         int maxTrys = game.getMaxTry();
 
-        for (i = 0; i < maxTrys; i++) { 
+        for (i = 0; i < maxTrys; i++) {
             Word word = new Word("month", new LinkedList<Integer>());
             game.addTry(word);
         }
@@ -147,7 +149,7 @@ public class GameTest {
      */
     @Test
     public void testResetGameConfigurable() {
-        
+
         game.disableConfigurable();
 
         game.resetGame();
@@ -161,7 +163,7 @@ public class GameTest {
      */
     @Test
     public void testResetGameTrys() {
-        
+
         game.addTry(new Word("words", new LinkedList<Integer>()));
 
         game.resetGame();

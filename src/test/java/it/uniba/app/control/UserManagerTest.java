@@ -9,7 +9,7 @@ import it.uniba.app.utils.GameException;
 
 public class UserManagerTest {
     private UserManager userManager = new UserManager();
-    
+
     @Test
     public void testSetSecretWord() {
         String secretWord = "clock";

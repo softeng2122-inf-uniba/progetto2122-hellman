@@ -19,7 +19,7 @@ public class GameTest {
     private Game game = new Game();
 
     /**
-     * Metodo per il testing del metodo testSetSecretWord() di Game.
+     * Metodo per il testing del metodo setSecretWord() di Game.
      */
     @Test
     public void testSetSecretWord() {

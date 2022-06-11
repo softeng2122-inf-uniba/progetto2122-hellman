@@ -4,11 +4,18 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
 import it.uniba.app.models.Game;
-
+import it.uniba.app.models.Word;
 import it.uniba.app.utils.GameException;
+import it.uniba.app.utils.Helper;
+import it.uniba.app.utils.Pair;
 
 public class GameManagerTest {
     private Game game = new Game();
@@ -224,7 +231,7 @@ public class GameManagerTest {
     }
 
     @Test
-    public void testMakeTryWordGameNotStarted() {
+    public void testMakeTryGameNotStarted() {
         Throwable exception = assertThrows(
                 GameException.class, () -> {
                     game.enableConfigurable();
@@ -233,4 +240,339 @@ public class GameManagerTest {
 
         assertEquals("Il game non è iniziato.", exception.getMessage());
     }
+
+    @Test
+    public void testMakeTryGameWinInteger() {
+        Pair<Integer, List<Word>> pair = new Pair<Integer, List<Word>>();
+
+        game.setSecretWord("match");
+
+        game.disableConfigurable();
+
+        try {
+            pair = GameManager.makeTry(game, "match");
+        } catch (GameException e) {
+            e.printStackTrace();
+        }
+
+        assertEquals(pair.getFirst(), Helper.GAME_WIN);
+    }
+
+    @Test
+    public void testMakeTryGameWinTryFirst() {
+        List<Word> trys = new ArrayList<Word>();
+        List<Integer> formats = new LinkedList<Integer>();
+        Pair<Integer, List<Word>> pair = new Pair<Integer, List<Word>>();
+
+        for (int i = 0; i < Helper.MAX_LETTERS; i++) {
+            formats.add(Helper.FORMAT_LETTER_FOUND_RIGHT_POSITION);
+        }
+
+        trys.add(new Word("match", formats));
+
+        game.setSecretWord("match");
+
+        game.disableConfigurable();
+
+        try {
+            pair = GameManager.makeTry(game, "match");
+        } catch (GameException e) {
+            e.printStackTrace();
+        }
+
+        int i = 0;
+
+        for (Word words : trys) {
+            assertEquals(pair.getSecond().get(i).getWord(), words.getWord());
+            i++;
+        }
+
+    }
+
+    @Test
+    public void testMakeTryGameWinTrySecond() {
+        List<Word> trys = new ArrayList<Word>();
+        List<Integer> formats = new LinkedList<Integer>();
+        Pair<Integer, List<Word>> pair = new Pair<Integer, List<Word>>();
+
+        for (int i = 0; i < Helper.MAX_LETTERS; i++) {
+            formats.add(Helper.FORMAT_LETTER_FOUND_RIGHT_POSITION);
+        }
+
+        trys.add(new Word("match", formats));
+
+        game.setSecretWord("match");
+
+        game.disableConfigurable();
+
+        try {
+            pair = GameManager.makeTry(game, "match");
+        } catch (GameException e) {
+            e.printStackTrace();
+        }
+
+        int i = 0;
+
+        for (Word words : trys) {
+            assertEquals(pair.getSecond().get(i).getFormat(), words.getFormat());
+            i++;
+        }
+
+    }
+
+    @Test
+    public void testMakeTryGameWinSizeTrys() {
+        Pair<Integer, List<Word>> pair = new Pair<Integer, List<Word>>();
+
+        game.setSecretWord("women");
+
+        game.disableConfigurable();
+
+        try {
+            pair = GameManager.makeTry(game, "woman");
+            pair = GameManager.makeTry(game, "woman");
+            pair = GameManager.makeTry(game, "woman");
+            pair = GameManager.makeTry(game, "woman");
+            pair = GameManager.makeTry(game, "woman");
+            pair = GameManager.makeTry(game, "women");
+        } catch (GameException e) {
+            e.printStackTrace();
+        }
+
+        assertTrue(pair.getSecond().size() > 0 && pair.getSecond().size() <= Helper.MAX_TRYS);
+    }
+
+    @Test
+    public void testMakeTryGameWaitingInteger() {
+        Pair<Integer, List<Word>> pair = new Pair<Integer, List<Word>>();
+
+        game.setSecretWord("women");
+
+        game.disableConfigurable();
+
+        try {
+            pair = GameManager.makeTry(game, "woman");
+        } catch (GameException e) {
+            e.printStackTrace();
+        }
+
+        assertEquals(pair.getFirst(), Helper.GAME_WAITING);
+    }
+
+    @Test
+    public void testMakeTryGameWaitingTryFirst() {
+        List<Word> trys = new ArrayList<Word>();
+        List<Integer> formats = new LinkedList<Integer>();
+        Pair<Integer, List<Word>> pair = new Pair<Integer, List<Word>>();
+
+        formats = Arrays.asList(Helper.FORMAT_LETTER_FOUND_RIGHT_POSITION,
+                Helper.FORMAT_LETTER_FOUND_RIGHT_POSITION,
+                Helper.FORMAT_LETTER_FOUND_RIGHT_POSITION,
+                Helper.FORMAT_LETTER_NOT_FOUND,
+                Helper.FORMAT_LETTER_FOUND_RIGHT_POSITION);
+
+        trys.add(new Word("woman", formats));
+
+        game.setSecretWord("women");
+
+        game.disableConfigurable();
+
+        try {
+            pair = GameManager.makeTry(game, "woman");
+        } catch (GameException e) {
+            e.printStackTrace();
+        }
+
+        int i = 0;
+
+        for (Word words : trys) {
+            assertEquals(pair.getSecond().get(i).getWord(), words.getWord());
+            i++;
+        }
+    }
+
+    @Test
+    public void testMakeTryGameWaitingTrySecond() {
+        List<Word> trys = new ArrayList<Word>();
+        List<Integer> formats = new LinkedList<Integer>();
+        Pair<Integer, List<Word>> pair = new Pair<Integer, List<Word>>();
+
+        formats = Arrays.asList(Helper.FORMAT_LETTER_FOUND_RIGHT_POSITION,
+                Helper.FORMAT_LETTER_FOUND_RIGHT_POSITION,
+                Helper.FORMAT_LETTER_FOUND_RIGHT_POSITION,
+                Helper.FORMAT_LETTER_NOT_FOUND,
+                Helper.FORMAT_LETTER_FOUND_RIGHT_POSITION);
+
+        trys.add(new Word("woman", formats));
+
+        game.setSecretWord("women");
+
+        game.disableConfigurable();
+
+        try {
+            pair = GameManager.makeTry(game, "woman");
+        } catch (GameException e) {
+            e.printStackTrace();
+        }
+
+        int i = 0;
+
+        for (Word words : trys) {
+            assertEquals(pair.getSecond().get(i).getFormat(), words.getFormat());
+            i++;
+        }
+    }
+
+    @Test
+    public void testMakeTryGameWaitingSizeTrys() {
+        Pair<Integer, List<Word>> pair = new Pair<Integer, List<Word>>();
+
+        game.setSecretWord("women");
+
+        game.disableConfigurable();
+
+        try {
+            pair = GameManager.makeTry(game, "woman");
+        } catch (GameException e) {
+            e.printStackTrace();
+        }
+
+        assertTrue(pair.getSecond().size() > 0 && pair.getSecond().size() < Helper.MAX_TRYS);
+    }
+
+    @Test
+    public void testMakeTryGameLoseInteger() {
+        Pair<Integer, List<Word>> pair = new Pair<Integer, List<Word>>();
+
+        game.setSecretWord("women");
+
+        game.disableConfigurable();
+
+        try {
+            pair = GameManager.makeTry(game, "woman");
+        } catch (GameException e) {
+            e.printStackTrace();
+        }
+
+        assertEquals(pair.getFirst(), Helper.GAME_WAITING);
+    }
+
+    @Test
+    public void testMakeTryGameLoseTryFirst() {
+        List<Word> trys = new ArrayList<Word>();
+        List<Integer> formats = new LinkedList<Integer>();
+        Pair<Integer, List<Word>> pair = new Pair<Integer, List<Word>>();
+
+        game.setSecretWord("women");
+
+        for (int i = 0; i < Helper.MAX_TRYS; i++) {
+            for (int j = 0; j < Helper.MAX_LETTERS; j++) {
+                formats.add(Helper.FORMAT_LETTER_NOT_FOUND);
+            }
+            trys.add(new Word("pairs", formats));
+
+            if (i != Helper.MAX_TRYS - 1) {
+                game.addTry(new Word("pairs", formats));
+            }
+
+            formats.clear();
+        }
+
+        game.disableConfigurable();
+
+        try {
+            pair = GameManager.makeTry(game, "pairs");
+        } catch (GameException e) {
+            e.printStackTrace();
+        }
+
+        trys.add(new Word("women",
+                Arrays.asList(Helper.FORMAT_LETTER_FOUND_RIGHT_POSITION,
+                        Helper.FORMAT_LETTER_FOUND_RIGHT_POSITION,
+                        Helper.FORMAT_LETTER_FOUND_RIGHT_POSITION,
+                        Helper.FORMAT_LETTER_FOUND_RIGHT_POSITION,
+                        Helper.FORMAT_LETTER_FOUND_RIGHT_POSITION)));
+
+        int i = 0;
+
+        for (Word words : trys) {
+            assertEquals(pair.getSecond().get(i).getWord(), words.getWord());
+            i++;
+        }
+    }
+
+    @Test
+    public void testMakeTryGameLoseTrySecond() {
+        List<Word> trys = new ArrayList<Word>();
+        List<Integer> formats = new LinkedList<Integer>();
+        Pair<Integer, List<Word>> pair = new Pair<Integer, List<Word>>();
+
+        game.setSecretWord("women");
+
+        for (int i = 0; i < Helper.MAX_TRYS; i++) {
+            for (int j = 0; j < Helper.MAX_LETTERS; j++) {
+                formats.add(Helper.FORMAT_LETTER_NOT_FOUND);
+            }
+            trys.add(new Word("pairs", formats));
+
+            if (i != Helper.MAX_TRYS - 1) {
+                game.addTry(new Word("pairs", formats));
+            }
+
+            formats.clear();
+        }
+
+        game.disableConfigurable();
+
+        try {
+            pair = GameManager.makeTry(game, "pairs");
+        } catch (GameException e) {
+            e.printStackTrace();
+        }
+
+        trys.add(new Word("women",
+                Arrays.asList(Helper.FORMAT_LETTER_NOT_FOUND,
+                        Helper.FORMAT_LETTER_NOT_FOUND,
+                        Helper.FORMAT_LETTER_NOT_FOUND,
+                        Helper.FORMAT_LETTER_NOT_FOUND,
+                        Helper.FORMAT_LETTER_NOT_FOUND)));
+
+        int i = 0;
+
+        for (Word words : trys) {
+            assertEquals(pair.getSecond().get(i).getFormat(), words.getFormat());
+            i++;
+        }
+    }
+
+    @Test
+    public void testMakeTryGameLoseSizeTrys() {
+        List<Integer> formats = new LinkedList<Integer>();
+        Pair<Integer, List<Word>> pair = new Pair<Integer, List<Word>>();
+
+        game.setSecretWord("women");
+
+        for (int i = 0; i < Helper.MAX_TRYS; i++) {
+            for (int j = 0; j < Helper.MAX_LETTERS; j++) {
+                formats.add(Helper.FORMAT_LETTER_NOT_FOUND);
+            }
+
+            if (i != Helper.MAX_TRYS - 1) {
+                game.addTry(new Word("pairs", formats));
+            }
+
+            formats.clear();
+        }
+
+        game.disableConfigurable();
+
+        try {
+            pair = GameManager.makeTry(game, "pairs");
+        } catch (GameException e) {
+            e.printStackTrace();
+        }
+
+        assertTrue(pair.getSecond().size() == Helper.MAX_TRYS + 1);
+    }
+
 }

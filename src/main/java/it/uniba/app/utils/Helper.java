@@ -80,7 +80,7 @@ public final class Helper {
      * Metodo per inserire i valori di un Array di int all'interno di
      * una List di Integer.
      *
-     * @param array     Arry di int.
+     * @param array     Array di int.
      * @param arrayList List di Integer.
      */
     public static void arrayToArrayList(final int[] array,

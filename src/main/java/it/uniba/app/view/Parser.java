@@ -3,7 +3,6 @@ package it.uniba.app.view;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Scanner;
 import java.util.Set;
 
 import it.uniba.app.utils.CommandType;
@@ -15,9 +14,6 @@ import it.uniba.app.utils.Pair;
  * parola) dell'utente, paroliere o giocatore che sia.
  */
 class Parser {
-
-    /** Scanner per leggere l'input da tastiera. */
-    private Scanner scanner = new Scanner(System.in, "UTF-8");
 
     /** Lista dei comandi del gioco. */
     private final List<Commands> commands = new ArrayList<>();
@@ -113,37 +109,6 @@ class Parser {
     }
 
     /**
-     * Il metodo readCommand permette il confronto del risultato del metodo
-     * parse con uno qualsiasi dei comandi supportati, se essa corrisponde
-     * ad uno dei comandi, lo restituisce, altrimenti restituisce null.
-     *
-     * @param printCommand se true stampa l'inserimento del comando,
-     *                     altrimenti non stampa nulla.
-     * @param gameStarted  se true stampa "Effettua un tentativo (o un
-     *                     comando):", altrimenti "Inserisci un comando:".
-     * @return risultato di parse.
-     */
-    ParserOutput readCommand(final boolean printCommand,
-                                    final boolean gameStarted) {
-        ParserOutput p = null;
-
-        if (printCommand) {
-            if (gameStarted) {
-                System.out.println("Effettua un tentativo (o un comando):");
-            } else {
-                System.out.println("Inserisci un comando:");
-            }
-        }
-
-        while (scanner.hasNextLine()) {
-            String command = scanner.nextLine();
-            p = this.parse(command);
-            return p;
-        }
-        return p;
-    }
-
-    /**
      * Il metodo parse permette il confronto del risultato di parseString
      * con il risultato di checkForCommand, che restituira' l'indice appropriato
      * nella lista dei comandi.
@@ -151,7 +116,7 @@ class Parser {
      * @param command stringa da analizzare
      * @return indice nella lista di comandi possibili.
      */
-    private ParserOutput parse(final String command) {
+    ParserOutput parse(final String command) {
         List<String> tokens = parseString(command, ignoreWords);
         if (!tokens.isEmpty()) {
             String firstWord = tokens.get(0);

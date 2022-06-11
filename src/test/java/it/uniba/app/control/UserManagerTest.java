@@ -17,11 +17,10 @@ import it.uniba.app.utils.GameException;
 import it.uniba.app.utils.Helper;
 import it.uniba.app.utils.Pair;
 
-
 public class UserManagerTest {
-    
+
     private UserManager userManager = new UserManager();
-    
+
     @Test
     public void testSetSecretWord() {
         String secretWord = "clock";
@@ -82,7 +81,6 @@ public class UserManagerTest {
         assertEquals(userManager.getSecretWord(), secretWord);
     }
 
-   
     @Test
     public void testStartGameConfiguratedGameNull() {
         Throwable exception = assertThrows(
@@ -94,7 +92,6 @@ public class UserManagerTest {
                 exception.getMessage());
     }
 
-    
     @Test
     public void testStartGameConfiguratedGameEmptySecretWord() {
         Throwable exception = assertThrows(
@@ -106,7 +103,6 @@ public class UserManagerTest {
                 exception.getMessage());
     }
 
-    
     @Test
     public void testBackGame() {
         try {
@@ -121,7 +117,6 @@ public class UserManagerTest {
         assertFalse(userManager.isGameStarted());
     }
 
-    
     @Test
     public void testBackGameConfigurableGame() {
 
@@ -134,7 +129,6 @@ public class UserManagerTest {
         assertEquals("Non c'è un game in corso.", exception.getMessage());
     }
 
-   
     @Test
     public void testBackGameEmptySecretWord() {
 
@@ -146,7 +140,6 @@ public class UserManagerTest {
         assertEquals("Non c'è un game in corso.", exception.getMessage());
     }
 
-   
     @Test
     public void testMakeTryWordTooLong() {
         Throwable exception = assertThrows(
@@ -513,5 +506,27 @@ public class UserManagerTest {
         }
 
         assertTrue(pair.getSecond().size() == Helper.MAX_TRYS + 1);
+    }
+
+    @Test
+    public void testIsGameStartedGameNotStarted() {
+        try {
+            userManager.setSecretWord("");
+        } catch (GameException e) {
+            e.printStackTrace();
+        }
+        assertFalse(userManager.isGameStarted());
+    }
+
+    @Test
+    public void testIsGameStartedGameStarted() {
+        try {
+            userManager.setSecretWord("modem");
+            userManager.startGame();
+        } catch (GameException e) {
+            e.printStackTrace();
+        }
+
+        assertTrue(userManager.isGameStarted());
     }
 }

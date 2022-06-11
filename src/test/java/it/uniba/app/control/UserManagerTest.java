@@ -107,4 +107,45 @@ public class UserManagerTest {
     }
 
     
+    @Test
+    public void testBackGame() {
+        try {
+            userManager.setSecretWord("bread");
+            userManager.startGame();
+
+            userManager.backGame();
+        } catch (GameException e) {
+            e.printStackTrace();
+        }
+
+        assertFalse(userManager.isGameStarted());
     }
+
+    
+    @Test
+    public void testBackGameConfigurableGame() {
+
+        Throwable exception = assertThrows(
+                GameException.class, () -> {
+                    userManager.setSecretWord("mouse");
+                    userManager.backGame();
+                });
+
+        assertEquals("Non c'è un game in corso.", exception.getMessage());
+    }
+
+   
+    @Test
+    public void testBackGameEmptySecretWord() {
+
+        Throwable exception = assertThrows(
+                GameException.class, () -> {
+                    userManager.backGame();
+                });
+
+        assertEquals("Non c'è un game in corso.", exception.getMessage());
+    }
+
+   
+    
+}

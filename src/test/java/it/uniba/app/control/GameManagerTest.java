@@ -1,6 +1,7 @@
 package it.uniba.app.control;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -573,6 +574,18 @@ public class GameManagerTest {
         }
 
         assertTrue(pair.getSecond().size() == Helper.MAX_TRYS + 1);
+    }
+
+    @Test
+    public void testIsGameStartedGameNotStarted() {
+        assertFalse(GameManager.isGameStarted(game));
+    }
+
+    @Test
+    public void testIsGameStartedGameStarted() {
+        game.setSecretWord("modem");
+
+        assertTrue(GameManager.isGameStarted(game));
     }
 
 }

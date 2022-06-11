@@ -105,23 +105,6 @@ public class UserManagerTest {
 
     /**
      * Metodo per il testing del metodo startGame di UserManager
-     * nel caso in cui il game configurato non abbia la parola segreta
-     * impostata.
-     */
-    @Test
-    public void testStartGameConfiguratedGameEmptySecretWord() {
-        Throwable exception = assertThrows(
-                GameException.class, () -> {
-                    userManager.setSecretWord("");
-                    userManager.startGame();
-                });
-
-        assertEquals("Non è ancora stata inserita la parola segreta!",
-                exception.getMessage());
-    }
-
-    /**
-     * Metodo per il testing del metodo startGame di UserManager
      * nel caso in cui il game corrente sia già stato avviato.
      */
     @Test
@@ -203,7 +186,7 @@ public class UserManagerTest {
         assertEquals("La parola inserita contiene un numero"
                 + " troppo elevato di caratteri.", exception.getMessage());
     }
-    
+
     /**
      * Metodo per il testing del metodo makeTry di UserManager
      * nel caso in cui la parola del tentativo sia troppo corta.
@@ -306,7 +289,7 @@ public class UserManagerTest {
         }
 
     }
-    
+
     /**
      * Metodo per il testing del metodo makeTry di UserManager.
      * Qui viene verificato che, nel caso in cui il game venga vinto,
@@ -342,7 +325,7 @@ public class UserManagerTest {
         }
 
     }
-    
+
     /**
      * Metodo per il testing del metodo makeTry di UserManager.
      * Qui viene verificato che, nel caso in cui il game venga vinto,
@@ -610,16 +593,7 @@ public class UserManagerTest {
      */
     @Test
     public void testMakeTryGameLoseSizeTrys() {
-        List<Integer> formats = new LinkedList<Integer>();
         Pair<Integer, List<Word>> pair = new Pair<Integer, List<Word>>();
-
-        for (int i = 0; i < Helper.MAX_TRYS; i++) {
-            for (int j = 0; j < Helper.MAX_LETTERS; j++) {
-                formats.add(Helper.FORMAT_LETTER_NOT_FOUND);
-            }
-
-            formats.clear();
-        }
 
         try {
             userManager.setSecretWord("women");

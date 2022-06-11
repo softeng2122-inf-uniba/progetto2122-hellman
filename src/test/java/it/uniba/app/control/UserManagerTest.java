@@ -82,9 +82,10 @@ public class UserManagerTest {
     }
 
     @Test
-    public void testStartGameConfiguratedGameNull() {
+    public void testStartGameConfiguratedGameEmptySecretWord() {
         Throwable exception = assertThrows(
                 GameException.class, () -> {
+                    userManager.setSecretWord("");
                     userManager.startGame();
                 });
 
@@ -93,14 +94,18 @@ public class UserManagerTest {
     }
 
     @Test
-    public void testStartGameConfiguratedGameEmptySecretWord() {
+    public void testStartGameCurrentGameAlreadyStarted() {
         Throwable exception = assertThrows(
                 GameException.class, () -> {
+
+                    userManager.setSecretWord("glass");
+                    userManager.startGame();
+
+                    userManager.setSecretWord("glass");
                     userManager.startGame();
                 });
 
-        assertEquals("Non è ancora stata inserita la parola segreta!",
-                exception.getMessage());
+        assertEquals("C'è già un game in corso.", exception.getMessage());
     }
 
     @Test

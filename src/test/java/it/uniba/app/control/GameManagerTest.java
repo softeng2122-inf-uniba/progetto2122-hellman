@@ -472,7 +472,7 @@ public class GameManagerTest {
     @Test
     public void testMakeTryGameWaitingTryFirst() {
         List<Word> trys = new ArrayList<Word>();
-        List<Integer> formats = new LinkedList<Integer>();
+        List<Integer> formats;
         Pair<Integer, List<Word>> pair = new Pair<Integer, List<Word>>();
 
         formats = Arrays.asList(Helper.FORMAT_LETTER_FOUND_RIGHT_POSITION,
@@ -510,7 +510,7 @@ public class GameManagerTest {
     @Test
     public void testMakeTryGameWaitingTrySecond() {
         List<Word> trys = new ArrayList<Word>();
-        List<Integer> formats = new LinkedList<Integer>();
+        List<Integer> formats;
         Pair<Integer, List<Word>> pair = new Pair<Integer, List<Word>>();
 
         formats = Arrays.asList(Helper.FORMAT_LETTER_FOUND_RIGHT_POSITION,

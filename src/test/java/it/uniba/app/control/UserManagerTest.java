@@ -17,10 +17,16 @@ import it.uniba.app.utils.GameException;
 import it.uniba.app.utils.Helper;
 import it.uniba.app.utils.Pair;
 
+/**
+ * Classe dedicata ai casi di test della classe UserManager.
+ */
 public class UserManagerTest {
-
+    /** Oggetto di tipo UserManager da utilizzare per i casi di test. */
     private UserManager userManager = new UserManager();
 
+    /**
+     * Metodo per il testing del metodo setSecretWord di UserManager.
+     */
     @Test
     public void testSetSecretWord() {
         String secretWord = "clock";
@@ -34,6 +40,10 @@ public class UserManagerTest {
         assertEquals(secretWord, userManager.getSecretWord());
     }
 
+    /**
+     * Metodo per il testing del metodo setSecretWord di UserManager
+     * nel caso in cui la parola segreta dovesse essere troppo lunga.
+     */
     @Test
     public void testSecretWordTooLong() {
 
@@ -46,6 +56,10 @@ public class UserManagerTest {
                 + " troppo elevato di caratteri.", exception.getMessage());
     }
 
+    /**
+     * Metodo per il testing del metodo setSecretWord di UserManager
+     * nel caso in cui la parola segreta dovesse essere troppo corta.
+     */
     @Test
     public void testSecretWordTooShort() {
         Throwable exception = assertThrows(
@@ -57,6 +71,11 @@ public class UserManagerTest {
                 + "caratteri.", exception.getMessage());
     }
 
+    /**
+     * Metodo per il testing del metodo setSecretWord di UserManager
+     * nel caso in cui la parola segreta dovesse contenere
+     * caratteri non ammessi.
+     */
     @Test
     public void testSecretWordUnavailableCharacters() {
         Throwable exception = assertThrows(
@@ -68,6 +87,9 @@ public class UserManagerTest {
                 exception.getMessage());
     }
 
+    /**
+     * Metodo per il testing del metodo getSecretWord di UserManager.
+     */
     @Test
     public void testGetSecretWord() {
         String secretWord = "hands";
@@ -81,6 +103,11 @@ public class UserManagerTest {
         assertEquals(userManager.getSecretWord(), secretWord);
     }
 
+    /**
+     * Metodo per il testing del metodo startGame di UserManager
+     * nel caso in cui il game configurato non abbia la parola segreta
+     * impostata.
+     */
     @Test
     public void testStartGameConfiguratedGameEmptySecretWord() {
         Throwable exception = assertThrows(
@@ -93,6 +120,10 @@ public class UserManagerTest {
                 exception.getMessage());
     }
 
+    /**
+     * Metodo per il testing del metodo startGame di UserManager
+     * nel caso in cui il game corrente sia già stato avviato.
+     */
     @Test
     public void testStartGameCurrentGameAlreadyStarted() {
         Throwable exception = assertThrows(
@@ -108,6 +139,9 @@ public class UserManagerTest {
         assertEquals("C'è già un game in corso.", exception.getMessage());
     }
 
+    /**
+     * Metodo per il testing del metodo backGame di UserManager.
+     */
     @Test
     public void testBackGame() {
         try {
@@ -122,6 +156,10 @@ public class UserManagerTest {
         assertFalse(userManager.isGameStarted());
     }
 
+    /**
+     * Metodo per il testing del metodo backGame di UserManager
+     * nel caso in cui il game corrente sia configurabile.
+     */
     @Test
     public void testBackGameConfigurableGame() {
 
@@ -134,6 +172,10 @@ public class UserManagerTest {
         assertEquals("Non c'è un game in corso.", exception.getMessage());
     }
 
+    /**
+     * Metodo per il testing del metodo startGame di UserManager
+     * nel caso in cui il game corrente non abbia una parola segreta.
+     */
     @Test
     public void testBackGameEmptySecretWord() {
 
@@ -145,6 +187,10 @@ public class UserManagerTest {
         assertEquals("Non c'è un game in corso.", exception.getMessage());
     }
 
+    /**
+     * Metodo per il testing del metodo makeTry di UserManager
+     * nel caso in cui la parola del tentativo sia troppo lunga.
+     */
     @Test
     public void testMakeTryWordTooLong() {
         Throwable exception = assertThrows(
@@ -157,7 +203,11 @@ public class UserManagerTest {
         assertEquals("La parola inserita contiene un numero"
                 + " troppo elevato di caratteri.", exception.getMessage());
     }
-
+    
+    /**
+     * Metodo per il testing del metodo makeTry di UserManager
+     * nel caso in cui la parola del tentativo sia troppo corta.
+     */
     @Test
     public void testMakeTryWordTooShort() {
         Throwable exception = assertThrows(
@@ -171,6 +221,10 @@ public class UserManagerTest {
                 + "caratteri.", exception.getMessage());
     }
 
+    /**
+     * Metodo per il testing del metodo makeTry di UserManager
+     * nel caso in cui la parola del tentativo contenga caratteri non ammessi.
+     */
     @Test
     public void testMakeTryWordUnavailableCharacters() {
         Throwable exception = assertThrows(
@@ -184,6 +238,10 @@ public class UserManagerTest {
                 exception.getMessage());
     }
 
+    /**
+     * Metodo per il testing del metodo makeTry di UserManager
+     * nel caso in cui il game sia configurabile.
+     */
     @Test
     public void testMakeTryGameNotStarted() {
         Throwable exception = assertThrows(
@@ -195,6 +253,11 @@ public class UserManagerTest {
         assertEquals("Il game non è iniziato.", exception.getMessage());
     }
 
+    /**
+     * Metodo per il testing del metodo makeTry di UserManager.
+     * Qui viene verificato che, nel caso in cui il game venga vinto,
+     * la costante restituita sia quelle che effettivamente ci si aspetta.
+     */
     @Test
     public void testMakeTryGameWinInteger() {
         Pair<Integer, List<Word>> pair = new Pair<Integer, List<Word>>();
@@ -210,6 +273,11 @@ public class UserManagerTest {
         assertEquals(pair.getFirst(), Helper.GAME_WIN);
     }
 
+    /**
+     * Metodo per il testing del metodo makeTry di UserManager.
+     * Qui viene verificato che, nel caso in cui il game venga vinto,
+     * le parole vengano inserite correttamente nei vari tentativi.
+     */
     @Test
     public void testMakeTryGameWinTryFirst() {
         List<Word> trys = new ArrayList<Word>();
@@ -238,7 +306,13 @@ public class UserManagerTest {
         }
 
     }
-
+    
+    /**
+     * Metodo per il testing del metodo makeTry di UserManager.
+     * Qui viene verificato che, nel caso in cui il game venga vinto,
+     * il format delle parole inserite nei vari tentativi
+     * sia impostato correttamente.
+     */
     @Test
     public void testMakeTryGameWinTrySecond() {
         List<Word> trys = new ArrayList<Word>();
@@ -268,7 +342,13 @@ public class UserManagerTest {
         }
 
     }
-
+    
+    /**
+     * Metodo per il testing del metodo makeTry di UserManager.
+     * Qui viene verificato che, nel caso in cui il game venga vinto,
+     * il numero di tentativi sia effettivamente compreso nell'intervallo
+     * che ci si aspetta.
+     */
     @Test
     public void testMakeTryGameWinSizeTrys() {
         Pair<Integer, List<Word>> pair = new Pair<Integer, List<Word>>();
@@ -290,6 +370,11 @@ public class UserManagerTest {
                 && pair.getSecond().size() <= Helper.MAX_TRYS);
     }
 
+    /**
+     * Metodo per il testing del metodo makeTry di UserManager.
+     * Qui viene verificato che, nel caso in cui il game sia ancora in corso,
+     * la costante restituita sia quelle che effettivamente ci si aspetta.
+     */
     @Test
     public void testMakeTryGameWaitingInteger() {
         Pair<Integer, List<Word>> pair = new Pair<Integer, List<Word>>();
@@ -305,6 +390,11 @@ public class UserManagerTest {
         assertEquals(pair.getFirst(), Helper.GAME_WAITING);
     }
 
+    /**
+     * Metodo per il testing del metodo makeTry di UserManager.
+     * Qui viene verificato che, nel caso in cui il game sia in corso,
+     * le parole vengano inserite correttamente nei vari tentativi.
+     */
     @Test
     public void testMakeTryGameWaitingTryFirst() {
         List<Word> trys = new ArrayList<Word>();
@@ -335,6 +425,12 @@ public class UserManagerTest {
         }
     }
 
+    /**
+     * Metodo per il testing del metodo makeTry di UserManager.
+     * Qui viene verificato che, nel caso in cui il game sia in corso,
+     * il format delle parole inserite nei vari tentativi
+     * sia impostato correttamente.
+     */
     @Test
     public void testMakeTryGameWaitingTrySecond() {
         List<Word> trys = new ArrayList<Word>();
@@ -366,6 +462,12 @@ public class UserManagerTest {
         }
     }
 
+    /**
+     * Metodo per il testing del metodo makeTry di UserManager.
+     * Qui viene verificato che, nel caso in cui il game sia in corso,
+     * il numero di tentativi sia effettivamente compreso nell'intervallo
+     * che ci si aspetta.
+     */
     @Test
     public void testMakeTryGameWaitingSizeTrys() {
         Pair<Integer, List<Word>> pair = new Pair<Integer, List<Word>>();
@@ -382,6 +484,11 @@ public class UserManagerTest {
                 && pair.getSecond().size() < Helper.MAX_TRYS);
     }
 
+    /**
+     * Metodo per il testing del metodo makeTry di UserManager.
+     * Qui viene verificato che, nel caso in cui il game venga perso,
+     * la costante restituita sia quelle che effettivamente ci si aspetta.
+     */
     @Test
     public void testMakeTryGameLoseInteger() {
         Pair<Integer, List<Word>> pair = new Pair<Integer, List<Word>>();
@@ -397,6 +504,11 @@ public class UserManagerTest {
         assertEquals(pair.getFirst(), Helper.GAME_WAITING);
     }
 
+    /**
+     * Metodo per il testing del metodo makeTry di UserManager.
+     * Qui viene verificato che, nel caso in cui il game venga perso,
+     * le parole vengano inserite correttamente nei vari tentativi.
+     */
     @Test
     public void testMakeTryGameLoseTryFirst() {
         List<Word> trys = new ArrayList<Word>();
@@ -440,6 +552,12 @@ public class UserManagerTest {
         }
     }
 
+    /**
+     * Metodo per il testing del metodo makeTry di UserManager.
+     * Qui viene verificato che, nel caso in cui il game venga perso,
+     * il format delle parole inserite nei vari tentativi
+     * sia impostato correttamente.
+     */
     @Test
     public void testMakeTryGameLoseTrySecond() {
         List<Word> trys = new ArrayList<Word>();
@@ -484,6 +602,12 @@ public class UserManagerTest {
         }
     }
 
+    /**
+     * Metodo per il testing del metodo makeTry di UserManager.
+     * Qui viene verificato che, nel caso in cui il game venga perso,
+     * il numero di tentativi sia effettivamente compreso nell'intervallo
+     * che ci si aspetta.
+     */
     @Test
     public void testMakeTryGameLoseSizeTrys() {
         List<Integer> formats = new LinkedList<Integer>();
@@ -513,6 +637,10 @@ public class UserManagerTest {
         assertTrue(pair.getSecond().size() == Helper.MAX_TRYS + 1);
     }
 
+    /**
+     * Metodo per il testing del metodo isGameStarted di UserManager
+     * nel caso in cui il gioco non sia partito.
+     */
     @Test
     public void testIsGameStartedGameNotStarted() {
         try {
@@ -523,6 +651,10 @@ public class UserManagerTest {
         assertFalse(userManager.isGameStarted());
     }
 
+    /**
+     * Metodo per il testing del metodo isGameStarted di UserManager
+     * nel caso in cui il gioco sia partito.
+     */
     @Test
     public void testIsGameStartedGameStarted() {
         try {

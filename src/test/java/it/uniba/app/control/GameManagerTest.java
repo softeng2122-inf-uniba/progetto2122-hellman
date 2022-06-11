@@ -18,9 +18,16 @@ import it.uniba.app.utils.GameException;
 import it.uniba.app.utils.Helper;
 import it.uniba.app.utils.Pair;
 
+/**
+ * Classe dedicata ai casi di test della classe GameManager.
+ */
 public class GameManagerTest {
+    /** Oggetto di tipo Game da utilizzare per i casi di test. */
     private Game game = new Game();
 
+    /**
+     * Metodo per il testing del metodo setSecretWord di GameManager.
+     */
     @Test
     public void testSetSecretWord() {
         String secretWord = "clock";
@@ -33,7 +40,11 @@ public class GameManagerTest {
 
         assertEquals(secretWord, game.getSecretWord());
     }
-
+    
+    /**
+     * Metodo per il testing del metodo setSecretWord di GameManager
+     * nel caso in cui la parola segreta dovesse essere troppo lunga.
+     */
     @Test
     public void testSecretWordTooLong() {
 
@@ -46,6 +57,10 @@ public class GameManagerTest {
                 + " troppo elevato di caratteri.", exception.getMessage());
     }
 
+    /**
+     * Metodo per il testing del metodo setSecretWord di GameManager
+     * nel caso in cui la parola segreta dovesse essere troppo corta.
+     */
     @Test
     public void testSecretWordTooShort() {
         Throwable exception = assertThrows(
@@ -56,7 +71,12 @@ public class GameManagerTest {
         assertEquals("La parola inserita contiene un numero insufficiente di "
                 + "caratteri.", exception.getMessage());
     }
-
+    
+    /**
+     * Metodo per il testing del metodo setSecretWord di GameManager
+     * nel caso in cui la parola segreta dovesse contenere
+     * caratteri non ammessi.
+     */
     @Test
     public void testSecretWordUnavailableCharacters() {
         Throwable exception = assertThrows(
@@ -68,6 +88,10 @@ public class GameManagerTest {
                 exception.getMessage());
     }
 
+    /**
+     * Metodo per il testing del metodo setSecretWord di GameManager
+     * nel caso in cui il metodo non dovesse essere configurabile.
+     */
     @Test
     public void testSecretWordUnconfigurableGame() {
         Throwable exception = assertThrows(
@@ -79,6 +103,9 @@ public class GameManagerTest {
         assertEquals("Il game non è configurabile.", exception.getMessage());
     }
 
+    /**
+     * Metodo per il testing del metodo getSecretWord di GameManager.
+     */
     @Test
     public void testGetSecretWord() {
         String secretWord = "hands";
@@ -88,6 +115,10 @@ public class GameManagerTest {
         assertEquals(GameManager.getSecretWord(game), secretWord);
     }
 
+    /**
+     * Metodo per il testing dell'assegnazione della secret word
+     * nel metodo startGame di GameManager.
+     */
     @Test
     public void testStartGameSetSecretWord() {
         Game configuratedGame = new Game();
@@ -104,6 +135,10 @@ public class GameManagerTest {
                 GameManager.getSecretWord(configuratedGame));
     }
 
+    /**
+     * Metodo per il testing della verifica della non configurabilità del
+     * game corrente nel metodo startGame di GameManager.
+     */
     @Test
     public void testStartGameGameNotConfigurable() {
         Game configuratedGame = new Game();
@@ -119,6 +154,10 @@ public class GameManagerTest {
         assertTrue(!game.isConfigurable());
     }
 
+    /**
+     * Metodo per il testing del metodo startGame di GameManager
+     * nel caso in cui il game configurato sia null.
+     */
     @Test
     public void testStartGameConfiguratedGameNull() {
         Throwable exception = assertThrows(
@@ -131,6 +170,11 @@ public class GameManagerTest {
                 exception.getMessage());
     }
 
+    /**
+     * Metodo per il testing del metodo startGame di GameManager
+     * nel caso in cui il game configurato non abbia la parola segreta
+     * impostata.
+     */
     @Test
     public void testStartGameConfiguratedGameEmptySecretWord() {
         Throwable exception = assertThrows(
@@ -143,6 +187,10 @@ public class GameManagerTest {
                 exception.getMessage());
     }
 
+    /**
+     * Metodo per il testing del metodo startGame di GameManager
+     * nel caso in cui il game corrente sia già stato configurato.
+     */
     @Test
     public void testStartGameCurrentGameHasSecretWord() {
         Throwable exception = assertThrows(
@@ -157,6 +205,9 @@ public class GameManagerTest {
         assertEquals("C'è già un game in corso.", exception.getMessage());
     }
 
+    /**
+     * Metodo per il testing del metodo backGame di GameManager.
+     */
     @Test
     public void testBackGame() {
         game.setSecretWord("bread");
@@ -171,6 +222,10 @@ public class GameManagerTest {
         assertEquals(GameManager.getSecretWord(game), "");
     }
 
+    /**
+     * Metodo per il testing del metodo backGame di GameManager
+     * nel caso in cui il game corrente sia configurabile.
+     */
     @Test
     public void testBackGameConfigurableGame() {
 
@@ -183,6 +238,10 @@ public class GameManagerTest {
         assertEquals("Non c'è un game in corso.", exception.getMessage());
     }
 
+    /**
+     * Metodo per il testing del metodo startGame di GameManager
+     * nel caso in cui il game corrente non abbia una parola segreta.
+     */
     @Test
     public void testBackGameEmptySecretWord() {
 
@@ -195,6 +254,10 @@ public class GameManagerTest {
         assertEquals("Non c'è un game in corso.", exception.getMessage());
     }
 
+    /**
+     * Metodo per il testing del metodo makeTry di GameManager
+     * nel caso in cui la parola del tentativo sia troppo lunga.
+     */
     @Test
     public void testMakeTryWordTooLong() {
         Throwable exception = assertThrows(
@@ -207,6 +270,10 @@ public class GameManagerTest {
                 + " troppo elevato di caratteri.", exception.getMessage());
     }
 
+    /**
+     * Metodo per il testing del metodo makeTry di GameManager
+     * nel caso in cui la parola del tentativo sia troppo corta.
+     */
     @Test
     public void testMakeTryWordTooShort() {
         Throwable exception = assertThrows(
@@ -219,6 +286,10 @@ public class GameManagerTest {
                 + "caratteri.", exception.getMessage());
     }
 
+    /**
+     * Metodo per il testing del metodo makeTry di GameManager
+     * nel caso in cui la parola del tentativo contenga caratteri non ammessi.
+     */
     @Test
     public void testMakeTryWordUnavailableCharacters() {
         Throwable exception = assertThrows(
@@ -231,6 +302,10 @@ public class GameManagerTest {
                 exception.getMessage());
     }
 
+    /**
+     * Metodo per il testing del metodo makeTry di GameManager
+     * nel caso in cui il game sia configurabile.
+     */
     @Test
     public void testMakeTryGameNotStarted() {
         Throwable exception = assertThrows(
@@ -241,7 +316,12 @@ public class GameManagerTest {
 
         assertEquals("Il game non è iniziato.", exception.getMessage());
     }
-
+    
+    /**
+     * Metodo per il testing del metodo makeTry di GameManager.
+     * Qui viene verificato che, nel caso in cui il game venga vinto,
+     * la costante restituita sia quelle che effettivamente ci si aspetta.
+     */
     @Test
     public void testMakeTryGameWinInteger() {
         Pair<Integer, List<Word>> pair = new Pair<Integer, List<Word>>();
@@ -258,7 +338,12 @@ public class GameManagerTest {
 
         assertEquals(pair.getFirst(), Helper.GAME_WIN);
     }
-
+    
+    /**
+     * Metodo per il testing del metodo makeTry di GameManager.
+     * Qui viene verificato che, nel caso in cui il game venga vinto,
+     * le parole vengano inserite correttamente nei vari tentativi.
+     */
     @Test
     public void testMakeTryGameWinTryFirst() {
         List<Word> trys = new ArrayList<Word>();
@@ -290,6 +375,12 @@ public class GameManagerTest {
 
     }
 
+    /**
+     * Metodo per il testing del metodo makeTry di GameManager.
+     * Qui viene verificato che, nel caso in cui il game venga vinto,
+     * il format delle parole inserite nei vari tentativi
+     * sia impostato correttamente.
+     */
     @Test
     public void testMakeTryGameWinTrySecond() {
         List<Word> trys = new ArrayList<Word>();
@@ -321,6 +412,12 @@ public class GameManagerTest {
 
     }
 
+    /**
+     * Metodo per il testing del metodo makeTry di GameManager.
+     * Qui viene verificato che, nel caso in cui il game venga vinto,
+     * il numero di tentativi sia effettivamente compreso nell'intervallo
+     * che ci si aspetta.
+     */
     @Test
     public void testMakeTryGameWinSizeTrys() {
         Pair<Integer, List<Word>> pair = new Pair<Integer, List<Word>>();
@@ -343,6 +440,11 @@ public class GameManagerTest {
         assertTrue(pair.getSecond().size() > 0 && pair.getSecond().size() <= Helper.MAX_TRYS);
     }
 
+    /**
+     * Metodo per il testing del metodo makeTry di GameManager.
+     * Qui viene verificato che, nel caso in cui il game sia ancora in corso,
+     * la costante restituita sia quelle che effettivamente ci si aspetta.
+     */
     @Test
     public void testMakeTryGameWaitingInteger() {
         Pair<Integer, List<Word>> pair = new Pair<Integer, List<Word>>();
@@ -360,6 +462,11 @@ public class GameManagerTest {
         assertEquals(pair.getFirst(), Helper.GAME_WAITING);
     }
 
+    /**
+     * Metodo per il testing del metodo makeTry di GameManager.
+     * Qui viene verificato che, nel caso in cui il game sia in corso,
+     * le parole vengano inserite correttamente nei vari tentativi.
+     */
     @Test
     public void testMakeTryGameWaitingTryFirst() {
         List<Word> trys = new ArrayList<Word>();
@@ -392,6 +499,12 @@ public class GameManagerTest {
         }
     }
 
+    /**
+     * Metodo per il testing del metodo makeTry di GameManager.
+     * Qui viene verificato che, nel caso in cui il game sia in corso,
+     * il format delle parole inserite nei vari tentativi
+     * sia impostato correttamente.
+     */
     @Test
     public void testMakeTryGameWaitingTrySecond() {
         List<Word> trys = new ArrayList<Word>();
@@ -424,6 +537,12 @@ public class GameManagerTest {
         }
     }
 
+    /**
+     * Metodo per il testing del metodo makeTry di GameManager.
+     * Qui viene verificato che, nel caso in cui il game sia in corso,
+     * il numero di tentativi sia effettivamente compreso nell'intervallo
+     * che ci si aspetta.
+     */
     @Test
     public void testMakeTryGameWaitingSizeTrys() {
         Pair<Integer, List<Word>> pair = new Pair<Integer, List<Word>>();
@@ -441,6 +560,11 @@ public class GameManagerTest {
         assertTrue(pair.getSecond().size() > 0 && pair.getSecond().size() < Helper.MAX_TRYS);
     }
 
+    /**
+     * Metodo per il testing del metodo makeTry di GameManager.
+     * Qui viene verificato che, nel caso in cui il game venga perso,
+     * la costante restituita sia quelle che effettivamente ci si aspetta.
+     */
     @Test
     public void testMakeTryGameLoseInteger() {
         Pair<Integer, List<Word>> pair = new Pair<Integer, List<Word>>();
@@ -458,6 +582,11 @@ public class GameManagerTest {
         assertEquals(pair.getFirst(), Helper.GAME_WAITING);
     }
 
+    /**
+     * Metodo per il testing del metodo makeTry di GameManager.
+     * Qui viene verificato che, nel caso in cui il game venga perso,
+     * le parole vengano inserite correttamente nei vari tentativi.
+     */
     @Test
     public void testMakeTryGameLoseTryFirst() {
         List<Word> trys = new ArrayList<Word>();
@@ -502,6 +631,12 @@ public class GameManagerTest {
         }
     }
 
+    /**
+     * Metodo per il testing del metodo makeTry di GameManager.
+     * Qui viene verificato che, nel caso in cui il game venga perso,
+     * il format delle parole inserite nei vari tentativi
+     * sia impostato correttamente.
+     */
     @Test
     public void testMakeTryGameLoseTrySecond() {
         List<Word> trys = new ArrayList<Word>();
@@ -546,6 +681,12 @@ public class GameManagerTest {
         }
     }
 
+    /**
+     * Metodo per il testing del metodo makeTry di GameManager.
+     * Qui viene verificato che, nel caso in cui il game venga perso,
+     * il numero di tentativi sia effettivamente compreso nell'intervallo
+     * che ci si aspetta.
+     */
     @Test
     public void testMakeTryGameLoseSizeTrys() {
         List<Integer> formats = new LinkedList<Integer>();
@@ -576,11 +717,19 @@ public class GameManagerTest {
         assertTrue(pair.getSecond().size() == Helper.MAX_TRYS + 1);
     }
 
+    /**
+     * Metodo per il testing del metodo isGameStarted di GameManager
+     * nel caso in cui il gioco non sia partito.
+     */
     @Test
     public void testIsGameStartedGameNotStarted() {
         assertFalse(GameManager.isGameStarted(game));
     }
 
+    /**
+     * Metodo per il testing del metodo isGameStarted di GameManager
+     * nel caso in cui il gioco sia partito.
+     */
     @Test
     public void testIsGameStartedGameStarted() {
         game.setSecretWord("modem");

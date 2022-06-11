@@ -40,7 +40,7 @@ public class GameManagerTest {
 
         assertEquals(secretWord, game.getSecretWord());
     }
-    
+
     /**
      * Metodo per il testing del metodo setSecretWord di GameManager
      * nel caso in cui la parola segreta dovesse essere troppo lunga.
@@ -71,7 +71,7 @@ public class GameManagerTest {
         assertEquals("La parola inserita contiene un numero insufficiente di "
                 + "caratteri.", exception.getMessage());
     }
-    
+
     /**
      * Metodo per il testing del metodo setSecretWord di GameManager
      * nel caso in cui la parola segreta dovesse contenere
@@ -316,7 +316,7 @@ public class GameManagerTest {
 
         assertEquals("Il game non è iniziato.", exception.getMessage());
     }
-    
+
     /**
      * Metodo per il testing del metodo makeTry di GameManager.
      * Qui viene verificato che, nel caso in cui il game venga vinto,
@@ -338,7 +338,7 @@ public class GameManagerTest {
 
         assertEquals(pair.getFirst(), Helper.GAME_WIN);
     }
-    
+
     /**
      * Metodo per il testing del metodo makeTry di GameManager.
      * Qui viene verificato che, nel caso in cui il game venga vinto,
@@ -406,7 +406,8 @@ public class GameManagerTest {
         int i = 0;
 
         for (Word words : trys) {
-            assertEquals(pair.getSecond().get(i).getFormat(), words.getFormat());
+            assertEquals(pair.getSecond().get(i).getFormat(),
+                words.getFormat());
             i++;
         }
 
@@ -437,7 +438,8 @@ public class GameManagerTest {
             e.printStackTrace();
         }
 
-        assertTrue(pair.getSecond().size() > 0 && pair.getSecond().size() <= Helper.MAX_TRYS);
+        assertTrue(pair.getSecond().size() > 0
+            && pair.getSecond().size() <= Helper.MAX_TRYS);
     }
 
     /**
@@ -532,7 +534,8 @@ public class GameManagerTest {
         int i = 0;
 
         for (Word words : trys) {
-            assertEquals(pair.getSecond().get(i).getFormat(), words.getFormat());
+            assertEquals(pair.getSecond().get(i).getFormat(),
+                words.getFormat());
             i++;
         }
     }
@@ -557,7 +560,8 @@ public class GameManagerTest {
             e.printStackTrace();
         }
 
-        assertTrue(pair.getSecond().size() > 0 && pair.getSecond().size() < Helper.MAX_TRYS);
+        assertTrue(pair.getSecond().size() > 0
+            && pair.getSecond().size() < Helper.MAX_TRYS);
     }
 
     /**
@@ -676,7 +680,8 @@ public class GameManagerTest {
         int i = 0;
 
         for (Word words : trys) {
-            assertEquals(pair.getSecond().get(i).getFormat(), words.getFormat());
+            assertEquals(pair.getSecond().get(i).getFormat(),
+                words.getFormat());
             i++;
         }
     }

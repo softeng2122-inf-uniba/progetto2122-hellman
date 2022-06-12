@@ -768,7 +768,7 @@ public class GameManagerTest {
             e.printStackTrace();
         }
 
-        assertEquals(pair.getSecond().get(0).getFormat().get(trying.length()),
+        assertEquals(pair.getSecond().get(0).getFormat().get(trying.length() - 1),
                 Helper.FORMAT_LETTER_NOT_FOUND);
     }
 

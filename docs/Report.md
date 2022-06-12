@@ -185,23 +185,23 @@ Per la lettura dell'input dell'utente e il riconoscimento dei comandi si utilizz
 ![Parser](../drawings/Parser.jpg)
 
 ### Come paroliere voglio impostare una parola segreta manualmente
-![Nuova](../drawings/Nuova.jpg)
+![nuova](../drawings/nuova.jpg)
 
 ### Come paroliere voglio mostrare la parola segreta
-![Mostra](../drawings/Mostra.jpg)
+![mostra](../drawings/mostra.jpg)
 
 ### Come giocatore voglio mostrare l'help con elenco comandi
-![Help](../drawings/Help.jpg)
-![Help](../drawings/Help2.jpg)
+![help](../drawings/help.jpg)
+![help](../drawings/help2.jpg)
 
 ### Come giocatore voglio iniziare una nuova partita
-![Gioca](../drawings/Gioca.jpg)
+![gioca](../drawings/gioca.jpg)
 
 ### Come giocatore voglio abbandonare la partita
-![Abbandona](../drawings/Abbandona.jpg)
+![abbandona](../drawings/abbandona.jpg)
 
 ### Come giocatore voglio chiudere il gioco
-![Esci](../drawings/Esci.jpg)
+![esci](../drawings/esci.jpg)
 
 ### Come giocatore voglio effettuare un tentativo per indovinare la parola segreta
 ![Tentativo](../drawings/Tentativo.jpg)

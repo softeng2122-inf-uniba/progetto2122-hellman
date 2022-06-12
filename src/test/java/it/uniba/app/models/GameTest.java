@@ -21,7 +21,7 @@ public class GameTest {
     private Game game = new Game();
 
     /**
-     * Metodo per il testing del metodo setSecretWord() di Game.
+     * Metodo per il testing del metodo setSecretWord di Game.
      */
     @Test
     public void testSetSecretWord() {
@@ -33,7 +33,7 @@ public class GameTest {
     }
 
     /**
-     * Metodo per il testing del metodo getMaxTry() di Game.
+     * Metodo per il testing del metodo getMaxTry di Game.
      */
     @Test
     public void testGetMaxTry() {
@@ -41,7 +41,7 @@ public class GameTest {
     }
 
     /**
-     * Metodo per il testing del metodo getNumberLetter() di Game.
+     * Metodo per il testing del metodo getNumberLetter di Game.
      */
     @Test
     public void testGetNumberLetter() {
@@ -49,7 +49,7 @@ public class GameTest {
     }
 
     /**
-     * Metodo per il testing del metodo isConfigurable() di Game
+     * Metodo per il testing del metodo isConfigurable di Game
      * nel caso in cui il gioco sia settato come non configurabile.
      */
     @Test
@@ -60,7 +60,7 @@ public class GameTest {
     }
 
     /**
-     * Metodo per il testing del metodo isConfigurable() di Game
+     * Metodo per il testing del metodo isConfigurable di Game
      * nel caso in cui il gioco sia settato come configurabile.
      */
     @Test
@@ -70,7 +70,7 @@ public class GameTest {
     }
 
     /**
-     * Metodo per il testing del metodo enableConfigurable() di Game.
+     * Metodo per il testing del metodo enableConfigurable di Game.
      */
     @Test
     public void testEnableConfigurable() {
@@ -80,7 +80,7 @@ public class GameTest {
     }
 
     /**
-     * Metodo per il testing del metodo disableConfigurable() di Game.
+     * Metodo per il testing del metodo disableConfigurable di Game.
      */
     @Test
     public void testDisableConfigurable() {
@@ -90,7 +90,7 @@ public class GameTest {
     }
 
     /**
-     * Metodo per il testing del metodo getAddTry() di Game.
+     * Metodo per il testing del metodo getAddTry di Game.
      */
     @Test
     public void testAddTry() {
@@ -101,7 +101,7 @@ public class GameTest {
     }
 
     /**
-     * Metodo per il testing del metodo getTrys() di Game.
+     * Metodo per il testing del metodo getTrys di Game.
      */
     @Test
     public void testGetTrys() {
@@ -114,7 +114,7 @@ public class GameTest {
     }
 
     /**
-     * Metodo per il testing del metodo getNumberTrys() di Game.
+     * Metodo per il testing del metodo getNumberTrys di Game.
      */
     @Test
     public void testGetNumberTrys() {
@@ -131,7 +131,7 @@ public class GameTest {
 
     /**
      * Metodo per il testing del reset della secret word
-     * con il metodo resetGame() di Game.
+     * con il metodo resetGame di Game.
      */
     @Test
     public void testResetGameSecretWord() {
@@ -145,7 +145,7 @@ public class GameTest {
 
     /**
      * Metodo per il testing del reset della configurabilità
-     * con il metodo resetGame() di Game.
+     * con il metodo resetGame di Game.
      */
     @Test
     public void testResetGameConfigurable() {
@@ -159,7 +159,7 @@ public class GameTest {
 
     /**
      * Metodo per il testing del reset dei tentativi
-     * con il metodo resetGame() di Game.
+     * con il metodo resetGame di Game.
      */
     @Test
     public void testResetGameTrys() {

@@ -182,26 +182,26 @@ Di seguito sono presentati i diagrammi di sequenza del progetto.
 Per la lettura dell'input dell'utente e il riconoscimento dei comandi si utilizza il parser prima dell'esecuzione delle funzionalità richieste del gioco.
 
 ### Parser
-![](../drawings/Parser.jpg)
+![Parser](../drawings/Parser.jpg)
 
 ### Come paroliere voglio impostare una parola segreta manualmente
-![nuova](../drawings/Nuova.jpg)
+![Nuova](../drawings/Nuova.jpg)
 
 ### Come paroliere voglio mostrare la parola segreta
-![mostra](../drawings/Mostra.jpg)
+![Mostra](../drawings/Mostra.jpg)
 
 ### Come giocatore voglio mostrare l'help con elenco comandi
-![help](../drawings/Help.jpg)
-![help](../drawings/Help2.jpg)
+![Help](../drawings/Help.jpg)
+![Help](../drawings/Help2.jpg)
 
 ### Come giocatore voglio iniziare una nuova partita
-![gioca](../drawings/Gioca.jpg)
+![Gioca](../drawings/Gioca.jpg)
 
 ### Come giocatore voglio abbandonare la partita
-![abbandona](../drawings/Abbandona.jpg)
+![Abbandona](../drawings/Abbandona.jpg)
 
 ### Come giocatore voglio chiudere il gioco
-![esci](../drawings/Esci.jpg)
+![Esci](../drawings/Esci.jpg)
 
 ### Come giocatore voglio effettuare un tentativo per indovinare la parola segreta
-![tentativo](../drawings/Tentativo.jpg)
+![Tentativo](../drawings/Tentativo.jpg)

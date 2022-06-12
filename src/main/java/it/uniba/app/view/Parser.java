@@ -37,8 +37,8 @@ class Parser {
 
     }
 
-    void setIgnoreWords(Set<String> ignoreWords) {
-        this.ignoreWords = ignoreWords;
+    void setIgnoreWords(final Set<String> newIgnoreWords) {
+        this.ignoreWords = newIgnoreWords;
     }
 
     /**

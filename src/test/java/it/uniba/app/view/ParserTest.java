@@ -4,7 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -48,6 +50,17 @@ public class ParserTest {
             i++;
         }
 
+    }
+    
+    @Test
+    public void testParseTokenEmpty() {
+        Set<String> ignoreWords = new HashSet<String>();
+        ignoreWords.add("/ciao");
+        parser.setIgnoreWords(ignoreWords);
+
+        ParserOutput parserOutput = parser.parse("/ciao");
+
+        assertNull(parserOutput);
     }
 
     @Test

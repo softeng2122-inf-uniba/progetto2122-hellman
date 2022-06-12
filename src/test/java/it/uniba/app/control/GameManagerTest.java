@@ -722,6 +722,42 @@ public class GameManagerTest {
         assertTrue(pair.getSecond().size() == Helper.MAX_TRYS + 1);
     }
 
+    @Test
+    public void testMakeTryLetterFoundWrongPosition() {
+        Pair<Integer, List<Word>> pair = new Pair<Integer, List<Word>>();
+
+        game.setSecretWord("women");
+
+        game.disableConfigurable();
+        
+        try {
+            pair = GameManager.makeTry(game, "clock");
+        } catch (GameException e) {
+            e.printStackTrace();
+        }
+
+        assertEquals(pair.getSecond().get(0).getFormat().get(2),
+            Helper.FORMAT_LETTER_FOUND_WRONG_POSITION);
+    }
+
+    @Test
+    public void testMakeTryRepeatedLetters() {
+        Pair<Integer, List<Word>> pair = new Pair<Integer, List<Word>>();
+
+        game.setSecretWord("allen");
+
+        game.disableConfigurable();
+
+        try {
+            pair = GameManager.makeTry(game, "lolal");
+        } catch (GameException e) {
+            e.printStackTrace();
+        }
+
+        assertEquals(pair.getSecond().get(0).getFormat().get(4),
+                Helper.FORMAT_LETTER_NOT_FOUND);
+    }
+
     /**
      * Metodo per il testing del metodo isGameStarted di GameManager
      * nel caso in cui il gioco non sia partito.

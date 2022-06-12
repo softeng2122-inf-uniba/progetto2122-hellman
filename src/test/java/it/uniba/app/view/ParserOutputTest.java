@@ -7,9 +7,18 @@ import org.junit.jupiter.api.Test;
 
 import it.uniba.app.utils.CommandType;
 
+/**
+ * Classe dedicata ai test dei metodi della classe ParserOutput.
+ */
 public class ParserOutputTest {
+    /** Oggetto da utilizzare per effettuare i casi di test. */
     private ParserOutput parserOutput;
 
+    /**
+     * Metodo per testare il comportamento del costruttore e per inizializzare
+     * i valori dell'oggetto parserOutput da usare per
+     * i successivi casi di test.
+     */
     @BeforeEach
     public void testConstructor() {
         String name = "/help";
@@ -22,6 +31,9 @@ public class ParserOutputTest {
         assertEquals(command, parserOutput.getCommand());
     }
 
+    /**
+     * Metodo utilizzato per il testing del metodo getCommand di ParserOutput.
+     */
     @Test
     public void testGetCommand() {
         String name = "/gioca";
@@ -34,6 +46,9 @@ public class ParserOutputTest {
         assertEquals(command, parserOutput.getCommand());
     }
 
+    /**
+     * Metodo utilizzato per il testing del metodo setCommand di ParserOutput.
+     */
     @Test
     public void testSetCommand() {
         String name = "/nuova";

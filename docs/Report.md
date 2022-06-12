@@ -204,4 +204,4 @@ Per la lettura dell'input dell'utente e il riconoscimento dei comandi si utilizz
 ![esci](../drawings/esci.jpg)
 
 ### Come giocatore voglio effettuare un tentativo per indovinare la parola segreta
-![Tentativo](../drawings/Tentativo.jpg)
+![tentativo](../drawings/tentativo.jpg)

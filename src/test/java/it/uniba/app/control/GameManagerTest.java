@@ -722,6 +722,12 @@ public class GameManagerTest {
         assertTrue(pair.getSecond().size() == Helper.MAX_TRYS + 1);
     }
 
+    /**
+     * Metodo per il testing della giusta colorazione delle lettere
+     * dopo aver effettuato un tentativo con il metodo makeTry
+     * di GameManager. In metodo viene verificato il caso in cui
+     * sia la lettera sia presente ma si trovi nel posto sbagliato.
+     */
     @Test
     public void testMakeTryLetterFoundWrongPosition() {
         Pair<Integer, List<Word>> pair = new Pair<Integer, List<Word>>();
@@ -729,7 +735,7 @@ public class GameManagerTest {
         game.setSecretWord("women");
 
         game.disableConfigurable();
-        
+
         try {
             pair = GameManager.makeTry(game, "clock");
         } catch (GameException e) {
@@ -740,6 +746,12 @@ public class GameManagerTest {
             Helper.FORMAT_LETTER_FOUND_WRONG_POSITION);
     }
 
+    /**
+     * Metodo per il testing della giusta colorazione delle lettere
+     * dopo aver effettuato un tentativo con il metodo makeTry
+     * di GameManager. In metodo viene verificato il caso in cui
+     * sia presente più volte la stessa lettera nelle parole.
+     */
     @Test
     public void testMakeTryRepeatedLetters() {
         Pair<Integer, List<Word>> pair = new Pair<Integer, List<Word>>();
@@ -748,13 +760,15 @@ public class GameManagerTest {
 
         game.disableConfigurable();
 
+        String trying = "lolal";
+
         try {
-            pair = GameManager.makeTry(game, "lolal");
+            pair = GameManager.makeTry(game, trying);
         } catch (GameException e) {
             e.printStackTrace();
         }
 
-        assertEquals(pair.getSecond().get(0).getFormat().get(4),
+        assertEquals(pair.getSecond().get(0).getFormat().get(trying.length()),
                 Helper.FORMAT_LETTER_NOT_FOUND);
     }
 

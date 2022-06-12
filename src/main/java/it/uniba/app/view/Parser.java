@@ -37,6 +37,10 @@ class Parser {
 
     }
 
+    void setIgnoreWords(Set<String> ignoreWords) {
+        this.ignoreWords = ignoreWords;
+    }
+
     /**
      * Restituisce la lista dei comandi accettati dal parser.
      *

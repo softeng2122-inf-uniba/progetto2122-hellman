@@ -138,42 +138,70 @@ Dopo aver eseguito il comando `docker pull` copiandolo da GitHub Packages, il co
 ## Diagrammi delle classi
 
 ---
-Di seguito è presentato il modello a prospettiva software del progetto.
+Di seguito è presentato il modello a prospettiva software generale del progetto.
 
-![prospettivaSW](../drawings/prospettivaSw.png)
+Come pattern architetturale è stato utilizzato l'MVC.
 
-Come pattern architetturale è stato utilizzato l'MVC. La sigla MVC sta per Model View Controller ove Model fornisce i metodi per accedere ai dati utili all'applicazione, View visualizza i dati contenuti nel model e si occupa dell'interazione con utenti e agenti, Controller riceve i comandi dell'utente e li attua modificando lo stato degli altri due componenti.
+![prospettivaSW](../drawings/Generale.jpg)
+
+Di seguito sono presentate i modelli a prospettiva software dei comandi del gioco:
+
+### Impostare una parola segreta manualmente
+![](../drawings/Sw-ImpostareParolaSegreta.jpg)
+
+### Mostrare parola segreta
+![](../drawings/Sw-MostrareParolaSegreta.jpg)
+
+### Help
+![](../drawings/Sw-Help.jpg)
+
+### Gioca
+![](../drawings/Sw-Nuova.jpg)
+
+### Abbandona
+![](../drawings/Sw-Abbandona.jpg)
+
+### Chiusura gioco
+![](../drawings/Sw-Esci.jpg)
+
+### Effettuare tentativo parola segreta
+![](../drawings/Sw-Tentativo.jpg)
+
+La sigla MVC sta per Model View Controller ove Model fornisce i metodi per accedere ai dati utili all'applicazione, View visualizza i dati contenuti nel model e si occupa dell'interazione con utenti e agenti, Controller riceve i comandi dell'utente e li attua modificando lo stato degli altri due componenti.
 
 In questo progetto sono stati scelti come Model le classi WordSmith, Player, Game e Word.
 
-Come View sono state scelte le classi UserManager e GameManager.
+Come View sono state scelte le classi Viewer, Terminal e Parser.
 
-Come Controller sono state scelte le classi Viewer, Terminal e Parser.
+Come Controller sono state scelte le classi UserManager e GameManager.
 
 ## Diagrammi di Sequenza
 
 ---
 Di seguito sono presentati i diagrammi di sequenza del progetto.
-Per tutte le funzionalità è stato incluso il diagramma di sequenza del parsing del comando dell'utente, logicamente precedente all'esecuzione delle istruzioni legate al comando stesso.
+Per la lettura dell'input dell'utente e il riconoscimento dei comandi si utilizza il parser prima dell'esecuzione delle funzionalità richieste del gioco.
+
+### Parser
+![](../drawings/Parser.jpg)
 
 ### Come paroliere voglio impostare una parola segreta manualmente
-![nuova](../drawings/nuova.jpg)
+![nuova](../drawings/Nuova.jpg)
 
 ### Come paroliere voglio mostrare la parola segreta
-![mostra](../drawings/mostra.jpg)
+![mostra](../drawings/Mostra.jpg)
 
 ### Come giocatore voglio mostrare l'help con elenco comandi
-![help](../drawings/help.jpg)
-![help](../drawings/help2.jpg)
+![help](../drawings/Help.jpg)
+![help](../drawings/Help2.jpg)
 
 ### Come giocatore voglio iniziare una nuova partita
-![gioca](../drawings/gioca.jpg)
+![gioca](../drawings/Gioca.jpg)
 
 ### Come giocatore voglio abbandonare la partita
-![abbandona](../drawings/abbandona.jpg)
+![abbandona](../drawings/Abbandona.jpg)
 
 ### Come giocatore voglio chiudere il gioco
-![esci](../drawings/esci.jpg)
+![esci](../drawings/Esci.jpg)
 
 ### Come giocatore voglio effettuare un tentativo per indovinare la parola segreta
-![tentativo](../drawings/tentativo.jpg)
+![tentativo](../drawings/Tentativo.jpg)

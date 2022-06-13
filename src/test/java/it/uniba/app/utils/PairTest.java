@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 public class PairTest {
     /** Oggetto di tipo Pair creato per effettuare i test
      * sui vari metodi della classe. */
-    Pair<String, Integer> pair = new Pair<String, Integer>();
+    private Pair<String, Integer> pair = new Pair<String, Integer>();
 
     /**
      * Metodo per il testing del costruttore Pair
@@ -29,8 +29,8 @@ public class PairTest {
      */
     @Test
     public void testPairFirst() {
-        Integer number = 100;
-        String string = "200";
+        Integer number = 3;
+        String string = "33";
         pair = new Pair<String, Integer>(string, number);
         assertEquals(string, pair.getFirst());
     }
@@ -42,8 +42,8 @@ public class PairTest {
      */
     @Test
     public void testPairSecond() {
-        Integer number = 100;
-        String string = "200";
+        Integer number = 3;
+        String string = "33";
         pair = new Pair<String, Integer>(string, number);
         assertEquals(number, pair.getSecond());
     }
@@ -54,7 +54,7 @@ public class PairTest {
      */
     @Test
     public void testGetFirst() {
-        String string = "200";
+        String string = "33";
         pair.setFirst(string);
         assertEquals(string, pair.getFirst());
     }
@@ -65,7 +65,7 @@ public class PairTest {
      */
     @Test
     public void testGetSecond() {
-        Integer number = 100;
+        Integer number = 3;
         pair.setSecond(number);
         assertEquals(number, pair.getSecond());
     }
@@ -76,7 +76,7 @@ public class PairTest {
      */
     @Test
     public void testSetFirst() {
-        String string = "200";
+        String string = "33";
         pair.setFirst(string);
         assertEquals(string, pair.getFirst());
     }
@@ -87,7 +87,7 @@ public class PairTest {
      */
     @Test
     public void testSetSecond() {
-        Integer number = 100;
+        Integer number = 3;
         pair.setSecond(number);
         assertEquals(number, pair.getSecond());
     }

@@ -64,7 +64,15 @@ Di seguito è presentato il modello di dominio del progetto.
 >   - 3.0. Requisiti specifici;
 >       - 3.1. Requisiti funzionali;
 >       - 3.2. Requisiti non funzionali;
+>   - 4.0. System design;
+>       - 4.1. Stile architetturale adottato;
 >   - 5.0. OO Design (diagrammi delle classi e diagrammi di sequenza delle user story più importanti con eventuali commenti alle decisioni prese);
+>       - 5.1. Diagrammi delle classi;
+>       - 5.2. Diagrammi di sequenza;
+>   - 6.0. Riepilogo test;
+>   - 7.0. Manuale utente;
+>   - 8.0. Processo di sviluppo e organizzazione del lavoro;
+>   - 9.0. Analisi retrospettiva;
 
 ---
 

@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-public class WordSmithTest{
+public class WordSmithTest {
 
     /** Oggetto di tipo WordSmith creato per effettuare i test
      * sui vari metodi della classe. */
@@ -12,7 +12,7 @@ public class WordSmithTest{
 
     /** Oggetto di tipo Game creato per effettuare i test
      * sui vari metodi della classe WordSmith. */
-    Game game = new Game();
+    private Game game = new Game();
 
     /**
      * Metodo per il testing del metodo getCurrentGame di WordSmith,
@@ -21,7 +21,8 @@ public class WordSmithTest{
     @Test
     public void testGetConfiguratedGameSecretWord() {
         wordSmith.setConfiguratedGame(game);
-        assertEquals(game.getSecretWord(), wordSmith.getConfiguratedGame().getSecretWord());
+        assertEquals(game.getSecretWord(),
+        wordSmith.getConfiguratedGame().getSecretWord());
     }
 
     /**
@@ -31,7 +32,8 @@ public class WordSmithTest{
     @Test
     public void testGetConfiguratedGameConfigurable() {
         wordSmith.setConfiguratedGame(game);
-        assertEquals(game.isConfigurable(), wordSmith.getConfiguratedGame().isConfigurable());
+        assertEquals(game.isConfigurable(),
+        wordSmith.getConfiguratedGame().isConfigurable());
     }
 
     /**w
@@ -41,7 +43,8 @@ public class WordSmithTest{
     @Test
     public void testGetConfiguratedGameTrys() {
         wordSmith.setConfiguratedGame(game);
-        assertEquals(game.getTrys(), wordSmith.getConfiguratedGame().getTrys());
+        assertEquals(game.getTrys(),
+        wordSmith.getConfiguratedGame().getTrys());
     }
 
     /**
@@ -51,7 +54,8 @@ public class WordSmithTest{
     @Test
     public void testSetConfiguratedGameSecretWord() {
         wordSmith.setConfiguratedGame(game);
-        assertEquals(game.getSecretWord(), wordSmith.getConfiguratedGame().getSecretWord());
+        assertEquals(game.getSecretWord(),
+        wordSmith.getConfiguratedGame().getSecretWord());
     }
 
     /**
@@ -61,7 +65,8 @@ public class WordSmithTest{
     @Test
     public void testSetConfiguratedGameConfigurable() {
         wordSmith.setConfiguratedGame(game);
-        assertEquals(game.isConfigurable(), wordSmith.getConfiguratedGame().isConfigurable());
+        assertEquals(game.isConfigurable(),
+        wordSmith.getConfiguratedGame().isConfigurable());
     }
 
     /**
@@ -71,7 +76,7 @@ public class WordSmithTest{
     @Test
     public void testSetConfiguratedGameTrys() {
         wordSmith.setConfiguratedGame(game);
-        assertEquals(game.getTrys(), wordSmith.getConfiguratedGame().getTrys());
+        assertEquals(game.getTrys(),
+        wordSmith.getConfiguratedGame().getTrys());
     }
-
 }

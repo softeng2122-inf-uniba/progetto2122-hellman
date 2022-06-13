@@ -27,7 +27,6 @@
 
 # **1. Introduzione del progetto**
 
----
 
 
 >Il seguente progetto si basa sulla realizzazione del gioco Wordle a riga di comando.
@@ -40,7 +39,7 @@ La parola da indovinare viene decisa dal paroliere, prima che il gioco inizi.
 
 # **2. Modello di dominio**
 
----
+
 Di seguito è presentato il modello di dominio del progetto.
 
 ![dominio](../drawings/Dominio.png)

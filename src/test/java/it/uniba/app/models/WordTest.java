@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 public class WordTest {
     /** Oggetto di tipo Word creato per effettuare i test
      * sui vari metodi della classe. */
-    private Word word_object;
+    private Word wordObject;
 
     /** Oggetto di tipo String creato per effettuare i test
      * sui vari metodi della classe Word. */
@@ -21,15 +21,15 @@ public class WordTest {
 
     /** Oggetto di tipo List<Integer> creato per effettuare i test
      * sui vari metodi della classe Word. */
-    private List<Integer> format = Arrays.asList(1,1,1,1,1);
-    
+    private List<Integer> format = Arrays.asList(1, 1, 1, 1, 1);
+
     /**
      * Metodo per il testing del costruttore di Word.
      */
     @Test
     public void testWordWord() {
-        word_object = new Word(word, format);
-        assertEquals(word, word_object.getWord());
+        wordObject = new Word(word, format);
+        assertEquals(word, wordObject.getWord());
     }
 
     /**
@@ -37,8 +37,8 @@ public class WordTest {
      */
     @Test
     public void testWordFormat() {
-        word_object = new Word(word, format);
-        assertEquals(format, word_object.getFormat());
+        wordObject = new Word(word, format);
+        assertEquals(format, wordObject.getFormat());
     }
 
     /**
@@ -46,8 +46,8 @@ public class WordTest {
      */
     @Test
     public void testGetWord() {
-        word_object = new Word(word, format);
-        assertEquals(word, word_object.getWord());
+        wordObject = new Word(word, format);
+        assertEquals(word, wordObject.getWord());
     }
 
     /**
@@ -55,7 +55,7 @@ public class WordTest {
      */
     @Test
     public void testGetFormat() {
-        word_object = new Word(word, format);
-        assertEquals(format, word_object.getFormat());
+        wordObject = new Word(word, format);
+        assertEquals(format, wordObject.getFormat());
     }
 }

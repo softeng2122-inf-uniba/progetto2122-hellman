@@ -19,6 +19,8 @@
 - [5.1 Diagrammi delle classi](#51-diagrammi-delle-classi)
 - [5.2 Diagrammi di sequenza](#52-diagrammi-di-sequenza)
 
+[6. Riepilogo test](#6-riepilogo-test)
+
 [7. Manuale Utente](#7-manuale-utente)
 
 [9. Analisi Retrospettiva](#9-analisi-retrospettiva)
@@ -218,6 +220,19 @@ Per la lettura dell'input dell'utente e il riconoscimento dei comandi si utilizz
 
 ### Come giocatore voglio effettuare un tentativo per indovinare la parola segreta
 ![tentativo](../drawings/tentativo.jpg)
+
+---
+
+# **6. Riepilogo test**
+
+*Casi di test* totali:
+
+![casi_test](../drawings/casi_test.png)
+
+
+Di seguito il report di *jacoco*:
+
+![jacoco](../drawings/jacoco.png)
 
 ---
 

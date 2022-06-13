@@ -21,6 +21,8 @@
 
 [7. Manuale Utente](#7-manuale-utente)
 
+[8. Processo di sviluppo e organizzazione del lavoro](#8-processo-di-sviluppo-e-organizzazione-del-lavoro)
+
 [9. Analisi Retrospettiva](#9-analisi-retrospettiva)
 
 ---
@@ -243,6 +245,13 @@ I comandi del giocatore per interagire con il gioco sono:
    >- abbandona la partita corrente (comando /abbandona)
    >- chiudere il gioco (comando /esci)
    >- effettua un tentativo per indovinare la parola segreta (inserendo qualsiasi input dopo /gioca)
+
+---
+
+# **8. Processo di sviluppo e organizzazione del lavoro**
+>Il nostro team ha applicato it metodo di sviluppo software SCRUM, che a sua volta segue il modello di sviluppo software Agile, che utilizza lo stile di processo di Cambiamento ed Evoluzione del software Iterativo. Essendo un team SCRUM, abbiamo seguito le linee guida per questo metodo di sviluppo, tra cui la durata delle iterazioni, che nel nostro caso, hanno avuto una durata di 2 settimane, nonchè il nome delle iterazioni, che in SCRUM prendono il nome di Sprint; come da linee guida SCRUM, il nostro team non ha avuto alcun leader, e, non essendoci un Team Manager, si è autogestito ed è stato autosufficiente per la nostra Cross-Functionality, in quanto tutti i componenti del team dispongono delle competenze necessarie per portare avanti il nostro progetto, evitando qualsiasi operazione di "consulenza", che si sarebbe tradotta in un ritardo dovuto alla spiegazione di argomenti inerenti al nostro progetto ai membri del Team.
+
+>Abbiamo utilizzato, come da direttive, una Scrum Board fornitaci da GitHub, con cinque colonne, To Do, In Progress, Review, Ready e Done per il progresso per lo sviluppo delle issues, ed infine, oltre ai meeting di Sprint Planning, portati a termine con il Product Owner, Professor Filippo Lanubile, abbiamo tenuto dei Daily Scrum Meetings, di durata rigorosamente non maggiore ai 15 minuti, tenutasi online con tutte le webcam accese, in modo da verificare che tutti i componenti del team siano in piedi, e abbiamo chiesto, come da linee guida SCRUM, "Cosa si è fatto ieri?", "Cosa si è fatto oggi?" e "Ci sono problemi?", eventualmente approfonditi in un secondo momento, e non nel meeting stesso. Per lo sviluppo delle issues si sono assegnati uno o due assignees per issue o user story, in base alla difficoltà valutata dal team stesso, ed infine si è tenuto il meeting di Sprint Retrospective relativo allo Sprint 1, utilizzando la piattaforma Microsoft Teams, utilizzando Microsoft Whiteboard in quanto offre il Modello di Retrospettiva Mad, Sad, Glad utilizzato dal nostro team.
 
 ---
 

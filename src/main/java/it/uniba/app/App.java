@@ -3,6 +3,7 @@ package it.uniba.app;
 import it.uniba.app.view.Terminal;
 
 /**
+ * {@literal <<Boundary>>}
  * Main class of the application.
  */
 public final class App {

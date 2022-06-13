@@ -3,24 +3,34 @@
 ## Indice
 
 ---
-[1. Introduzione del progetto](#introduzione-del-progetto)
+[1. Introduzione del progetto](#1-introduzione-del-progetto)
 
-[2. Modello di dominio](#modello-di-dominio)
+[2. Modello di dominio](#2-modello-di-dominio)
 
-[3. Requisiti specifici](#requisiti-specifici)
+[3. Requisiti specifici](#3-requisiti-specifici)
 
-- [3.1 Requisiti funzionali](#requisiti-funzionali)
-- [3.2 Requisiti non funzionali](#requisiti-non-funzionali)
+- [3.1 Requisiti funzionali](#31-requisiti-funzionali)
+- [3.2 Requisiti non funzionali](#32-requisiti-non-funzionali)
 
-[4. OO Design](#oo-design)
-- [4.1 Diagrammi delle classi](#diagrammi-delle-classi)
-- [4.2 Diagrammi di sequenza](#diagrammi-di-sequenza)
+[4. System Design](#4-system-design)
+- [4.1 Stile architetturale adottato](#41-stile-architetturale-adottato)
+
+[5. OO Design](#5-oo-design)
+- [5.1 Diagrammi delle classi](#51-diagrammi-delle-classi)
+- [5.2 Diagrammi di sequenza](#52-diagrammi-di-sequenza)
+
+[6. Riepilogo test](#6-riepilogo-test)
+
+[7. Manuale Utente](#7-manuale-utente)
+
+[8. Processo di sviluppo e organizzazione del lavoro](#8-processo-di-sviluppo-e-organizzazione-del-lavoro)
+
+[9. Analisi Retrospettiva](#9-analisi-retrospettiva)
 
 ---
 
-## **Introduzione del progetto**
+# **1. Introduzione del progetto**
 
----
 
 
 >Il seguente progetto si basa sulla realizzazione del gioco Wordle a riga di comando.
@@ -31,17 +41,17 @@ La parola da indovinare viene decisa dal paroliere, prima che il gioco inizi.
 
 ---
 
-## **Modello di dominio**
+# **2. Modello di dominio**
 
----
+
 Di seguito è presentato il modello di dominio del progetto.
 
 ![dominio](../drawings/Dominio.png)
 
 ---
 
-# Requisiti specifici
-## Requisiti funzionali
+# **3. Requisiti specifici**
+## 3.1 Requisiti funzionali
 
 ---
 È stata abbozzata la relazione tecnica:
@@ -54,7 +64,15 @@ Di seguito è presentato il modello di dominio del progetto.
 >   - 3.0. Requisiti specifici;
 >       - 3.1. Requisiti funzionali;
 >       - 3.2. Requisiti non funzionali;
->   - 4.0. OO Design (diagrammi delle classi e diagrammi di sequenza delle user story più importanti con eventuali commenti alle decisioni prese);
+>   - 4.0. System design;
+>       - 4.1. Stile architetturale adottato;
+>   - 5.0. OO Design (diagrammi delle classi e diagrammi di sequenza delle user story più importanti con eventuali commenti alle decisioni prese);
+>       - 5.1. Diagrammi delle classi;
+>       - 5.2. Diagrammi di sequenza;
+>   - 6.0. Riepilogo test;
+>   - 7.0. Manuale utente;
+>   - 8.0. Processo di sviluppo e organizzazione del lavoro;
+>   - 9.0. Analisi retrospettiva;
 
 ---
 
@@ -117,7 +135,7 @@ Le seguenti user story inizierebbero con *Come giocatore voglio*...
 
 ---
 
-## Requisiti non funzionali
+## 3.2 Requisiti non funzionali
 
 ---
 
@@ -134,17 +152,32 @@ Dopo aver eseguito il comando `docker pull` copiandolo da GitHub Packages, il co
 
 ---
 
-# OO Design
-## Diagrammi delle classi
+# **4. System Design**
+## 4.1 Stile architetturale adottato
+
+---
+Come pattern architetturale è stato utilizzato l'__MVC__. Si è fatta questa scelta in quanto è il pattern che meglio riusciva ad isolare il ruolo di ciascuna classe e per dare un'organizzazione e struttura chiara all'intero codice del progetto.
+
+La sigla __MVC__ sta per __Model View Controller__ ove __Model__ fornisce i metodi per accedere ai dati utili all'applicazione, __View__ visualizza i dati contenuti nel model e si occupa dell'interazione con utenti e agenti, __Controller__ riceve i comandi dell'utente e li attua modificando lo stato degli altri due componenti.
+
+Come __Model__ sono state scelte le classi __WordSmith__, __Player__, __Game__ e __Word__.
+
+Come __View__ sono state scelte le classi __Viewer__, __Terminal__ e __Parser__.
+
+Come __Controller__ sono state scelte le classi __UserManager__ e __GameManager__.
+
+---
+
+# **5. OO Design**
+## 5.1 Diagrammi delle classi
 
 ---
 Di seguito è presentato il modello a prospettiva software generale del progetto.
 
-Come pattern architetturale è stato utilizzato l'MVC.
 
 ![prospettivaSW](../drawings/Generale.jpg)
 
-Di seguito sono presentate i modelli a prospettiva software dei comandi del gioco:
+Di seguito sono presentati i modelli a prospettiva software dei comandi del gioco:
 
 ### Impostare una parola segreta manualmente
 ![](../drawings/Sw-ImpostareParolaSegreta.jpg)
@@ -167,15 +200,7 @@ Di seguito sono presentate i modelli a prospettiva software dei comandi del gioc
 ### Effettuare tentativo parola segreta
 ![](../drawings/Sw-Tentativo.jpg)
 
-La sigla MVC sta per Model View Controller ove Model fornisce i metodi per accedere ai dati utili all'applicazione, View visualizza i dati contenuti nel model e si occupa dell'interazione con utenti e agenti, Controller riceve i comandi dell'utente e li attua modificando lo stato degli altri due componenti.
-
-In questo progetto sono stati scelti come Model le classi WordSmith, Player, Game e Word.
-
-Come View sono state scelte le classi Viewer, Terminal e Parser.
-
-Come Controller sono state scelte le classi UserManager e GameManager.
-
-## Diagrammi di Sequenza
+## 5.2 Diagrammi di Sequenza
 
 ---
 Di seguito sono presentati i diagrammi di sequenza del progetto.
@@ -205,3 +230,55 @@ Per la lettura dell'input dell'utente e il riconoscimento dei comandi si utilizz
 
 ### Come giocatore voglio effettuare un tentativo per indovinare la parola segreta
 ![tentativo](../drawings/tentativo.jpg)
+
+---
+
+# **6. Riepilogo test**
+
+*Casi di test* totali:
+
+![casi_test](../drawings/casi_test.png)
+
+
+Di seguito il report di *jacoco*:
+
+![jacoco](../drawings/jacoco.png)
+
+---
+
+# **7. Manuale utente**
+
+Per poter avviare l'applicazione è necessario utilizzare docker.
+
+Il container docker dell’app deve essere eseguito da terminali che supportano Unicode con encoding UTF-8 o UTF-16.
+
+### Comando per l’esecuzione del container
+Dopo aver eseguito il comando `docker pull` copiandolo da GitHub Packages, il comando Docker da usare per eseguire il container contenente l’applicazione è:
+
+>`docker run --rm -it ghcr.io/softeng2122-inf-uniba/wordle-hellman:latest`
+
+Wordle è un videogioco in cui il giocatore deve indovinare una parola di cinque lettere in meno di sei tentativi.
+
+I comandi del paroliere per interagire con il gioco sono: 
+   >- imposta parola segreta (comando /nuova)
+   >- mostra parola segreta (comando /mostra) 
+ 
+I comandi del giocatore per interagire con il gioco sono:
+   >- inizia una nuova partita (comando /gioca)
+   >- abbandona la partita corrente (comando /abbandona)
+   >- chiudere il gioco (comando /esci)
+   >- effettua un tentativo per indovinare la parola segreta (inserendo qualsiasi input dopo /gioca)
+
+---
+
+# **8. Processo di sviluppo e organizzazione del lavoro**
+>Il nostro team ha applicato it metodo di sviluppo software SCRUM, che a sua volta segue il modello di sviluppo software Agile, che utilizza lo stile di processo di Cambiamento ed Evoluzione del software Iterativo. Essendo un team SCRUM, abbiamo seguito le linee guida per questo metodo di sviluppo, tra cui la durata delle iterazioni, che nel nostro caso, hanno avuto una durata di 2 settimane, nonchè il nome delle iterazioni, che in SCRUM prendono il nome di Sprint; come da linee guida SCRUM, il nostro team non ha avuto alcun leader, e, non essendoci un Team Manager, si è autogestito ed è stato autosufficiente per la nostra Cross-Functionality, in quanto tutti i componenti del team dispongono delle competenze necessarie per portare avanti il nostro progetto, evitando qualsiasi operazione di "consulenza", che si sarebbe tradotta in un ritardo dovuto alla spiegazione di argomenti inerenti al nostro progetto ai membri del Team.
+
+>Abbiamo utilizzato, come da direttive, una Scrum Board fornitaci da GitHub, con cinque colonne, To Do, In Progress, Review, Ready e Done per il progresso per lo sviluppo delle issues, ed infine, oltre ai meeting di Sprint Planning, portati a termine con il Product Owner, Professor Filippo Lanubile, abbiamo tenuto dei Daily Scrum Meetings, di durata rigorosamente non maggiore ai 15 minuti, tenutasi online con tutte le webcam accese, in modo da verificare che tutti i componenti del team siano in piedi, e abbiamo chiesto, come da linee guida SCRUM, "Cosa si è fatto ieri?", "Cosa si è fatto oggi?" e "Ci sono problemi?", eventualmente approfonditi in un secondo momento, e non nel meeting stesso. Per lo sviluppo delle issues si sono assegnati uno o due assignees per issue o user story, in base alla difficoltà valutata dal team stesso, ed infine si è tenuto il meeting di Sprint Retrospective relativo allo Sprint 1, utilizzando la piattaforma Microsoft Teams, utilizzando Microsoft Whiteboard in quanto offre il Modello di Retrospettiva Mad, Sad, Glad utilizzato dal nostro team.
+
+---
+
+# **9. Analisi Retrospettiva**
+Di seguito è riportato lo screenshot relativo analisi retrospettiva:
+
+![](../drawings/analisi_retrospettiva.png)

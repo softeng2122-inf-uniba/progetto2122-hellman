@@ -3,27 +3,29 @@
 ## Indice
 
 ---
-[1. Introduzione del progetto](#introduzione-del-progetto)
+[1. Introduzione del progetto](#1-introduzione-del-progetto)
 
-[2. Modello di dominio](#modello-di-dominio)
+[2. Modello di dominio](#2-modello-di-dominio)
 
-[3. Requisiti specifici](#requisiti-specifici)
+[3. Requisiti specifici](#3-requisiti-specifici)
 
-- [3.1 Requisiti funzionali](#requisiti-funzionali)
-- [3.2 Requisiti non funzionali](#requisiti-non-funzionali)
+- [3.1 Requisiti funzionali](#31-requisiti-funzionali)
+- [3.2 Requisiti non funzionali](#32-requisiti-non-funzionali)
 
 [4. System Design](#4-system-design)
 - [4.1 Stile architetturale adottato](#41-stile-architetturale-adottato)
 
-[5. OO Design](#oo-design)
-- [5.1 Diagrammi delle classi](#diagrammi-delle-classi)
-- [5.2 Diagrammi di sequenza](#diagrammi-di-sequenza)
+[5. OO Design](#5-oo-design)
+- [5.1 Diagrammi delle classi](#51-diagrammi-delle-classi)
+- [5.2 Diagrammi di sequenza](#52-diagrammi-di-sequenza)
 
-[9. Analisi Retrospettiva](#analisi-retrospettiva)
+[7. Manuale Utente](#7-manuale-utente)
+
+[9. Analisi Retrospettiva](#9-analisi-retrospettiva)
 
 ---
 
-## **Introduzione del progetto**
+# **1. Introduzione del progetto**
 
 ---
 
@@ -36,7 +38,7 @@ La parola da indovinare viene decisa dal paroliere, prima che il gioco inizi.
 
 ---
 
-## **Modello di dominio**
+# **2. Modello di dominio**
 
 ---
 Di seguito è presentato il modello di dominio del progetto.
@@ -45,8 +47,8 @@ Di seguito è presentato il modello di dominio del progetto.
 
 ---
 
-# Requisiti specifici
-## Requisiti funzionali
+# **3. Requisiti specifici**
+## 3.1 Requisiti funzionali
 
 ---
 È stata abbozzata la relazione tecnica:
@@ -122,7 +124,7 @@ Le seguenti user story inizierebbero con *Come giocatore voglio*...
 
 ---
 
-## Requisiti non funzionali
+## 3.2 Requisiti non funzionali
 
 ---
 
@@ -139,7 +141,7 @@ Dopo aver eseguito il comando `docker pull` copiandolo da GitHub Packages, il co
 
 ---
 
-# 4. System Design
+# **4. System Design**
 ## 4.1 Stile architetturale adottato
 
 ---
@@ -155,8 +157,8 @@ Come __Controller__ sono state scelte le classi __UserManager__ e __GameManager_
 
 ---
 
-# OO Design
-## Diagrammi delle classi
+# **5. OO Design**
+## 5.1 Diagrammi delle classi
 
 ---
 Di seguito è presentato il modello a prospettiva software generale del progetto.
@@ -187,7 +189,7 @@ Di seguito sono presentate i modelli a prospettiva software dei comandi del gioc
 ### Effettuare tentativo parola segreta
 ![](../drawings/Sw-Tentativo.jpg)
 
-## Diagrammi di Sequenza
+## 5.2 Diagrammi di Sequenza
 
 ---
 Di seguito sono presentati i diagrammi di sequenza del progetto.
@@ -218,6 +220,33 @@ Per la lettura dell'input dell'utente e il riconoscimento dei comandi si utilizz
 ### Come giocatore voglio effettuare un tentativo per indovinare la parola segreta
 ![tentativo](../drawings/tentativo.jpg)
 
-## **Analisi Retrospettiva**
+---
+
+# **7. Manuale utente**
+
+Per poter avviare l'applicazione è necessario utilizzare docker.
+
+Il container docker dell’app deve essere eseguito da terminali che supportano Unicode con encoding UTF-8 o UTF-16.
+
+### Comando per l’esecuzione del container
+Dopo aver eseguito il comando `docker pull` copiandolo da GitHub Packages, il comando Docker da usare per eseguire il container contenente l’applicazione è:
+
+>`docker run --rm -it ghcr.io/softeng2122-inf-uniba/wordle-hellman:latest`
+
+Wordle è un videogioco in cui il giocatore deve indovinare una parola di cinque lettere in meno di sei tentativi.
+
+I comandi del paroliere per interagire con il gioco sono: 
+   >- imposta parola segreta (comando /nuova)
+   >- mostra parola segreta (comando /mostra) 
+ 
+I comandi del giocatore per interagire con il gioco sono:
+   >- inizia una nuova partita (comando /gioca)
+   >- abbandona la partita corrente (comando /abbandona)
+   >- chiudere il gioco (comando /esci)
+   >- effettua un tentativo per indovinare la parola segreta (inserendo qualsiasi input dopo /gioca)
+
+---
+
+# **9. Analisi Retrospettiva**
 Di seguito è riportata lo screenshot relativo analisi retrospettiva
 ![](../drawings/analisi_retrospettiva.png)

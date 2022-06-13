@@ -21,4 +21,30 @@ public class PairTest {
     public void testPairEmpty() {
         assertTrue(true);
     }
+
+    /**
+     * Metodo per il testing del costruttore Pair
+     * della classe Pair con parametri iniziali,
+     * per verificare il settaggio del primo oggetto.
+     */
+    @Test
+    public void testPairFirst() {
+        Integer number = 100;
+        String string = "200";
+        pair = new Pair<String, Integer>(string, number);
+        assertEquals(string, pair.getFirst());
+    }
+
+    /**
+     * Metodo per il testing del costruttore Pair
+     * della classe Pair con parametri iniziali,
+     * per verificare il settaggio del secondo oggetto.
+     */
+    @Test
+    public void testPairSecond() {
+        Integer number = 100;
+        String string = "200";
+        pair = new Pair<String, Integer>(string, number);
+        assertEquals(number, pair.getSecond());
+    }
 }

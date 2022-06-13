@@ -1,9 +1,7 @@
 package it.uniba.app.view;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import it.uniba.app.utils.CommandType;
@@ -23,9 +21,6 @@ class Commands {
     /** Insieme degli alias associati al comando. */
     private Set<String> alias;
 
-    /** Insieme dei comandi accettati dal gioco. */
-    private static List<String> commands = new ArrayList<>();
-
     /**
      * Costruttore dei comandi.
      *
@@ -35,15 +30,6 @@ class Commands {
     Commands(final CommandType newType, final String newName) {
         this.type = newType;
         this.name = newName;
-    }
-
-    /**
-     * Restituisce tutti i comandi del gioco.
-     *
-     * @return commands
-     */
-    List<String> getCommands() {
-        return commands;
     }
 
     /**

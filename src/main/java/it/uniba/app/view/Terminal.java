@@ -9,12 +9,15 @@ import it.uniba.app.utils.GameException;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  * {@literal <<Boundary>>}
  * Classe front-end che permette di dialogare con l'utente a linea di comando.
  */
 public class Terminal extends Viewer {
+    /** Scanner per leggere l'input da tastiera. */
+    private Scanner scanner = new Scanner(System.in, "UTF-8");
 
     /** Parser utilizzato per il riconoscimento dei comandi del gioco. */
     private Parser parser;
@@ -24,6 +27,7 @@ public class Terminal extends Viewer {
 
     /**
      * Costruttore di terminal.
+     *
      * @param flags passato all'apertura del terminale
      */
     public Terminal(final String[] flags) {
@@ -46,11 +50,11 @@ public class Terminal extends Viewer {
      * Restituisce il nuovo comando creato.
      *
      * @param command stringa del comando
-     * @param cType identificativo del comando
+     * @param cType   identificativo del comando
      * @return comando creato
      */
     private Pair<String, CommandType> newCmd(final String command,
-                                            final CommandType cType) {
+            final CommandType cType) {
         return new Pair<String, CommandType>(command, cType);
     }
 
@@ -61,8 +65,40 @@ public class Terminal extends Viewer {
         while (true) {
             boolean isGameStarted = getUserManager().isGameStarted();
 
-            nextCommand(parser.readCommand(true, isGameStarted), System.out);
+            nextCommand(readCommand(true, isGameStarted), System.out);
         }
+    }
+
+    /**
+     * Il metodo readCommand permette il confronto del risultato del metodo
+     * parse con uno qualsiasi dei comandi supportati, se essa corrisponde
+     * ad uno dei comandi, lo restituisce, altrimenti restituisce null.
+     *
+     * @param printCommand se true stampa l'inserimento del comando,
+     *                     altrimenti non stampa nulla.
+     * @param gameStarted  se true stampa "Effettua un tentativo (o un
+     *                     comando):", altrimenti "Inserisci un comando:".
+     * @return risultato di parse.
+     */
+    private ParserOutput readCommand(final boolean printCommand,
+            final boolean gameStarted) {
+        ParserOutput p = null;
+
+        if (printCommand) {
+            if (gameStarted) {
+                System.out.println("Effettua un tentativo (o un comando):");
+            } else {
+                System.out.println("Inserisci un comando:");
+            }
+        }
+
+        while (scanner.hasNextLine()) {
+            String command = scanner.nextLine();
+            p = parser.parse(command);
+            return p;
+        }
+
+        return p;
     }
 
     /**
@@ -118,6 +154,7 @@ public class Terminal extends Viewer {
     /**
      * Metodo per l'avvio della partita nel caso in cui la
      * parola segreta sia stata impostata.
+     *
      * @return messaggio di avvio partita.
      */
     private String startGame() {
@@ -144,7 +181,7 @@ public class Terminal extends Viewer {
         out.println("Sei sicuro di abbandonare il gioco in corso? (si/no)");
 
         boolean isGameStarted = getUserManager().isGameStarted();
-        ParserOutput po = parser.readCommand(false, isGameStarted);
+        ParserOutput po = readCommand(false, isGameStarted);
 
         if (po != null) {
             CommandType type = po.getCommand().getType();
@@ -175,6 +212,7 @@ public class Terminal extends Viewer {
 
     /**
      * Restituisce la stringa del comando di help.
+     *
      * @return comando di help
      */
     private String help() {
@@ -198,7 +236,7 @@ public class Terminal extends Viewer {
 
         boolean isGameStarted = getUserManager().isGameStarted();
 
-        ParserOutput po = parser.readCommand(false, isGameStarted);
+        ParserOutput po = readCommand(false, isGameStarted);
         if (po != null) {
             CommandType type = po.getCommand().getType();
             switch (type) {
@@ -244,7 +282,7 @@ public class Terminal extends Viewer {
      * ottenibili dall'effettuazione di un tentativo.
      *
      * @param newRes coppia di valori che indica lo stato
-     * del game e la lista di tentativi finora effettuati.
+     *               del game e la lista di tentativi finora effettuati.
      * @return Stringa da stampare.
      */
     private String handleTry(final Pair<Integer, List<Word>> newRes) {
@@ -298,6 +336,7 @@ public class Terminal extends Viewer {
 
     /**
      * Metodo che permette di stampare la parola segreta.
+     *
      * @return stringa della parola segreta, se presente
      */
     private String printSecretWord() {
@@ -341,8 +380,8 @@ public class Terminal extends Viewer {
                 }
 
                 str = str.concat(
-                    Helper.ANSI_GREY.concat(
-                        cell.concat(Helper.ANSI_RESET)));
+                        Helper.ANSI_GREY.concat(
+                                cell.concat(Helper.ANSI_RESET)));
             }
             str = str.concat("\n");
         }
@@ -384,6 +423,7 @@ public class Terminal extends Viewer {
 
     /**
      * Metodo che ritorna una stringa contenente il Welcome dell'app.
+     *
      * @return stringa contenente il Welcome dell'app.
      */
     private String getWelcome() {
@@ -401,6 +441,7 @@ public class Terminal extends Viewer {
     /**
      * Metodo che controlla la lunghezza dei flag inseriti
      * all'avvio dell'applicazione.
+     *
      * @param newFlags array di argomenti in input al lancio dell'applicazione
      * @return variabile booleana che controlla i flag inseriti.
      */

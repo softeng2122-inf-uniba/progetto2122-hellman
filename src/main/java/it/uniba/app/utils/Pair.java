@@ -65,13 +65,4 @@ public class Pair<I, O> {
     public void setSecond(final O newSecond) {
         this.second = newSecond;
     }
-
-    /**
-     * Metodo che concatena il primo e secondo oggetto in una stringa.
-     *
-     * @return first + second in una stringa.
-     */
-    public String toString() {
-        return first + " " + second;
-    }
 }

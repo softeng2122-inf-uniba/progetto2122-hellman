@@ -12,7 +12,7 @@ public class PlayerTest {
 
     /** Oggetto di tipo Game creato per effettuare i test
      * sui vari metodi della classe Player. */
-    Game game = new Game();
+    private Game game = new Game();
 
     /**
      * Metodo per il testing del metodo getCurrentGame di Player,
@@ -21,7 +21,8 @@ public class PlayerTest {
     @Test
     public void testGetCurrentGameSecretWord() {
         player.setCurrentGame(game);
-        assertEquals(game.getSecretWord(), player.getCurrentGame().getSecretWord());
+        assertEquals(game.getSecretWord(),
+        player.getCurrentGame().getSecretWord());
     }
 
     /**
@@ -31,7 +32,8 @@ public class PlayerTest {
     @Test
     public void testGetCurrentGameConfigurable() {
         player.setCurrentGame(game);
-        assertEquals(game.isConfigurable(), player.getCurrentGame().isConfigurable());
+        assertEquals(game.isConfigurable(),
+        player.getCurrentGame().isConfigurable());
     }
 
     /**
@@ -51,7 +53,8 @@ public class PlayerTest {
     @Test
     public void testSetCurrentGameSecretWord() {
         player.setCurrentGame(game);
-        assertEquals(game.getSecretWord(), player.getCurrentGame().getSecretWord());
+        assertEquals(game.getSecretWord(),
+        player.getCurrentGame().getSecretWord());
     }
 
     /**
@@ -61,7 +64,8 @@ public class PlayerTest {
     @Test
     public void testSetCurrentGameConfigurable() {
         player.setCurrentGame(game);
-        assertEquals(game.isConfigurable(), player.getCurrentGame().isConfigurable());
+        assertEquals(game.isConfigurable(),
+        player.getCurrentGame().isConfigurable());
     }
 
     /**
@@ -73,5 +77,4 @@ public class PlayerTest {
         player.setCurrentGame(game);
         assertEquals(game.getTrys(), player.getCurrentGame().getTrys());
     }
-
 }

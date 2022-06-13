@@ -16,6 +16,8 @@
 - [4.1 Diagrammi delle classi](#diagrammi-delle-classi)
 - [4.2 Diagrammi di sequenza](#diagrammi-di-sequenza)
 
+[5. Analisi Retrospettiva](#analisi-retrospettiva)
+
 ---
 
 ## **Introduzione del progetto**
@@ -205,3 +207,7 @@ Per la lettura dell'input dell'utente e il riconoscimento dei comandi si utilizz
 
 ### Come giocatore voglio effettuare un tentativo per indovinare la parola segreta
 ![tentativo](../drawings/tentativo.jpg)
+
+## **Analisi Retrospettiva**
+Di seguito è riportata lo screenshot relativo analisi retrospettiva
+![](../drawings/analisi_retrospettiva.png)

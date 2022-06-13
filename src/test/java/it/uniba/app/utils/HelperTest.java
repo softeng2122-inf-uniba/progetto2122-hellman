@@ -33,7 +33,7 @@ public class HelperTest {
         int[] array = {-1, 0, 1};
         List<Integer> arrayList = new ArrayList<>();
         Helper.arrayToArrayList(array, arrayList);
-        for(int i = 0; i < arrayList.size(); i++){
+        for (int i = 0; i < arrayList.size(); i++) {
             assertEquals(array[i], arrayList.get(i));
         }
     }

@@ -177,7 +177,7 @@ Di seguito è presentato il modello a prospettiva software generale del progetto
 
 ![prospettivaSW](../drawings/Generale.jpg)
 
-Di seguito sono presentate i modelli a prospettiva software dei comandi del gioco:
+Di seguito sono presentati i modelli a prospettiva software dei comandi del gioco:
 
 ### Impostare una parola segreta manualmente
 ![](../drawings/Sw-ImpostareParolaSegreta.jpg)
@@ -279,5 +279,6 @@ I comandi del giocatore per interagire con il gioco sono:
 ---
 
 # **9. Analisi Retrospettiva**
-Di seguito è riportata lo screenshot relativo analisi retrospettiva
+Di seguito è riportato lo screenshot relativo analisi retrospettiva:
+
 ![](../drawings/analisi_retrospettiva.png)

@@ -12,11 +12,11 @@
 - [3.1 Requisiti funzionali](#requisiti-funzionali)
 - [3.2 Requisiti non funzionali](#requisiti-non-funzionali)
 
-[4. OO Design](#oo-design)
-- [4.1 Diagrammi delle classi](#diagrammi-delle-classi)
-- [4.2 Diagrammi di sequenza](#diagrammi-di-sequenza)
+[5. OO Design](#oo-design)
+- [5.1 Diagrammi delle classi](#diagrammi-delle-classi)
+- [5.2 Diagrammi di sequenza](#diagrammi-di-sequenza)
 
-[5. Analisi Retrospettiva](#analisi-retrospettiva)
+[9. Analisi Retrospettiva](#analisi-retrospettiva)
 
 ---
 
@@ -56,7 +56,7 @@ Di seguito è presentato il modello di dominio del progetto.
 >   - 3.0. Requisiti specifici;
 >       - 3.1. Requisiti funzionali;
 >       - 3.2. Requisiti non funzionali;
->   - 4.0. OO Design (diagrammi delle classi e diagrammi di sequenza delle user story più importanti con eventuali commenti alle decisioni prese);
+>   - 5.0. OO Design (diagrammi delle classi e diagrammi di sequenza delle user story più importanti con eventuali commenti alle decisioni prese);
 
 ---
 

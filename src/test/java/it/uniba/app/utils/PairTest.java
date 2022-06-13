@@ -69,4 +69,15 @@ public class PairTest {
         pair.setSecond(number);
         assertEquals(number, pair.getSecond());
     }
+
+    /**
+     * Metodo per il testing del metodo setFirst di Pair,
+     * che verifica che il campo 1 sia stato settato correttamente.
+     */
+    @Test
+    public void testSetFirst() {
+        String string = "200";
+        pair.setFirst(string);
+        assertEquals(string, pair.getFirst());
+    }
 }

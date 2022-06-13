@@ -12,6 +12,9 @@
 - [3.1 Requisiti funzionali](#requisiti-funzionali)
 - [3.2 Requisiti non funzionali](#requisiti-non-funzionali)
 
+[4. System Design](#4-system-design)
+- [4.1 Stile architetturale adottato](#41-stile-architetturale-adottato)
+
 [5. OO Design](#oo-design)
 - [5.1 Diagrammi delle classi](#diagrammi-delle-classi)
 - [5.2 Diagrammi di sequenza](#diagrammi-di-sequenza)
@@ -136,13 +139,28 @@ Dopo aver eseguito il comando `docker pull` copiandolo da GitHub Packages, il co
 
 ---
 
+# 4. System Design
+## 4.1 Stile architetturale adottato
+
+---
+Come pattern architetturale è stato utilizzato l'__MVC__. Si è fatta questa scelta in quanto è il pattern che meglio riusciva ad isolare il ruolo di ciascuna classe e per dare un'organizzazione e struttura chiara all'intero codice del progetto.
+
+La sigla __MVC__ sta per __Model View Controller__ ove __Model__ fornisce i metodi per accedere ai dati utili all'applicazione, __View__ visualizza i dati contenuti nel model e si occupa dell'interazione con utenti e agenti, __Controller__ riceve i comandi dell'utente e li attua modificando lo stato degli altri due componenti.
+
+Come __Model__ sono state scelte le classi __WordSmith__, __Player__, __Game__ e __Word__.
+
+Come __View__ sono state scelte le classi __Viewer__, __Terminal__ e __Parser__.
+
+Come __Controller__ sono state scelte le classi __UserManager__ e __GameManager__.
+
+---
+
 # OO Design
 ## Diagrammi delle classi
 
 ---
 Di seguito è presentato il modello a prospettiva software generale del progetto.
 
-Come pattern architetturale è stato utilizzato l'MVC.
 
 ![prospettivaSW](../drawings/Generale.jpg)
 
@@ -168,14 +186,6 @@ Di seguito sono presentate i modelli a prospettiva software dei comandi del gioc
 
 ### Effettuare tentativo parola segreta
 ![](../drawings/Sw-Tentativo.jpg)
-
-La sigla MVC sta per Model View Controller ove Model fornisce i metodi per accedere ai dati utili all'applicazione, View visualizza i dati contenuti nel model e si occupa dell'interazione con utenti e agenti, Controller riceve i comandi dell'utente e li attua modificando lo stato degli altri due componenti.
-
-In questo progetto sono stati scelti come Model le classi WordSmith, Player, Game e Word.
-
-Come View sono state scelte le classi Viewer, Terminal e Parser.
-
-Come Controller sono state scelte le classi UserManager e GameManager.
 
 ## Diagrammi di Sequenza
 
